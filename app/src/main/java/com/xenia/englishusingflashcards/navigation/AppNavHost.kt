@@ -5,9 +5,10 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.xenia.englishusingflashcards.screens.LearningScreen
-import com.xenia.englishusingflashcards.screens.MainScreen
+import com.xenia.englishusingflashcards.screens.learning_screen.LearningScreen
+import com.xenia.englishusingflashcards.screens.main_screen.MainScreen
 import com.xenia.englishusingflashcards.screens.SplashScreen
+import com.xenia.englishusingflashcards.screens.category_screen.CategoryScreen
 
 @Composable
 fun AppNavHost(
@@ -28,6 +29,9 @@ fun AppNavHost(
         }
         composable(NavigationItem.LearningCard.route) {
             LearningScreen(navController)
+        }
+        composable(NavigationItem.Category.route) {
+            CategoryScreen(navController)
         }
     }
 }
