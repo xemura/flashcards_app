@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,7 +20,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
@@ -28,6 +32,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -59,9 +67,21 @@ private val TextColors = listOf(
     Color(0xFFD3EBCD),
 )
 
+private val levelsList = listOf(
+    "Уровень A1",
+    "Уровень A2",
+    "Уровень B1",
+    "Уровень B2",
+    "Уровень C1",
+    "Уровень C2",
+    )
+
 @Composable
 fun CategoryScreen(navController : NavController) {
     val data = categoryTest
+    var levelName : String by remember {mutableStateOf(levelsList[0])}
+    var expanded by remember { mutableStateOf(false)}
+
     Scaffold(
         floatingActionButton = {
             ExtendedFloatingActionButton(
@@ -115,14 +135,37 @@ fun CategoryScreen(navController : NavController) {
                         modifier = Modifier.size(50.dp)
                     )
                 }
-                Text(
-                    modifier = Modifier
-                        .align(Alignment.TopCenter)
-                        .padding(top = 7.dp),
-                    text = "Главная",
-                    style = MaterialTheme.typography.bodyLarge,
-                    fontSize = 20.sp
-                )
+
+                Box(modifier = Modifier
+                    .fillMaxWidth(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Row(modifier = Modifier
+                        .clickable { // Anchor view
+                            expanded = !expanded
+                        }) { // Anchor view
+                        Text(modifier = Modifier.padding(top = 7.dp),
+                            text = levelName,
+                            fontSize = 20.sp) // City name label
+                        Icon(modifier = Modifier.padding(top = 13.dp),
+                            imageVector = Icons.Filled.ArrowDropDown,
+                            contentDescription = null)
+                        DropdownMenu(
+                            expanded = expanded,
+                            onDismissRequest = {
+                                expanded = false
+                            }
+                        ) {
+                            levelsList.forEach { level ->
+                                DropdownMenuItem(onClick = {
+                                    expanded = false
+                                    levelName = level
+                                }, text = { Text(text = level, style = MaterialTheme.typography.bodyLarge) })
+                            }
+                        }
+                    }
+                }
+
             }
 
             LazyColumn(modifier = Modifier
@@ -131,13 +174,18 @@ fun CategoryScreen(navController : NavController) {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(start = 20.dp, end = contentPadding.calculateBottomPadding(), bottom = 10.dp)
+                            .padding(
+                                start = 20.dp,
+                                end = contentPadding.calculateBottomPadding(),
+                                bottom = 10.dp
+                            )
                             .clip(RoundedCornerShape(25.dp))
                             .border(BorderStroke(1.dp, Color.Black), RoundedCornerShape(25.dp)),
                         horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
                         Spacer(modifier = Modifier.height(10.dp))
-                        Row(modifier = Modifier.fillMaxWidth()
+                        Row(modifier = Modifier
+                            .fillMaxWidth()
                             .padding(start = 20.dp, end = 20.dp),
                             horizontalArrangement = Arrangement.Start) {
                             Image(painter = painterResource(id = R.drawable.test), contentDescription = "",
