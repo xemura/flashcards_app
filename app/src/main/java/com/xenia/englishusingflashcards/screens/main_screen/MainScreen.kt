@@ -1,7 +1,6 @@
 package com.xenia.englishusingflashcards.screens.main_screen
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -26,11 +25,13 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.paint
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.text.TextStyle
@@ -45,9 +46,7 @@ import androidx.navigation.compose.rememberNavController
 import com.xenia.englishusingflashcards.R
 import com.xenia.englishusingflashcards.navigation.NavigationItem
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.painterResource
+import com.xenia.englishusingflashcards.screens.main_screen.bottom_sheets.BottomSheet
 
 private val TextColors = listOf(
     Color(0xFF03045E),
@@ -68,7 +67,7 @@ private val backgroundColors = listOf(
 
 @Composable
 fun MainScreen(navController : NavController) {
-    val boxSize = with(LocalDensity.current) { 200.dp.toPx() }
+    // val boxSize = with(LocalDensity.current) { 200.dp.toPx() }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -86,11 +85,11 @@ fun MainScreen(navController : NavController) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(15.dp)
+                .padding(10.dp)
         ) {
             IconButton(
                 onClick = {
-
+                    // exit from app
                 },
                 modifier = Modifier.align(Alignment.CenterStart)
             ) {
@@ -163,7 +162,7 @@ fun ButtonMain(navController: NavController, navigationItemRoute: String, text: 
         shape = RoundedCornerShape(25.dp),
         border = BorderStroke(1.dp, Color.Black),
         colors = ButtonDefaults.buttonColors(
-            containerColor = Color(205, 229, 235, 255),
+            containerColor = Color(202, 240, 248, 255),
             contentColor = Color.Black)
     ){
         Text(
@@ -176,6 +175,14 @@ fun ButtonMain(navController: NavController, navigationItemRoute: String, text: 
 }
 @Composable
 fun Card(countWordsText : String, cardText: String) {
+    var showSheet by remember { mutableStateOf(false) }
+
+    if (showSheet) {
+        BottomSheet(cardText) {
+            showSheet = false
+        }
+    }
+
     Column {
         Box(modifier = Modifier
             .clip(RoundedCornerShape(25.dp))
@@ -186,7 +193,7 @@ fun Card(countWordsText : String, cardText: String) {
         ) {
             IconButton(
                 onClick = {
-
+                    showSheet = true
                 },
                 modifier = Modifier.align(Alignment.TopEnd)
             ) {
