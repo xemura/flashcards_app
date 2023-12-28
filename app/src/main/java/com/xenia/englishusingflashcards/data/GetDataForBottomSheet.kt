@@ -1,7 +1,7 @@
 package com.xenia.englishusingflashcards.data
 
 data class BottomSheetInfo (
-    var data : List<CardInfo>,
+    var data : List<WordInfo>,
     var header : String,
     var description: String,
 )

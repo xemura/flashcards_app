@@ -37,12 +37,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.xenia.englishusingflashcards.R
-import com.xenia.englishusingflashcards.data.categoryTest
+import com.xenia.englishusingflashcards.data.getDataOfLevels
 import com.xenia.englishusingflashcards.navigation.NavigationItem
 
 @Composable
 fun CategoryScreen(navController : NavController) {
-    val data = categoryTest
+    val data = getDataOfLevels()
 
     Scaffold(
         floatingActionButton = {
@@ -85,7 +85,7 @@ fun CategoryScreen(navController : NavController) {
 
             LazyColumn(modifier = Modifier
                 .fillMaxWidth()) {
-                items(data) { (level, categoryName, image, words, percent) ->
+                items(data.levels[0].categories) { (categoryName, image, words, percent) ->
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -103,7 +103,7 @@ fun CategoryScreen(navController : NavController) {
                             .fillMaxWidth()
                             .padding(start = 20.dp, end = 20.dp),
                             horizontalArrangement = Arrangement.Start) {
-                            Image(painter = painterResource(id = R.drawable.test), contentDescription = "",
+                            Image(painter = painterResource(id = R.drawable.test_compressed), contentDescription = "",
                                 contentScale = ContentScale.Crop,
                                 modifier = Modifier
                                     .size(80.dp)
