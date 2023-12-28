@@ -1,4 +1,4 @@
-package com.xenia.englishusingflashcards.screens
+package com.xenia.englishusingflashcards.presentation
 
 import android.view.animation.OvershootInterpolator
 import androidx.compose.animation.core.tween

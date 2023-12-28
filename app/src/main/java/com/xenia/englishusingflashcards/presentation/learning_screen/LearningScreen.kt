@@ -1,4 +1,4 @@
-package com.xenia.englishusingflashcards.screens.learning_screen
+package com.xenia.englishusingflashcards.presentation.learning_screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

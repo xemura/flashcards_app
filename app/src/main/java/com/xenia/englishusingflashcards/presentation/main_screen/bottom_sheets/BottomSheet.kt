@@ -1,4 +1,4 @@
-package com.xenia.englishusingflashcards.screens.main_screen.bottom_sheets
+package com.xenia.englishusingflashcards.presentation.main_screen.bottom_sheets
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
@@ -23,10 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.xenia.englishusingflashcards.database.CardInfo
-import com.xenia.englishusingflashcards.database.cardsThatIKnow
-import com.xenia.englishusingflashcards.database.learnedCards
-import com.xenia.englishusingflashcards.database.studyCards
+import com.xenia.englishusingflashcards.data.getBottomSheetInfo
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -38,11 +35,11 @@ fun BottomSheet(text : String, onDismiss: () -> Unit) {
         sheetState = modalBottomSheetState,
         dragHandle = { BottomSheetDefaults.DragHandle() },
     ) {
-        val data = getData(text)
+        val bottomSheetInfo = getBottomSheetInfo(text)
 
         Text( modifier = Modifier
             .align(Alignment.CenterHorizontally),
-            text = getHeader(text),
+            text = bottomSheetInfo.header,
             fontSize = 25.sp
         )
 
@@ -50,12 +47,12 @@ fun BottomSheet(text : String, onDismiss: () -> Unit) {
             .align(Alignment.CenterHorizontally)
             .padding(horizontal = 20.dp),
             textAlign = TextAlign.Center,
-            text = getDescription(text),
+            text = bottomSheetInfo.description,
             color = Color.Gray
         )
 
         LazyColumn {
-            items(data) { (word, translate, sentence) ->
+            items(bottomSheetInfo.data) { (word, translate, sentence) ->
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -79,50 +76,3 @@ fun BottomSheet(text : String, onDismiss: () -> Unit) {
     }
 }
 
-fun getData(text: String) : List<CardInfo> {
-    var returnData : List<CardInfo> = listOf()
-    when (text) {
-        "учить" -> {
-            returnData = studyCards
-        }
-        "знаю" -> {
-            returnData = cardsThatIKnow
-        }
-        "выучено" -> {
-            returnData = learnedCards
-        }
-    }
-    return returnData
-}
-
-fun getHeader(text: String) : String {
-    var returnData : String = ""
-    when (text) {
-        "учить" -> {
-            returnData = "Карточки для изучения"
-        }
-        "знаю" -> {
-            returnData = "Краткосрочная память"
-        }
-        "выучено" -> {
-            returnData = "Долгосрочная память"
-        }
-    }
-    return returnData
-}
-
-fun getDescription(text: String) : String {
-    var returnData : String = ""
-    when (text) {
-        "учить" -> {
-            returnData = "Это число означает, сколько карточек готово к изучению."
-        }
-        "знаю" -> {
-            returnData = "Это число означает, сколько слов и фраз у тебя в кратковременной памяти."
-        }
-        "выучено" -> {
-            returnData = "Это число означает, сколько слов и фраз у тебя в долговременной памяти."
-        }
-    }
-    return returnData
-}
