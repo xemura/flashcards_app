@@ -3,6 +3,7 @@ package com.xenia.englishusingflashcards.screens.main_screen
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,15 +17,21 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -64,6 +71,19 @@ private val backgroundColors = listOf(
     Color(0xFFCAF0F8),
 )
 
+private val timesList = listOf(
+    "08:00",
+    "09:00",
+    "10:00",
+    "11:00",
+    "12:00",
+    "13:00",
+    "14:00",
+    "15:00",
+    "16:00",
+    "17:00",
+    "18:00"
+)
 
 @Composable
 fun MainScreen(navController : NavController) {
@@ -125,7 +145,8 @@ fun MainScreen(navController : NavController) {
         }
 
         Spacer(modifier = Modifier.height(136.dp))
-        ButtonMain(navController, NavigationItem.LearningCard.route, "Настройка уведомлений")
+
+        AlertDialogPlayground()
         ButtonMain(navController, NavigationItem.Category.route, "Пополнение папки слов")
         ButtonMain(navController, NavigationItem.LearningCard.route, "Обучение")
 
@@ -222,5 +243,119 @@ fun Card(countWordsText : String, cardText: String) {
             style = MaterialTheme.typography.bodyLarge,
             fontSize = 15.sp
         )
+    }
+}
+
+@Composable
+fun AlertDialog(onDismiss: () -> Unit, onConfirm: () -> Unit) {
+    var expanded by remember { mutableStateOf(false)}
+    var timeName : String by remember {mutableStateOf(timesList[0])}
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        confirmButton = {
+            Button(onClick = {
+                onConfirm.invoke()
+            },
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(25.dp),
+                border = BorderStroke(1.dp, Color.Black),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(202, 240, 248, 255),
+                    contentColor = Color.Black)
+                ) {
+                Text(text = "Применить",
+                    style = MaterialTheme.typography.bodyLarge)
+                }
+        },
+        containerColor = Color.White,
+        shape = RoundedCornerShape(25.dp),
+        modifier = Modifier.clip(RoundedCornerShape(25.dp))
+            .border(BorderStroke(1.dp, Color.Black), RoundedCornerShape(25.dp)),
+        text = {
+            val checkedState = remember { mutableStateOf(false) }
+            val textColor = remember { mutableStateOf(Color.Unspecified) }
+            Column(modifier = Modifier.padding(10.dp)){
+                Row (verticalAlignment = Alignment.CenterVertically ){
+                    Text("Включить уведомления",
+                        fontSize = 16.sp, style = MaterialTheme.typography.bodyLarge,
+                        modifier = Modifier.size(150.dp, 50.dp),
+                        color = textColor.value)
+                    Switch(
+                        checked = checkedState.value,
+                        modifier = Modifier.padding(start = 50.dp),
+                        onCheckedChange = {
+                            checkedState.value = it
+                            if(checkedState.value) textColor.value = Color(0xff00695C)
+                            else textColor.value = Color.Unspecified
+                        }
+                    )
+                }
+                Row (verticalAlignment = Alignment.CenterVertically ) {
+                    Text("Настройка напоминаний",
+                        fontSize = 16.sp, style = MaterialTheme.typography.bodyLarge,
+                        modifier = Modifier.size(150.dp, 50.dp),
+                        color = textColor.value)
+                    Box(modifier = Modifier.padding(start = 30.dp),
+                    ) {
+                        Row(modifier = Modifier
+                            .clickable {
+                                expanded = !expanded
+                            }) {
+                            Text(modifier = Modifier.padding(top = 7.dp),
+                                text = timeName,
+                                fontSize = 20.sp)
+                            Icon(modifier = Modifier.padding(top = 13.dp),
+                                imageVector = Icons.Filled.ArrowDropDown,
+                                contentDescription = null)
+                            DropdownMenu(
+                                expanded = expanded,
+                                onDismissRequest = {
+                                    expanded = false
+                                }
+                            ) {
+                                timesList.forEach { level ->
+                                    DropdownMenuItem(onClick = {
+                                        expanded = false
+                                        timeName = level
+                                    }, text = { Text(text = level, style = MaterialTheme.typography.bodyLarge) })
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    )
+}
+
+@Composable
+fun AlertDialogPlayground() {
+    val showAlertDialog = remember { mutableStateOf(false) }
+
+    Button(
+        onClick = {
+            showAlertDialog.value = true
+        },
+        Modifier
+            .fillMaxWidth()
+            .padding(start = 20.dp, end = 20.dp, bottom = 10.dp),
+        shape = RoundedCornerShape(25.dp),
+        border = BorderStroke(1.dp, Color.Black),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color(202, 240, 248, 255),
+            contentColor = Color.Black)
+    ){
+        Text(
+            "Настройка уведомлений",
+            fontSize = 16.sp,
+            modifier = Modifier.padding(10.dp),
+            style = MaterialTheme.typography.bodyLarge,
+        )
+    }
+
+    if (showAlertDialog.value) {
+        AlertDialog(onDismiss = { showAlertDialog.value = false }, onConfirm = {
+            showAlertDialog.value = false
+        })
     }
 }

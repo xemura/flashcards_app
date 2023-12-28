@@ -2,7 +2,7 @@ package com.xenia.englishusingflashcards.database
 
 data class CardInfo(
     var word : String,
-    var translateWord : String,
+    var translate : String,
     var sentence : String
 )
 
@@ -59,10 +59,6 @@ data class CategoryInfo(
     var progress: Float
 )
 
-val categoryTest1 = CategoryInfo("A1", "Овощи", "", studyCards, 0.4f)
-val categoryTest2 = CategoryInfo("A1", "Животные","", studyCards, 0.1f)
-val categoryTest3 = CategoryInfo("A1", "Город","", studyCards, 0.9f)
-
 val categoryTest = listOf(
     CategoryInfo("A1", "Овощи", "", studyCards, 40.0f),
     CategoryInfo("A1", "Животные","", studyCards, 10.0f),
@@ -70,5 +66,4 @@ val categoryTest = listOf(
     CategoryInfo("A1", "Овощи", "", studyCards, 40.0f),
     CategoryInfo("A1", "Животные","", studyCards, 10.0f),
     CategoryInfo("A1", "Город","", studyCards, 100.0f),
-
     )
