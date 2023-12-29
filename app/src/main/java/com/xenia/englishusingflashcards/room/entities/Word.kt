@@ -1,13 +1,13 @@
-package com.xenia.englishusingflashcards.data
+package com.xenia.englishusingflashcards.room.entities
 
-data class WordInfo (
+import androidx.room.Entity
+
+@Entity
+data class Word (
     var word : String,
     var translate : String,
     var sentence : String,
-    var wordDetails : WordDetails
-)
-
-data class WordDetails(
+    var inProcess: Boolean,
     var theDateOfTheWordStudy: String,
     var theNumberOfRepetitions: Int,
     var theRepetitionInterval: Double,

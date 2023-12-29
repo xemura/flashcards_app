@@ -1,5 +1,6 @@
 package com.xenia.englishusingflashcards.presentation.category_screen
 
+import android.app.Application
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -19,8 +20,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.xenia.englishusingflashcards.viewmodels.CategoryViewModel
+import com.xenia.englishusingflashcards.viewmodels.CategoryViewModelFactory
 
 private val levelsList = listOf(
     "Уровень A1",
@@ -35,6 +41,15 @@ private val levelsList = listOf(
 fun DropDownMenu() {
     var levelName : String by remember { mutableStateOf(levelsList[0]) }
     var expanded by remember { mutableStateOf(false) }
+
+    val categoryViewModel: CategoryViewModel = viewModel(
+        LocalViewModelStoreOwner.current!!,
+        "CategoryViewModel",
+        CategoryViewModelFactory(
+            LocalContext.current.applicationContext
+                    as Application
+        )
+    )
 
     Box(modifier = Modifier
         .fillMaxWidth(),
@@ -60,6 +75,7 @@ fun DropDownMenu() {
                     DropdownMenuItem(onClick = {
                         expanded = false
                         levelName = level
+                        categoryViewModel.getCurrentLevel = level
                     }, text = { Text(text = level, style = MaterialTheme.typography.bodyLarge) })
                 }
             }

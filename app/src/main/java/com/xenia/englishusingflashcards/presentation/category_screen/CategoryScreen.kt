@@ -1,5 +1,6 @@
 package com.xenia.englishusingflashcards.presentation.category_screen
 
+import android.app.Application
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -30,19 +31,34 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.xenia.englishusingflashcards.R
-import com.xenia.englishusingflashcards.data.getDataOfLevels
 import com.xenia.englishusingflashcards.navigation.NavigationItem
+import com.xenia.englishusingflashcards.viewmodels.CategoryViewModel
+import com.xenia.englishusingflashcards.viewmodels.CategoryViewModelFactory
 
 @Composable
 fun CategoryScreen(navController : NavController) {
-    val data = getDataOfLevels()
+    // val owner = LocalViewModelStoreOwner.current
+
+    val categoryViewModel: CategoryViewModel = viewModel(
+        LocalViewModelStoreOwner.current!!,
+        "CategoryViewModel",
+        CategoryViewModelFactory(
+            LocalContext.current.applicationContext
+                    as Application
+        )
+    )
+
+    val data = categoryViewModel.getCategoriesByLevel(categoryViewModel.getCurrentLevel)!!.categories
 
     Scaffold(
         floatingActionButton = {
@@ -85,7 +101,7 @@ fun CategoryScreen(navController : NavController) {
 
             LazyColumn(modifier = Modifier
                 .fillMaxWidth()) {
-                items(data.levels[0].categories) { (categoryName, image, words, percent) ->
+                items(data!!) { (level, categoryName, image, words, percent) ->
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
