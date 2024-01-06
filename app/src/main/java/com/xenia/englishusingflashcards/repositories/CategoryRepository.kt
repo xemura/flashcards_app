@@ -2,7 +2,7 @@ package com.xenia.englishusingflashcards.repositories
 
 import com.xenia.englishusingflashcards.room.daos.CategoryDao
 import com.xenia.englishusingflashcards.room.entities.Category
-import com.xenia.englishusingflashcards.room.entities.Level
+import com.xenia.englishusingflashcards.room.entities.Word
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -10,19 +10,19 @@ import kotlinx.coroutines.launch
 class CategoryRepository(private val categoryDao: CategoryDao) {
 
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
-    private var categoriesInLevel : Level? = null
-    private var wordsInCategory : Category? = null
+    private var categories : List<Category>? = null
+    private var wordsInCategory : List<Word>? = null
 
-    fun getCategoriesByLevel(levelName: String) : Level? {
+    fun getCategories() : List<Category>? {
         coroutineScope.launch(Dispatchers.IO) {
-            categoriesInLevel = categoryDao.getCategoriesByLevel(levelName)
+            categories = categoryDao.getCategories()
         }
-        return categoriesInLevel
+        return categories
     }
 
-    fun getWordsInCategory(levelName : String, categoryName : String) : Category? {
+    fun getWordsInCategory(categoryName : String) : List<Word>? {
         coroutineScope.launch(Dispatchers.IO) {
-            wordsInCategory = categoryDao.getWordsInCategory(levelName, categoryName)
+            wordsInCategory = categoryDao.getWordsInCategory(categoryName)
         }
         return wordsInCategory
     }

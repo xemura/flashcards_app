@@ -105,8 +105,12 @@ fun MainScreen(navController : NavController) {
         ButtonMain(navController, NavigationItem.Category.route, "Пополнение папки слов")
         ButtonMain(navController, NavigationItem.LearningCard.route, "Обучение")
 
-        Spacer(modifier = Modifier.height(120.dp))
+        // Spacer(modifier = Modifier.height(120.dp))
+
+        Spacer(modifier = Modifier.weight(1f))
+
         Text(
+            modifier = Modifier.padding(bottom = 20.dp),
             text = "created by xemura",
             textAlign = TextAlign.Center,
             color = Color.Gray,

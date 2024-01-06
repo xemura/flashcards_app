@@ -5,20 +5,19 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.xenia.englishusingflashcards.room.entities.Category
-import com.xenia.englishusingflashcards.room.entities.Level
+import com.xenia.englishusingflashcards.room.entities.Word
 
 @Dao
 interface CategoryDao {
+    @Query("SELECT * FROM word WHERE categoryName = :categoryName")
+    fun getWordsInCategory(categoryName: String): List<Word>?
 
-    @Query("SELECT * FROM level WHERE level = :levelName")
-    fun getCategoriesByLevel(levelName : String): Level
-
-    @Query("SELECT * FROM category WHERE level = :levelName AND categoryName = :categoryName")
-    fun getWordsInCategory(levelName : String, categoryName : String): Category
+    @Query("SELECT * FROM category")
+    fun getCategories(): List<Category>?
 
     @Insert
-    fun insertAll(vararg categories: Category)
+    fun insertCategory(vararg category: Category)
 
     @Delete
-    fun delete(category: Category)
+    fun deleteCategory(vararg categories: Category)
 }

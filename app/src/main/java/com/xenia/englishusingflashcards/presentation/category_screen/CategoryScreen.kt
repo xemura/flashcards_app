@@ -1,6 +1,7 @@
 package com.xenia.englishusingflashcards.presentation.category_screen
 
 import android.app.Application
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -23,6 +24,7 @@ import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -47,8 +49,6 @@ import com.xenia.englishusingflashcards.viewmodels.CategoryViewModelFactory
 
 @Composable
 fun CategoryScreen(navController : NavController) {
-    // val owner = LocalViewModelStoreOwner.current
-
     val categoryViewModel: CategoryViewModel = viewModel(
         LocalViewModelStoreOwner.current!!,
         "CategoryViewModel",
@@ -58,7 +58,7 @@ fun CategoryScreen(navController : NavController) {
         )
     )
 
-    val data = categoryViewModel.getCategoriesByLevel(categoryViewModel.getCurrentLevel)!!.categories
+    val data = categoryViewModel.getCategories()
 
     Scaffold(
         floatingActionButton = {
@@ -96,48 +96,62 @@ fun CategoryScreen(navController : NavController) {
                         modifier = Modifier.size(50.dp)
                     )
                 }
-                DropDownMenu()
+                Text(
+                    modifier = Modifier
+                        .align(Alignment.TopCenter)
+                        .padding(top = 7.dp),
+                    text = "Категории",
+                    style = MaterialTheme.typography.bodyLarge,
+                    fontSize = 20.sp
+                )
             }
 
-            LazyColumn(modifier = Modifier
-                .fillMaxWidth()) {
-                items(data!!) { (level, categoryName, image, words, percent) ->
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(
-                                start = 20.dp,
-                                end = contentPadding.calculateBottomPadding(),
-                                bottom = 10.dp
-                            )
-                            .clip(RoundedCornerShape(25.dp))
-                            .border(BorderStroke(1.dp, Color.Black), RoundedCornerShape(25.dp)),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                    ) {
-                        Spacer(modifier = Modifier.height(10.dp))
-                        Row(modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = 20.dp, end = 20.dp),
-                            horizontalArrangement = Arrangement.Start) {
-                            Image(painter = painterResource(id = R.drawable.test_compressed), contentDescription = "",
-                                contentScale = ContentScale.Crop,
-                                modifier = Modifier
-                                    .size(80.dp)
-                                    .clip(RoundedCornerShape(25.dp)))
-                            Column (modifier = Modifier.padding(start = 20.dp, top = 15.dp)) {
-                                Text(
-                                    modifier = Modifier.padding(bottom = 2.dp),
-                                    text = categoryName,
-                                    fontSize = 20.sp
+            Log.d("CategoryScreen", data.toString())
+            if (!data.isNullOrEmpty()) {
+                LazyColumn(modifier = Modifier
+                    .fillMaxWidth()) {
+                    items(data) { (id, categoryName, image, percent) ->
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(
+                                    start = 20.dp,
+                                    end = contentPadding.calculateBottomPadding(),
+                                    bottom = 10.dp
                                 )
+                                .clip(RoundedCornerShape(25.dp))
+                                .border(BorderStroke(1.dp, Color.Black), RoundedCornerShape(25.dp)),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                        ) {
+                            Spacer(modifier = Modifier.height(10.dp))
+                            Row(modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(start = 20.dp, end = 20.dp),
+                                horizontalArrangement = Arrangement.Start) {
+                                Image(painter = painterResource(id = R.drawable.test_compressed), contentDescription = "",
+                                    contentScale = ContentScale.Crop,
+                                    modifier = Modifier
+                                        .size(80.dp)
+                                        .clip(RoundedCornerShape(25.dp)))
+                                Column (modifier = Modifier.padding(start = 20.dp, top = 15.dp)) {
+                                    Text(
+                                        modifier = Modifier.padding(bottom = 2.dp),
+                                        text = categoryName,
+                                        fontSize = 20.sp
+                                    )
 
-                                SetProgressBar(percent.toInt())
+                                    SetProgressBar(percent.toInt())
+                                }
                             }
+                            Spacer(modifier = Modifier.height(10.dp))
                         }
-                        Spacer(modifier = Modifier.height(10.dp))
                     }
                 }
             }
+            else {
+                Text(text = "Нет категорий. Создайте.")
+            }
+
         }
     }
 }

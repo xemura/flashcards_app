@@ -1,33 +1,31 @@
 package com.xenia.englishusingflashcards.room.daos
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.xenia.englishusingflashcards.room.entities.TableStudy
-import com.xenia.englishusingflashcards.room.entities.TableWordsLearned
-import com.xenia.englishusingflashcards.room.entities.TableWordsThatIKnow
+import com.xenia.englishusingflashcards.room.entities.Word
 
-@Dao
-interface TableDao {
-    @Query("SELECT * FROM tablestudy")
-    fun getWordsInTableStudy(): TableStudy
-
-    @Query("SELECT * FROM tablewordsthatiknow")
-    fun getWordsInTableWordsThatIKnow(): TableWordsThatIKnow
-
-    @Query("SELECT * FROM tablewordslearned")
-    fun getWordsInTableLearned(): TableWordsLearned
-
-    @Insert
-    fun insertAll(vararg tableStudy: TableStudy)
-
-    @Insert
-    fun insertAll(vararg tableWordsThatIKnow: TableWordsThatIKnow)
-
-    @Insert
-    fun insertAll(vararg tableWordsLearned: TableWordsLearned)
-
-    @Delete
-    fun delete(category: TableStudy)
-}
+//@Dao
+//interface TableDao {
+//    @Query("SELECT words FROM table_study")
+//    fun getWordsInTableStudy(): List<Word>
+//
+//    @Query("SELECT words FROM table_words_that_i_know")
+//    fun getWordsInTableWordsThatIKnow(): List<Word>
+//
+//    @Query("SELECT words FROM table_words_learned")
+//    fun getWordsInTableLearned(): List<Word>
+//
+//    @Insert
+//    fun insertAll(vararg tableStudy: TableStudy)
+//
+//    @Insert
+//    fun insertAll(vararg tableWordsThatIKnow: TableWordsThatIKnow)
+//
+//    @Insert
+//    fun insertAll(vararg tableWordsLearned: TableWordsLearned)
+//
+////    @Delete
+////    fun delete(word: Word)
+//
+//}

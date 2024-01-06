@@ -1,9 +1,10 @@
 package com.xenia.englishusingflashcards.room.entities
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-@Entity
-data class NotificationTable (
-    var turnOff : Boolean = false,
-    var time : String = "08:00",
+@Entity(tableName = "notification_table")
+data class NotificationTable(
+    @PrimaryKey val turnOff : Boolean = false,
+    val time : String = "08:00",
 )

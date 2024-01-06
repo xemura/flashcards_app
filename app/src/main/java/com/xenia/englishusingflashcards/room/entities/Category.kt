@@ -4,11 +4,11 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
-data class Category (
-    var level: String,
-    @PrimaryKey var categoryName : String,
-    var image : String,
-    @ColumnInfo(name = "words_in_category") var words : List<Word>,
-    var progress: Float
+@Entity(tableName = "category")
+data class Category(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
+    @ColumnInfo(name = "category_name")val categoryName : String,
+    @ColumnInfo(name = "image") val image : String,
+    @ColumnInfo(name = "progress") val progress: Float
 )

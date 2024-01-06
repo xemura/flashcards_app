@@ -51,28 +51,37 @@ fun BottomSheet(text : String, onDismiss: () -> Unit) {
             color = Color.Gray
         )
 
-        LazyColumn {
-            items(bottomSheetInfo.data) { (word, translate, sentence) ->
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 10.dp, horizontal = 20.dp)
-                        .clip(RoundedCornerShape(25.dp))
-                        .border(BorderStroke(1.dp, Color.Black), RoundedCornerShape(25.dp)),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    Spacer(modifier = Modifier.height(10.dp))
-                    Text(
-                        text = word,
-                    )
-                    Text(
-                        text = translate,
-                    )
-                    Text(text = sentence)
-                    Spacer(modifier = Modifier.height(10.dp))
+        if (bottomSheetInfo.data != null) {
+            LazyColumn {
+                items(bottomSheetInfo.data) { (id, categoryName, word, translate, sentence) ->
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 10.dp, horizontal = 20.dp)
+                            .clip(RoundedCornerShape(25.dp))
+                            .border(BorderStroke(1.dp, Color.Black), RoundedCornerShape(25.dp)),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                    ) {
+                        Spacer(modifier = Modifier.height(10.dp))
+                        Text(
+                            text = word,
+                        )
+                        Text(
+                            text = translate,
+                        )
+                        Text(text = sentence)
+                        Spacer(modifier = Modifier.height(10.dp))
+                    }
                 }
             }
         }
+        else {
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                text = "Слов нет",
+            )
+        }
+
     }
 }
 
