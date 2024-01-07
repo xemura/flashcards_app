@@ -16,8 +16,8 @@ interface CategoryDao {
     fun getCategories(): List<Category>?
 
     @Insert
-    fun insertCategory(vararg category: Category)
+    fun insertCategory(category: Category)
 
     @Delete
-    fun deleteCategory(vararg categories: Category)
+    fun deleteCategory(categories: Category)
 }

@@ -9,7 +9,7 @@ import com.xenia.englishusingflashcards.room.entities.Word
 @Dao
 interface WordDao {
     @Query("SELECT word FROM word")
-    fun getAll(): Word
+    fun getAll(): List<Word>
 
     @Insert
     fun insertAll(vararg word: Word)

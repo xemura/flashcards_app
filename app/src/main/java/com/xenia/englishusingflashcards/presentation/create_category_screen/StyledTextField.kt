@@ -8,10 +8,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -22,7 +19,9 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.xenia.englishusingflashcards.ui.theme.default
+import com.xenia.englishusingflashcards.viewmodels.CreateCategoryViewModel
 
 private val textFieldColors = listOf(
     Color(0xFF184E77),
@@ -39,8 +38,7 @@ private val textFieldColors = listOf(
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun StyledTextField() {
-    var value by remember { mutableStateOf("") }
+fun StyledTextField(viewModel: CreateCategoryViewModel = viewModel()) {
 
     val keyboardController = LocalSoftwareKeyboardController.current
 
@@ -51,13 +49,13 @@ fun StyledTextField() {
     }
 
     OutlinedTextField(
-        value = value,
-        onValueChange = { value = it },
+        value = viewModel.categoryName,
+        onValueChange = { value -> viewModel.updateCategoryName(value) },
         label = { Text("Введите название", style = MaterialTheme.typography.bodyLarge) },
         placeholder = { Text(text = "Название", style = MaterialTheme.typography.bodyLarge) },
         singleLine = true,
         textStyle = TextStyle(brush = brush, fontFamily = default, fontSize = 16.sp),
-        modifier = Modifier.padding(20.dp),
+        modifier = Modifier.padding(bottom = 10.dp, top = 10.dp),
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Text,
             imeAction = ImeAction.Done),
