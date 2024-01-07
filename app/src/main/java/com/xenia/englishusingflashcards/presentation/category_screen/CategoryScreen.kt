@@ -66,7 +66,7 @@ fun CategoryScreen(navController : NavController) {
                 navController = navController
             )
         },
-        floatingActionButtonPosition = FabPosition.Center
+        floatingActionButtonPosition = FabPosition.End
     ) { contentPadding ->
         Column(
             modifier = Modifier
@@ -132,7 +132,8 @@ fun CategoryScreen(navController : NavController) {
                                     contentScale = ContentScale.Crop,
                                     modifier = Modifier
                                         .size(80.dp)
-                                        .clip(RoundedCornerShape(25.dp)))
+                                        .clip(RoundedCornerShape(25.dp))
+                                )
                                 Column (modifier = Modifier.padding(start = 20.dp, top = 15.dp)) {
                                     Text(
                                         modifier = Modifier.padding(bottom = 2.dp),
@@ -142,6 +143,12 @@ fun CategoryScreen(navController : NavController) {
 
                                     SetProgressBar(percent.toInt())
                                 }
+                                Image(painter = painterResource(id = R.drawable.btn_edit_in_categories), contentDescription = "",
+                                    contentScale = ContentScale.Crop,
+                                    modifier = Modifier
+                                        .size(80.dp)
+                                        .clip(RoundedCornerShape(25.dp))
+                                )
                             }
                             Spacer(modifier = Modifier.height(10.dp))
                         }

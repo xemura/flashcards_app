@@ -51,7 +51,7 @@ fun AlertDialog(onDismiss: () -> Unit, onConfirm: () -> Unit) {
                 onClick = {
                     onConfirm.invoke()
                 },
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().size(50.dp),
                 shape = RoundedCornerShape(25.dp),
                 border = BorderStroke(1.dp, Color.Black),
                 colors = ButtonDefaults.buttonColors(

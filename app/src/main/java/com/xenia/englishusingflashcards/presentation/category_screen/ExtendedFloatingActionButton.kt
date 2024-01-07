@@ -21,8 +21,8 @@ fun ExtendedFloatingActionButton(navController : NavController) {
             .clip(RoundedCornerShape(25.dp))
             .border(BorderStroke(1.dp, Color.Black), RoundedCornerShape(25.dp)),
         onClick = {
-            navController.navigate(NavigationItem.LearningCard.route) {
-                popUpTo(NavigationItem.Main.route) {
+            navController.navigate(NavigationItem.CreateCategory.route) {
+                popUpTo(NavigationItem.Category.route) {
                     inclusive = true
                 }
             }
@@ -31,7 +31,7 @@ fun ExtendedFloatingActionButton(navController : NavController) {
         contentColor = Color.Black
     ) {
         Text(
-            "Учить",
+            "+",
             fontSize = 16.sp,
             style = MaterialTheme.typography.bodyLarge,
         )

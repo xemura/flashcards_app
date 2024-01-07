@@ -5,10 +5,9 @@ enum class Screen {
     MAIN,
 
     LEARNING_CARDS,
-    LEARNING_BACK_CARDS,
 
     CATEGORY,
-    ADD_WORDS,
+    CREATE_CATEGORY,
 }
 sealed class NavigationItem(val route: String) {
     data object Splash : NavigationItem(Screen.SPLASH.name)
@@ -16,8 +15,8 @@ sealed class NavigationItem(val route: String) {
 
 
     data object LearningCard : NavigationItem(Screen.LEARNING_CARDS.name)
-    data object LearningBackCard : NavigationItem(Screen.LEARNING_BACK_CARDS.name)
+
 
     data object Category : NavigationItem(Screen.CATEGORY.name)
-    data object AddWords : NavigationItem(Screen.ADD_WORDS.name)
+    data object CreateCategory : NavigationItem(Screen.CREATE_CATEGORY.name)
 }
