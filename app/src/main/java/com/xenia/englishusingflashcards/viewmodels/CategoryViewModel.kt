@@ -8,26 +8,25 @@ import com.xenia.englishusingflashcards.room.database.AppDatabase
 import com.xenia.englishusingflashcards.room.entities.Category
 import com.xenia.englishusingflashcards.room.entities.Word
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class CategoryViewModel(app: Application) : ViewModel() {
 
+    private val appDb: AppDatabase = AppDatabase.getInstance(app)
+
     private val categoryRepository: CategoryRepository
-    private var categories: List<Category>? = null
+    internal var categories: Flow<List<Category>?> = appDb.categoryDao().getCategories()
     private var wordsInCategory : List<Word>? = null
 
     init {
-        val appDb = AppDatabase.getInstance(app)
         val categoryDao = appDb.categoryDao()
         categoryRepository = CategoryRepository(categoryDao)
     }
 
-    fun getCategories() : List<Category>? {
-        viewModelScope.launch(Dispatchers.IO) {
-            categories = categoryRepository.getCategories()
-        }
-        return categories
-    }
+//    fun createCategory(category: Category) {
+//        categoryRepository.createCategory(category)
+//    }
 
     fun getWordsInCategory(categoryName : String) : List<Word>? {
         viewModelScope.launch(Dispatchers.IO) {

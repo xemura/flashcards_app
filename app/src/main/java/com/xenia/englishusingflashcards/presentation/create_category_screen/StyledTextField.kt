@@ -1,5 +1,6 @@
 package com.xenia.englishusingflashcards.presentation.create_category_screen
 
+import android.app.Application
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -13,15 +14,18 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.xenia.englishusingflashcards.ui.theme.default
 import com.xenia.englishusingflashcards.viewmodels.CreateCategoryViewModel
+import com.xenia.englishusingflashcards.viewmodels.CreateCategoryViewModelFactory
 
 private val textFieldColors = listOf(
     Color(0xFF184E77),
@@ -38,7 +42,16 @@ private val textFieldColors = listOf(
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun StyledTextField(viewModel: CreateCategoryViewModel = viewModel()) {
+fun StyledTextField() {
+
+    val createCategoryViewModel: CreateCategoryViewModel = viewModel(
+        LocalViewModelStoreOwner.current!!,
+        "CreateCategoryViewModel",
+        CreateCategoryViewModelFactory(
+            LocalContext.current.applicationContext
+                    as Application
+        )
+    )
 
     val keyboardController = LocalSoftwareKeyboardController.current
 
@@ -49,8 +62,8 @@ fun StyledTextField(viewModel: CreateCategoryViewModel = viewModel()) {
     }
 
     OutlinedTextField(
-        value = viewModel.categoryName,
-        onValueChange = { value -> viewModel.updateCategoryName(value) },
+        value = createCategoryViewModel.categoryName,
+        onValueChange = { value -> createCategoryViewModel.updateCategoryName(value) },
         label = { Text("Введите название", style = MaterialTheme.typography.bodyLarge) },
         placeholder = { Text(text = "Название", style = MaterialTheme.typography.bodyLarge) },
         singleLine = true,

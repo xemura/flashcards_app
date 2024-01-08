@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.xenia.englishusingflashcards.room.daos.CategoryDao
+import com.xenia.englishusingflashcards.room.daos.WordDao
 import com.xenia.englishusingflashcards.room.entities.Category
 import com.xenia.englishusingflashcards.room.entities.NotificationTable
 import com.xenia.englishusingflashcards.room.entities.Word
@@ -14,10 +15,10 @@ import com.xenia.englishusingflashcards.room.entities.Word
     Word::class,
     Category::class,
     NotificationTable::class
-], version = 1, exportSchema = false)
+], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun categoryDao(): CategoryDao
-
+    abstract fun wordDao(): WordDao
     companion object {
         @Volatile
         private var INSTANCE: AppDatabase? = null
