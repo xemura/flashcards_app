@@ -13,6 +13,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -52,8 +57,8 @@ fun CategoryListItem(image: String, categoryName: String, percent: Float) {
                     .weight(0.5f)
             )
             Column (modifier = Modifier
-                .padding(start = 20.dp, top = 15.dp, end = 20.dp)
-                .weight(1.2f)) {
+                .padding(start = 20.dp, top = 15.dp, end = 10.dp)
+                .weight(1.4f)) {
                 Text(
                     modifier = Modifier.padding(bottom = 2.dp),
                     text = categoryName,
@@ -62,13 +67,19 @@ fun CategoryListItem(image: String, categoryName: String, percent: Float) {
 
                 SetProgressBar(percent.toInt())
             }
-            Image(painter = painterResource(id = R.drawable.btn_edit_in_categories), contentDescription = "",
-                contentScale = ContentScale.Crop,
+            IconButton(onClick = {
+
+            },
                 modifier = Modifier
-                    .size(50.dp).fillMaxHeight().align(Alignment.CenterVertically)
+                    .size(50.dp)
+                    .fillMaxHeight()
+                    .align(Alignment.CenterVertically)
                     .clip(RoundedCornerShape(25.dp))
                     .weight(0.3f)
-            )
+            ) {
+                Icon(imageVector = Icons.Filled.Edit, contentDescription = "Edit"
+                )
+            }
         }
         Spacer(modifier = Modifier.height(10.dp))
     }

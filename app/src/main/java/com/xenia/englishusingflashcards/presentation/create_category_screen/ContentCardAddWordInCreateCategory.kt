@@ -1,6 +1,7 @@
 package com.xenia.englishusingflashcards.presentation.create_category_screen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -47,15 +48,19 @@ fun ContentCardAddWordInCreateCategory(createCategoryViewModel: CreateCategoryVi
                             .background(LightGrayCustom),
                         horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
-                        Spacer(modifier = Modifier.height(10.dp))
-                        Text(
-                            text = word,
-                        )
-                        Text(
-                            text = translate,
-                        )
-                        Text(text = sentence)
-                        Spacer(modifier = Modifier.height(10.dp))
+                        Column(modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 20.dp, vertical = 10.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                        ) {
+                            Text(
+                                text = word,
+                            )
+                            Text(
+                                text = translate,
+                            )
+                            Text(text = sentence)
+                        }
                     }
                 }
             }

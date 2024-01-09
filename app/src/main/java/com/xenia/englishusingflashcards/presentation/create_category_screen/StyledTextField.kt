@@ -96,7 +96,7 @@ fun StyledTextField() {
         placeholder = { Text(text = "Название", style = MaterialTheme.typography.bodyLarge) },
         singleLine = true,
         textStyle = TextStyle(brush = brush, fontFamily = default, fontSize = 16.sp),
-        modifier = Modifier.padding(bottom = 10.dp, top = 10.dp),
+        modifier = Modifier.padding(bottom = 10.dp, top = 10.dp, start = 20.dp, end = 20.dp),
         isError = errorStateCategoryName,
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Text,

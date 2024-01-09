@@ -34,6 +34,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
@@ -72,6 +73,8 @@ fun AlertDialogAddWordInCategory(onDismiss: () -> Unit, onConfirm: () -> Unit) {
     var errorStateSentence by remember { mutableStateOf(false)}
     var errorMessageSentence by remember { mutableStateOf("")}
 
+    val maxChar = 50
+
     val createCategoryViewModel: CreateCategoryViewModel = viewModel(
         LocalViewModelStoreOwner.current!!,
         "CreateCategoryViewModel",
@@ -98,7 +101,7 @@ fun AlertDialogAddWordInCategory(onDismiss: () -> Unit, onConfirm: () -> Unit) {
                             theRepetitionInterval = 0.0,
                             theRepetitionIntervalAfterTheNRepetition = 0.0
                         )
-                        Log.d("CreateCategory", createdWord.toString())
+
                         createCategoryViewModel.updateListWordsInCategory(createdWord)
                         onConfirm.invoke()
                     } else {
@@ -106,19 +109,16 @@ fun AlertDialogAddWordInCategory(onDismiss: () -> Unit, onConfirm: () -> Unit) {
                             word = TextFieldValue("")
                             errorStateWord = true
                             errorMessageWord = "Заполните поле"
-                            Log.d("CreateCategory", "word value $errorStateWord")
                         }
                         if (translate.text.isEmpty()) {
                             translate = TextFieldValue("")
                             errorStateTranslate = true
                             errorMessageTranslate = "Заполните поле"
-                            Log.d("CreateCategory", "translate value ${translate.text}")
                         }
                         if (sentence.text.isEmpty()) {
                             sentence = TextFieldValue("")
                             errorStateSentence = true
                             errorMessageSentence = "Заполните поле"
-                            Log.d("CreateCategory", "sentence value ${sentence.text}")
                         }
                     }
                 },
@@ -161,10 +161,9 @@ fun AlertDialogAddWordInCategory(onDismiss: () -> Unit, onConfirm: () -> Unit) {
             .clip(RoundedCornerShape(25.dp))
             .border(BorderStroke(1.dp, Color.Black), RoundedCornerShape(25.dp)),
         text = {
-            val checkedState = remember { mutableStateOf(false) }
-            val textColor = remember { mutableStateOf(Color.Unspecified) }
             Column(modifier = Modifier.padding(10.dp),
-                horizontalAlignment = Alignment.CenterHorizontally) {
+                horizontalAlignment = Alignment.CenterHorizontally)
+            {
                 val keyboardController = LocalSoftwareKeyboardController.current
 
                 val brush = remember {
@@ -173,11 +172,18 @@ fun AlertDialogAddWordInCategory(onDismiss: () -> Unit, onConfirm: () -> Unit) {
                     )
                 }
 
+//                OutlineTextFieldAddWordInCategory(
+//                    maxChar = maxChar,
+//                    keyboardController = keyboardController,
+//                    brush = brush,
+//                    labelText = "Введите слово",
+//                    placeholderText = "Слово")
+
                 OutlinedTextField(
                     value = word,
                     onValueChange =
                     { value ->
-                        word = value
+                        if (value.text.length <= maxChar) word = value
                         when {
                             word.text.isEmpty() -> {
                                 errorStateWord = true
@@ -192,6 +198,16 @@ fun AlertDialogAddWordInCategory(onDismiss: () -> Unit, onConfirm: () -> Unit) {
                                 errorMessageWord = ""
                             }
                         }
+                    },
+                    supportingText = {
+                        if (word.text.length >= maxChar) {
+                            Text(
+                                text = "${word.text.length} / $maxChar",
+                                modifier = Modifier.fillMaxWidth(),
+                                textAlign = TextAlign.End,
+                            )
+                        }
+
                     },
                     label =
                     {
@@ -209,7 +225,6 @@ fun AlertDialogAddWordInCategory(onDismiss: () -> Unit, onConfirm: () -> Unit) {
                     },
                     maxLines = 2,
                     textStyle = TextStyle(brush = brush, fontFamily = default, fontSize = 16.sp),
-                    modifier = Modifier.padding(bottom = 10.dp, top = 10.dp),
                     isError = errorStateWord,
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Text,
@@ -235,7 +250,7 @@ fun AlertDialogAddWordInCategory(onDismiss: () -> Unit, onConfirm: () -> Unit) {
                     value = translate,
                     onValueChange =
                     { value ->
-                        translate = value
+                        if (value.text.length <= maxChar) translate = value
                         when {
                             translate.text.isEmpty() -> {
                                 errorStateTranslate = true
@@ -250,6 +265,16 @@ fun AlertDialogAddWordInCategory(onDismiss: () -> Unit, onConfirm: () -> Unit) {
                                 errorMessageTranslate = ""
                             }
                         }
+                    },
+                    supportingText = {
+                        if (translate.text.length >= maxChar) {
+                            Text(
+                                text = "${translate.text.length} / $maxChar",
+                                modifier = Modifier.fillMaxWidth(),
+                                textAlign = TextAlign.End,
+                            )
+                        }
+
                     },
                     label =
                     {
@@ -267,7 +292,6 @@ fun AlertDialogAddWordInCategory(onDismiss: () -> Unit, onConfirm: () -> Unit) {
                     },
                     maxLines = 2,
                     textStyle = TextStyle(brush = brush, fontFamily = default, fontSize = 16.sp),
-                    modifier = Modifier.padding(bottom = 10.dp, top = 10.dp),
                     isError = errorStateTranslate,
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Text,
@@ -292,7 +316,7 @@ fun AlertDialogAddWordInCategory(onDismiss: () -> Unit, onConfirm: () -> Unit) {
                 OutlinedTextField(
                     value = sentence,
                     { value ->
-                        sentence = value
+                        if (value.text.length <= maxChar) sentence = value
                         when {
                             sentence.text.isEmpty() -> {
                                 errorStateSentence = true
@@ -307,6 +331,16 @@ fun AlertDialogAddWordInCategory(onDismiss: () -> Unit, onConfirm: () -> Unit) {
                                 errorMessageSentence = ""
                             }
                         }
+                    },
+                    supportingText = {
+                        if (sentence.text.length >= maxChar) {
+                            Text(
+                                text = "${sentence.text.length} / $maxChar",
+                                modifier = Modifier.fillMaxWidth(),
+                                textAlign = TextAlign.End,
+                            )
+                        }
+
                     },
                     label =
                     {
@@ -324,7 +358,6 @@ fun AlertDialogAddWordInCategory(onDismiss: () -> Unit, onConfirm: () -> Unit) {
                     },
                     maxLines = 2,
                     textStyle = TextStyle(brush = brush, fontFamily = default, fontSize = 16.sp),
-                    modifier = Modifier.padding(bottom = 10.dp, top = 10.dp),
                     isError = errorStateSentence,
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Text,

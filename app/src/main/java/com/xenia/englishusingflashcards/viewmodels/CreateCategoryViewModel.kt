@@ -29,20 +29,12 @@ class CreateCategoryViewModel(app: Application) : ViewModel() {
     var categoryName by mutableStateOf("")
         private set
 
-    var categoryNameText by mutableStateOf("")
+    var categoryImage by mutableStateOf("")
         private set
-
-//    private val _listWordInCategory = MutableStateFlow(emptyList<Word>())
-//    var listWordInCategory = _listWordInCategory.asStateFlow()
 
     private val _listWordInCategory = MutableLiveData<List<Word>>(emptyList())
     val listWordInCategory: LiveData<List<Word>>
         get() = _listWordInCategory
-
-//    private val _listWordInCategory = MutableStateFlow<SnapshotStateList<Word>>(mutableStateListOf())
-//    val listWordInCategory: StateFlow<SnapshotStateList<Word>> = _listWordInCategory
-
-    //private var list = _listWordInCategory.value?.toMutableList()
 
     private val createCategoryRepository: CreateCategoryRepository
 
@@ -63,11 +55,10 @@ class CreateCategoryViewModel(app: Application) : ViewModel() {
     }
 
     fun updateListWordsInCategory(word: Word) {
-        viewModelScope.launch (Dispatchers.Main) {
+        viewModelScope.launch (Dispatchers.IO) {
             val list = _listWordInCategory.value?.toMutableList()
             list?.add(word.copy())
             _listWordInCategory.postValue(list)
-            Log.d("CreateCategory", "update IN VIEWMODEL ${listWordInCategory.value}")
         }
     }
 

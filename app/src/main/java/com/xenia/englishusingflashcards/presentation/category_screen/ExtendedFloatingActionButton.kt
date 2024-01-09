@@ -4,6 +4,9 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,10 +34,6 @@ fun ExtendedFloatingActionButton(navController : NavController) {
         containerColor = Color(202, 240, 248, 255),
         contentColor = Color.Black
     ) {
-        Text(
-            "+",
-            fontSize = 26.sp,
-            style = MaterialTheme.typography.bodyLarge,
-        )
+        Icon(imageVector = Icons.Filled.Add, contentDescription = "Add")
     }
 }
