@@ -3,8 +3,12 @@ package com.xenia.englishusingflashcards.viewmodels
 import android.app.Application
 import android.util.Log
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshots.SnapshotStateList
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.xenia.englishusingflashcards.repositories.CategoryRepository
@@ -17,6 +21,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class CreateCategoryViewModel(app: Application) : ViewModel() {
@@ -24,9 +29,20 @@ class CreateCategoryViewModel(app: Application) : ViewModel() {
     var categoryName by mutableStateOf("")
         private set
 
-    private val _listWordInCategory = MutableStateFlow(emptyList<Word>())
-    var listWordInCategory: Flow<List<Word>?> = _listWordInCategory
-    private var list = _listWordInCategory.value.toMutableList()
+    var categoryNameText by mutableStateOf("")
+        private set
+
+//    private val _listWordInCategory = MutableStateFlow(emptyList<Word>())
+//    var listWordInCategory = _listWordInCategory.asStateFlow()
+
+    private val _listWordInCategory = MutableLiveData<List<Word>>(emptyList())
+    val listWordInCategory: LiveData<List<Word>>
+        get() = _listWordInCategory
+
+//    private val _listWordInCategory = MutableStateFlow<SnapshotStateList<Word>>(mutableStateListOf())
+//    val listWordInCategory: StateFlow<SnapshotStateList<Word>> = _listWordInCategory
+
+    //private var list = _listWordInCategory.value?.toMutableList()
 
     private val createCategoryRepository: CreateCategoryRepository
 
@@ -47,20 +63,25 @@ class CreateCategoryViewModel(app: Application) : ViewModel() {
     }
 
     fun updateListWordsInCategory(word: Word) {
-        list.add(word)
-        _listWordInCategory.value = list
-        Log.d("CreateCategory", "update ${_listWordInCategory.value.toString()}")
+        viewModelScope.launch (Dispatchers.Main) {
+            val list = _listWordInCategory.value?.toMutableList()
+            list?.add(word.copy())
+            _listWordInCategory.postValue(list)
+            Log.d("CreateCategory", "update IN VIEWMODEL ${listWordInCategory.value}")
+        }
     }
 
     fun saveCategoryWithWords() {
-        wordRepository.insertListWords(_listWordInCategory.value)
-        categoryRepository.createCategory(
-            Category(
-                categoryName = categoryName,
-                image = "",
-                progress = 0.0f
+        viewModelScope.launch (Dispatchers.IO) {
+            _listWordInCategory.value?.let { wordRepository.insertListWords(it) }
+            categoryRepository.createCategory(
+                Category(
+                    categoryName = categoryName,
+                    image = "",
+                    progress = 0.0f
+                )
             )
-        )
+        }
     }
 
     fun insertAll(list: List<Word>) {

@@ -24,14 +24,14 @@ import com.xenia.englishusingflashcards.navigation.NavigationItem
 fun Header(contentPadding: PaddingValues, text: String, action: String, navController: NavController, activity: Activity?) {
     Box(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(contentPadding)
+            .fillMaxWidth().padding(top = 15.dp)
+            .padding(contentPadding.calculateBottomPadding().minus(10.dp))
     ) {
         IconButton(
             onClick = {
                 action(action, navController, activity)
             },
-            modifier = Modifier.align(Alignment.CenterStart).padding(start = 10.dp)
+            modifier = Modifier.align(Alignment.CenterStart)
         ) {
             Icon(
                 imageVector = Icons.Filled.KeyboardArrowLeft,

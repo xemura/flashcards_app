@@ -29,32 +29,26 @@ private val progressBarColors = listOf(
 
 @Composable
 fun SetProgressBar(percent : Int) {
-    CustomProgressBar(
-        Modifier
-            .clip(shape = RoundedCornerShape(25.dp))
-            .height(10.dp),
-        200.dp,
-        Color.LightGray,
-        Brush.linearGradient(
-            colors = progressBarColors,
-            tileMode = TileMode.Mirror
-        ),
-        percent
-    )
-}
 
-@Composable
-fun CustomProgressBar(
-    modifier: Modifier, width: Dp, backgroundColor: Color, foregroundColor: Brush, percent: Int
-) {
+    val modifier = Modifier
+        .clip(shape = RoundedCornerShape(25.dp))
+        .height(10.dp)
+
+    val brush = Brush.linearGradient(
+        colors = progressBarColors,
+        tileMode = TileMode.Mirror
+    )
+
+    val width = 200.dp
+
     Box(
         modifier = modifier
-            .background(backgroundColor)
+            .background(Color.LightGray)
             .width(width)
     ) {
         Box(
             modifier = modifier
-                .background(foregroundColor)
+                .background(brush)
                 .width(width * percent / 100)
         )
     }

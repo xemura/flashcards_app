@@ -2,6 +2,7 @@ package com.xenia.englishusingflashcards.presentation.category_screen
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -17,7 +18,7 @@ import com.xenia.englishusingflashcards.navigation.NavigationItem
 @Composable
 fun ExtendedFloatingActionButton(navController : NavController) {
     androidx.compose.material3.ExtendedFloatingActionButton(
-        modifier = Modifier
+        modifier = Modifier.size(70.dp)
             .clip(RoundedCornerShape(25.dp))
             .border(BorderStroke(1.dp, Color.Black), RoundedCornerShape(25.dp)),
         onClick = {
@@ -32,7 +33,7 @@ fun ExtendedFloatingActionButton(navController : NavController) {
     ) {
         Text(
             "+",
-            fontSize = 16.sp,
+            fontSize = 26.sp,
             style = MaterialTheme.typography.bodyLarge,
         )
     }

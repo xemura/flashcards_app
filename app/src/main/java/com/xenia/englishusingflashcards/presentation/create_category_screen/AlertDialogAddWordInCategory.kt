@@ -4,26 +4,17 @@ import android.app.Application
 import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -42,14 +33,13 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.xenia.englishusingflashcards.room.entities.Word
 import com.xenia.englishusingflashcards.ui.theme.default
-import com.xenia.englishusingflashcards.viewmodels.CategoryViewModel
-import com.xenia.englishusingflashcards.viewmodels.CategoryViewModelFactory
 import com.xenia.englishusingflashcards.viewmodels.CreateCategoryViewModel
 import com.xenia.englishusingflashcards.viewmodels.CreateCategoryViewModelFactory
 
@@ -70,9 +60,17 @@ private val textFieldColors = listOf(
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun AlertDialogAddWordInCategory(onDismiss: () -> Unit, onConfirm: () -> Unit) {
-    var word by remember { mutableStateOf("") }
-    var translate by remember { mutableStateOf("") }
-    var sentence by remember { mutableStateOf("") }
+    var word by remember { mutableStateOf(TextFieldValue()) }
+    var errorStateWord by remember { mutableStateOf(false)}
+    var errorMessageWord by remember { mutableStateOf("")}
+
+    var translate by remember { mutableStateOf(TextFieldValue()) }
+    var errorStateTranslate by remember { mutableStateOf(false)}
+    var errorMessageTranslate by remember { mutableStateOf("")}
+
+    var sentence by remember { mutableStateOf(TextFieldValue()) }
+    var errorStateSentence by remember { mutableStateOf(false)}
+    var errorMessageSentence by remember { mutableStateOf("")}
 
     val createCategoryViewModel: CreateCategoryViewModel = viewModel(
         LocalViewModelStoreOwner.current!!,
@@ -85,44 +83,46 @@ fun AlertDialogAddWordInCategory(onDismiss: () -> Unit, onConfirm: () -> Unit) {
 
     androidx.compose.material3.AlertDialog(
         onDismissRequest = onDismiss,
-        dismissButton = {
-            Button(
-                onClick = {
-                    onDismiss.invoke()
-                },
-                modifier = Modifier.fillMaxWidth().size(50.dp),
-                shape = RoundedCornerShape(25.dp),
-                border = BorderStroke(1.dp, Color.Black),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(202, 240, 248, 255),
-                    contentColor = Color.Black
-                )
-            ) {
-                Text(
-                    text = "Cancel",
-                    style = MaterialTheme.typography.bodyLarge
-                )
-            }
-        },
         confirmButton = {
             Button(
                 onClick = {
-                    val createdWord = Word(
-                        categoryName = createCategoryViewModel.categoryName,
-                        word = word,
-                        translate = translate,
-                        sentence = sentence,
-                        inProcess = false,
-                        theDateOfTheWordStudy = "", // вычислять
-                        theNumberOfRepetitions = 0,
-                        theRepetitionInterval = 0.0,
-                        theRepetitionIntervalAfterTheNRepetition = 0.0
-                    )
-                    Log.d("CreateCategory", createdWord.toString())
-                    createCategoryViewModel.updateListWordsInCategory(createdWord)
-                    onConfirm.invoke()
+                    if (!(word.text.isEmpty() or translate.text.isEmpty() or sentence.text.isEmpty())) {
+                        val createdWord = Word(
+                            categoryName = createCategoryViewModel.categoryName,
+                            word = word.text,
+                            translate = translate.text,
+                            sentence = sentence.text,
+                            inProcess = false,
+                            theDateOfTheWordStudy = "", // вычислять
+                            theNumberOfRepetitions = 0,
+                            theRepetitionInterval = 0.0,
+                            theRepetitionIntervalAfterTheNRepetition = 0.0
+                        )
+                        Log.d("CreateCategory", createdWord.toString())
+                        createCategoryViewModel.updateListWordsInCategory(createdWord)
+                        onConfirm.invoke()
+                    } else {
+                        if (word.text.isEmpty()) {
+                            word = TextFieldValue("")
+                            errorStateWord = true
+                            errorMessageWord = "Заполните поле"
+                            Log.d("CreateCategory", "word value $errorStateWord")
+                        }
+                        if (translate.text.isEmpty()) {
+                            translate = TextFieldValue("")
+                            errorStateTranslate = true
+                            errorMessageTranslate = "Заполните поле"
+                            Log.d("CreateCategory", "translate value ${translate.text}")
+                        }
+                        if (sentence.text.isEmpty()) {
+                            sentence = TextFieldValue("")
+                            errorStateSentence = true
+                            errorMessageSentence = "Заполните поле"
+                            Log.d("CreateCategory", "sentence value ${sentence.text}")
+                        }
+                    }
                 },
-                modifier = Modifier.fillMaxWidth().size(50.dp),
+                modifier = Modifier.size(width = 90.dp, height = 60.dp),
                 shape = RoundedCornerShape(25.dp),
                 border = BorderStroke(1.dp, Color.Black),
                 colors = ButtonDefaults.buttonColors(
@@ -136,9 +136,29 @@ fun AlertDialogAddWordInCategory(onDismiss: () -> Unit, onConfirm: () -> Unit) {
                 )
             }
         },
+        dismissButton = {
+            Button(
+                onClick = {
+                    onDismiss.invoke()
+                },
+                modifier = Modifier.size(width = 120.dp, height = 60.dp),
+                shape = RoundedCornerShape(25.dp),
+                border = BorderStroke(1.dp, Color.Black),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(202, 240, 248, 255),
+                    contentColor = Color.Black
+                )
+            ) {
+                Text(
+                    text = "Cancel",
+                    style = MaterialTheme.typography.bodyLarge
+                )
+            }
+        },
         containerColor = Color.White,
         shape = RoundedCornerShape(25.dp),
-        modifier = Modifier.clip(RoundedCornerShape(25.dp))
+        modifier = Modifier
+            .clip(RoundedCornerShape(25.dp))
             .border(BorderStroke(1.dp, Color.Black), RoundedCornerShape(25.dp)),
         text = {
             val checkedState = remember { mutableStateOf(false) }
@@ -155,12 +175,42 @@ fun AlertDialogAddWordInCategory(onDismiss: () -> Unit, onConfirm: () -> Unit) {
 
                 OutlinedTextField(
                     value = word,
-                    onValueChange = { value -> word = value },
-                    label = { Text("Введите слово", style = MaterialTheme.typography.bodyLarge) },
-                    placeholder = { Text(text = "Слово", style = MaterialTheme.typography.bodyLarge) },
+                    onValueChange =
+                    { value ->
+                        word = value
+                        when {
+                            word.text.isEmpty() -> {
+                                errorStateWord = true
+                                errorMessageWord = "Заполните поле"
+                            }
+                            word.text == "" -> {
+                                errorStateWord = true
+                                errorMessageWord = "Пустое поле"
+                            }
+                            else -> {
+                                errorStateWord = false
+                                errorMessageWord = ""
+                            }
+                        }
+                    },
+                    label =
+                    {
+                        Text(
+                            text = if (errorStateWord) errorMessageWord
+                            else "Введите слово", style = MaterialTheme.typography.bodyLarge
+                        )
+                    },
+                    placeholder =
+                    {
+                        Text(
+                            text = if (errorStateWord) errorMessageWord
+                            else "Слово", style = MaterialTheme.typography.bodyLarge
+                        )
+                    },
                     maxLines = 2,
                     textStyle = TextStyle(brush = brush, fontFamily = default, fontSize = 16.sp),
                     modifier = Modifier.padding(bottom = 10.dp, top = 10.dp),
+                    isError = errorStateWord,
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Text,
                         imeAction = ImeAction.Done),
@@ -173,18 +223,52 @@ fun AlertDialogAddWordInCategory(onDismiss: () -> Unit, onConfirm: () -> Unit) {
                         focusedIndicatorColor = Color.Black,
                         focusedContainerColor = Color.White,
                         focusedLabelColor = Color.Black,
-                        unfocusedContainerColor = Color.White
+                        unfocusedContainerColor = Color.White,
+                        errorIndicatorColor = Color(0xFFE30022),
+                        errorContainerColor = Color.White,
+                        errorLabelColor = Color(0xFFFF0800),
+                        errorCursorColor = Color(0xFF960018)
                     )
                 )
 
                 OutlinedTextField(
                     value = translate,
-                    onValueChange = { value -> translate = value },
-                    label = { Text("Введите перевод", style = MaterialTheme.typography.bodyLarge) },
-                    placeholder = { Text(text = "Перевод", style = MaterialTheme.typography.bodyLarge) },
+                    onValueChange =
+                    { value ->
+                        translate = value
+                        when {
+                            translate.text.isEmpty() -> {
+                                errorStateTranslate = true
+                                errorMessageTranslate = "Заполните поле"
+                            }
+                            translate.text == "" -> {
+                                errorStateTranslate = true
+                                errorMessageTranslate = "Пустое поле"
+                            }
+                            else -> {
+                                errorStateTranslate = false
+                                errorMessageTranslate = ""
+                            }
+                        }
+                    },
+                    label =
+                    {
+                        Text(
+                            text = if (errorStateTranslate) errorMessageTranslate
+                            else "Введите перевод", style = MaterialTheme.typography.bodyLarge
+                        )
+                    },
+                    placeholder =
+                    {
+                        Text(
+                            text = if (errorStateTranslate) errorMessageTranslate
+                            else "Перевод", style = MaterialTheme.typography.bodyLarge
+                        )
+                    },
                     maxLines = 2,
                     textStyle = TextStyle(brush = brush, fontFamily = default, fontSize = 16.sp),
                     modifier = Modifier.padding(bottom = 10.dp, top = 10.dp),
+                    isError = errorStateTranslate,
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Text,
                         imeAction = ImeAction.Done),
@@ -197,18 +281,51 @@ fun AlertDialogAddWordInCategory(onDismiss: () -> Unit, onConfirm: () -> Unit) {
                         focusedIndicatorColor = Color.Black,
                         focusedContainerColor = Color.White,
                         focusedLabelColor = Color.Black,
-                        unfocusedContainerColor = Color.White
+                        unfocusedContainerColor = Color.White,
+                        errorIndicatorColor = Color(0xFFE30022),
+                        errorContainerColor = Color.White,
+                        errorLabelColor = Color(0xFFFF0800),
+                        errorCursorColor = Color(0xFF960018)
                     )
                 )
 
                 OutlinedTextField(
                     value = sentence,
-                    onValueChange = { value -> sentence = value },
-                    label = { Text("Введите предложение", style = MaterialTheme.typography.bodyLarge) },
-                    placeholder = { Text(text = "Предложение", style = MaterialTheme.typography.bodyLarge) },
+                    { value ->
+                        sentence = value
+                        when {
+                            sentence.text.isEmpty() -> {
+                                errorStateSentence = true
+                                errorMessageSentence = "Заполните поле"
+                            }
+                            sentence.text == "" -> {
+                                errorStateSentence = true
+                                errorMessageSentence = "Пустое поле"
+                            }
+                            else -> {
+                                errorStateSentence = false
+                                errorMessageSentence = ""
+                            }
+                        }
+                    },
+                    label =
+                    {
+                        Text(
+                            text = if (errorStateSentence) errorMessageSentence
+                            else "Введите предложение", style = MaterialTheme.typography.bodyLarge
+                        )
+                    },
+                    placeholder =
+                    {
+                        Text(
+                            text = if (errorStateSentence) errorMessageSentence
+                            else "Перевод", style = MaterialTheme.typography.bodyLarge
+                        )
+                    },
                     maxLines = 2,
                     textStyle = TextStyle(brush = brush, fontFamily = default, fontSize = 16.sp),
                     modifier = Modifier.padding(bottom = 10.dp, top = 10.dp),
+                    isError = errorStateSentence,
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Text,
                         imeAction = ImeAction.Done),
@@ -221,7 +338,11 @@ fun AlertDialogAddWordInCategory(onDismiss: () -> Unit, onConfirm: () -> Unit) {
                         focusedIndicatorColor = Color.Black,
                         focusedContainerColor = Color.White,
                         focusedLabelColor = Color.Black,
-                        unfocusedContainerColor = Color.White
+                        unfocusedContainerColor = Color.White,
+                        errorIndicatorColor = Color(0xFFE30022),
+                        errorContainerColor = Color.White,
+                        errorLabelColor = Color(0xFFFF0800),
+                        errorCursorColor = Color(0xFF960018)
                     )
                 )
             }
@@ -233,18 +354,32 @@ fun AlertDialogAddWordInCategory(onDismiss: () -> Unit, onConfirm: () -> Unit) {
 fun AlertDialogAddWordInCategoryPlayground() {
     val showAlertDialog = remember { mutableStateOf(false) }
 
+    val createCategoryViewModel: CreateCategoryViewModel = viewModel(
+        LocalViewModelStoreOwner.current!!,
+        "CreateCategoryViewModel",
+        CreateCategoryViewModelFactory(
+            LocalContext.current.applicationContext
+                    as Application
+        )
+    )
+
     Button(
         onClick = {
-            showAlertDialog.value = true
+            if (createCategoryViewModel.categoryName.isNotEmpty()
+                and (createCategoryViewModel.categoryName != ""))
+            {
+                showAlertDialog.value = true
+            }
         },
         Modifier
             .fillMaxWidth()
-            .padding(start = 20.dp, end = 20.dp, bottom = 10.dp),
+            .padding(start = 20.dp, end = 20.dp, bottom = 20.dp),
         shape = RoundedCornerShape(25.dp),
         border = BorderStroke(1.dp, Color.Black),
         colors = ButtonDefaults.buttonColors(
             containerColor = Color(202, 240, 248, 255),
-            contentColor = Color.Black)
+            contentColor = Color.Black
+        )
     ){
         Text(
             "Добавить",
