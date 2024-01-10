@@ -31,7 +31,7 @@ import androidx.compose.ui.unit.sp
 import com.xenia.englishusingflashcards.R
 
 @Composable
-fun CategoryListItem(image: String, categoryName: String, percent: Float) {
+fun CategoryListItem(image: Int, categoryName: String, percent: Float) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -49,7 +49,7 @@ fun CategoryListItem(image: String, categoryName: String, percent: Float) {
             .fillMaxWidth()
             .padding(start = 20.dp, end = 20.dp),
             horizontalArrangement = Arrangement.Start) {
-            Image(painter = painterResource(id = R.drawable.test_compressed), contentDescription = "",
+            Image(painter = painterResource(id = image), contentDescription = "",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(80.dp)

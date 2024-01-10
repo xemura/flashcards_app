@@ -76,7 +76,7 @@ fun CreateCategoryScreen(navController : NavController) {
                     .border(BorderStroke(1.dp, Color.Black), RoundedCornerShape(25.dp)),
                     contentAlignment = Alignment.Center
                 ) {
-                    CardEnterCategoryName()
+                    CardEnterCategoryName(createCategoryViewModel)
                 }
                 Box(modifier = Modifier
                     .fillMaxWidth()
