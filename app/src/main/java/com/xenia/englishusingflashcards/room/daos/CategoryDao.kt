@@ -21,4 +21,8 @@ interface CategoryDao {
 
     @Delete
     fun deleteCategory(categories: Category)
+
+    @Query("DELETE FROM word WHERE category_name = :categoryName")
+    fun deleteWordsFromCategory(categoryName: String)
+
 }

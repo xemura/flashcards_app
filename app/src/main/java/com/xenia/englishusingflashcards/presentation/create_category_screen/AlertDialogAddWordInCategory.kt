@@ -1,7 +1,6 @@
 package com.xenia.englishusingflashcards.presentation.create_category_screen
 
 import android.app.Application
-import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column

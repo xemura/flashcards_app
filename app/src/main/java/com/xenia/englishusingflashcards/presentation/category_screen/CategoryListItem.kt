@@ -2,6 +2,7 @@ package com.xenia.englishusingflashcards.presentation.category_screen
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,7 +15,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -28,7 +28,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.xenia.englishusingflashcards.R
 
 @Composable
 fun CategoryListItem(image: Int, categoryName: String, percent: Float) {
@@ -38,10 +37,10 @@ fun CategoryListItem(image: Int, categoryName: String, percent: Float) {
             .padding(
                 start = 20.dp,
                 end = 20.dp,
-                bottom = 10.dp
             )
             .clip(RoundedCornerShape(25.dp))
-            .border(BorderStroke(1.dp, Color.Black), RoundedCornerShape(25.dp)),
+            .border(BorderStroke(1.dp, Color.Black), RoundedCornerShape(25.dp))
+            .background(Color.White),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Spacer(modifier = Modifier.height(10.dp))

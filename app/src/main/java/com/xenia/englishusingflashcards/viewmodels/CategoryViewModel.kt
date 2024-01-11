@@ -24,9 +24,9 @@ class CategoryViewModel(app: Application) : ViewModel() {
         categoryRepository = CategoryRepository(categoryDao)
     }
 
-//    fun createCategory(category: Category) {
-//        categoryRepository.createCategory(category)
-//    }
+    fun deleteCategory(category: Category) {
+        categoryRepository.deleteCategoryWithWords(category)
+    }
 
     fun getWordsInCategory(categoryName : String) : List<Word>? {
         viewModelScope.launch(Dispatchers.IO) {

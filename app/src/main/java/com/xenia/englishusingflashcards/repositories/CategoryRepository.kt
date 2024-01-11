@@ -18,6 +18,13 @@ class CategoryRepository(private val categoryDao: CategoryDao) {
         }
     }
 
+    fun deleteCategoryWithWords(category: Category) {
+        coroutineScope.launch(Dispatchers.IO) {
+            categoryDao.deleteCategory(category)
+            categoryDao.deleteWordsFromCategory(category.categoryName)
+        }
+    }
+
     fun getWordsInCategory(categoryName : String) : List<Word>? {
         coroutineScope.launch(Dispatchers.IO) {
             wordsInCategory = categoryDao.getWordsInCategory(categoryName)
