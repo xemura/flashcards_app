@@ -3,13 +3,16 @@ package com.xenia.englishusingflashcards.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.xenia.englishusingflashcards.presentation.learning_screen.LearningScreen
 import com.xenia.englishusingflashcards.presentation.main_screen.MainScreen
 import com.xenia.englishusingflashcards.presentation.SplashScreen
 import com.xenia.englishusingflashcards.presentation.category_screen.CategoryScreen
 import com.xenia.englishusingflashcards.presentation.create_category_screen.CreateCategoryScreen
+import com.xenia.englishusingflashcards.presentation.edit_category_screen.EditCategoryScreen
 
 @Composable
 fun AppNavHost(
@@ -36,6 +39,25 @@ fun AppNavHost(
         }
         composable(NavigationItem.CreateCategory.route) {
             CreateCategoryScreen(navController)
+        }
+
+        composable(NavigationItem.EditCategory.route + "/{categoryName}/{categoryImage}",
+            arguments = listOf(
+                navArgument("categoryName") {
+                    type = NavType.StringType
+                    nullable = false
+                },
+                navArgument("categoryImage") {
+                    type = NavType.IntType
+                    nullable = false
+                },
+            )
+        ) { entry ->
+            EditCategoryScreen(
+                navController,
+                entry.arguments!!.getString("categoryName")!!,
+                entry.arguments!!.getInt("categoryImage")
+            )
         }
     }
 }

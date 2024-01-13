@@ -8,6 +8,7 @@ enum class Screen {
 
     CATEGORY,
     CREATE_CATEGORY,
+    EDIT_CATEGORY,
 }
 sealed class NavigationItem(val route: String) {
     data object Splash : NavigationItem(Screen.SPLASH.name)
@@ -19,4 +20,5 @@ sealed class NavigationItem(val route: String) {
 
     data object Category : NavigationItem(Screen.CATEGORY.name)
     data object CreateCategory : NavigationItem(Screen.CREATE_CATEGORY.name)
+    data object EditCategory : NavigationItem(Screen.EDIT_CATEGORY.name)
 }

@@ -1,6 +1,6 @@
-package com.xenia.englishusingflashcards.presentation.create_category_screen
+package com.xenia.englishusingflashcards.presentation.edit_category_screen
 
-import android.app.Application
+import android.util.Log
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -17,18 +17,15 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.xenia.englishusingflashcards.ui.theme.default
-import com.xenia.englishusingflashcards.viewmodels.CreateCategoryViewModel
-import com.xenia.englishusingflashcards.viewmodels.CreateCategoryViewModelFactory
+import com.xenia.englishusingflashcards.viewmodels.EditCategoryViewModel
+
 
 private val textFieldColors = listOf(
     Color(0xFF184E77),
@@ -45,16 +42,7 @@ private val textFieldColors = listOf(
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun StyledTextField() {
-
-    val createCategoryViewModel: CreateCategoryViewModel = viewModel(
-        LocalViewModelStoreOwner.current!!,
-        "CreateCategoryViewModel",
-        CreateCategoryViewModelFactory(
-            LocalContext.current.applicationContext
-                    as Application
-        )
-    )
+fun EditStyledTextField(editCategoryViewModel: EditCategoryViewModel) {
 
     val keyboardController = LocalSoftwareKeyboardController.current
     var errorStateCategoryName by remember { mutableStateOf(false) }
@@ -66,17 +54,20 @@ fun StyledTextField() {
         )
     }
 
+    Log.d("Tag", "- ${editCategoryViewModel.categoryName}")
+
     OutlinedTextField(
-        value = createCategoryViewModel.categoryName,
+        value = editCategoryViewModel.categoryName,
         onValueChange =
         { value ->
-            if (value.length <= 12) createCategoryViewModel.updateCategoryName(value)
+            Log.d("Tag", "EditStyledTextField ${editCategoryViewModel.categoryName}")
+            if (value.length <= 12) editCategoryViewModel.updateCategoryName(value)
             when {
-                createCategoryViewModel.categoryName.isEmpty() -> {
+                editCategoryViewModel.categoryName.isEmpty() -> {
                     errorStateCategoryName = true
                     errorMessageCategoryName = "Заполните поле"
                 }
-                createCategoryViewModel.categoryName == "" -> {
+                editCategoryViewModel.categoryName == "" -> {
                     errorStateCategoryName = true
                     errorMessageCategoryName = "Пустое поле"
                 }

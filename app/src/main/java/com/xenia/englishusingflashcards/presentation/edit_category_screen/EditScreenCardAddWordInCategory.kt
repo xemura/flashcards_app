@@ -1,4 +1,4 @@
-package com.xenia.englishusingflashcards.presentation.create_category_screen
+package com.xenia.englishusingflashcards.presentation.edit_category_screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -15,14 +15,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.xenia.englishusingflashcards.presentation.create_category_screen.AlertDialogAddWordInCategoryPlayground
 import com.xenia.englishusingflashcards.ui.theme.LightGrayCustom
-import com.xenia.englishusingflashcards.viewmodels.CreateCategoryViewModel
+import com.xenia.englishusingflashcards.viewmodels.EditCategoryViewModel
 
 @Composable
-fun ContentCardAddWordInCreateCategory(createCategoryViewModel: CreateCategoryViewModel) {
+fun EditScreenCardAddWordInCategory(editCategoryViewModel: EditCategoryViewModel) {
 
     val wordsInCreatedCategory =
-        createCategoryViewModel.listWordInCategory.observeAsState()
+        editCategoryViewModel.listWordInCategory.observeAsState()
 
     Column(modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally) {

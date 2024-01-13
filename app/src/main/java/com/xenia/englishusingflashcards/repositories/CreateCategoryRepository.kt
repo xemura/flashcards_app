@@ -18,9 +18,9 @@ class CreateCategoryRepository(private val wordDao: WordDao) {
         }
     }
 
-    fun insertWordInCategory(word : Word) {
-        coroutineScope.launch(Dispatchers.IO) {
-            wordDao.insert(word)
-        }
-    }
+//    fun insertWordInCategory(word : Word) {
+//        coroutineScope.launch(Dispatchers.IO) {
+//            wordDao.insert(word)
+//        }
+//    }
 }

@@ -37,7 +37,7 @@ fun CategoryScreen(navController : NavController) {
             verticalArrangement = Arrangement.Top
         ) {
             Header(contentPadding, "Категории", "to_main_screen", navController, activity)
-            CategoryList()
+            CategoryList(navController)
         }
     }
 }

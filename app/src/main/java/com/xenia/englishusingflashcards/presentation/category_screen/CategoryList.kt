@@ -30,13 +30,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.xenia.englishusingflashcards.viewmodels.CategoryViewModel
 import com.xenia.englishusingflashcards.viewmodels.CategoryViewModelFactory
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CategoryList() {
+fun CategoryList(navController : NavController) {
 
     val categoryViewModel: CategoryViewModel = viewModel(
         LocalViewModelStoreOwner.current!!,
@@ -61,9 +62,7 @@ fun CategoryList() {
                 val dismissState = rememberDismissState()
 
                 if (dismissState.isDismissed(direction = DismissDirection.EndToStart)) {
-                    // swiping from left to right
                     categoryViewModel.deleteCategory(category)
-                    //peopleList.remove(people)
                 }
 
                 SwipeToDismiss(
@@ -100,7 +99,7 @@ fun CategoryList() {
                             Modifier
                                 .fillMaxSize()
                                 .background(color = backgroundColor)
-                                .padding(start = 16.dp, end = 16.dp), // inner padding
+                                .padding(start = 16.dp, end = 16.dp),
                             contentAlignment = iconAlignment
                         ) {
                             Icon(
@@ -112,8 +111,11 @@ fun CategoryList() {
                         }
                     },
                     dismissContent = {
-                        // list item
-                        CategoryListItem(image = category.image, categoryName = category.categoryName, percent = category.progress)
+                        CategoryListItem(
+                            image = category.image,
+                            categoryName = category.categoryName,
+                            percent = category.progress,
+                            navController)
                     }
                 )
             }

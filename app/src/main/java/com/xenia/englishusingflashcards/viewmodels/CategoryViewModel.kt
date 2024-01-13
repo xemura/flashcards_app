@@ -14,7 +14,6 @@ import kotlinx.coroutines.launch
 class CategoryViewModel(app: Application) : ViewModel() {
 
     private val appDb: AppDatabase = AppDatabase.getInstance(app)
-
     private val categoryRepository: CategoryRepository
     internal var categories: Flow<List<Category>?> = appDb.categoryDao().getCategories()
     private var wordsInCategory : List<Word>? = null
@@ -28,10 +27,10 @@ class CategoryViewModel(app: Application) : ViewModel() {
         categoryRepository.deleteCategoryWithWords(category)
     }
 
-    fun getWordsInCategory(categoryName : String) : List<Word>? {
-        viewModelScope.launch(Dispatchers.IO) {
-            wordsInCategory = categoryRepository.getWordsInCategory(categoryName)
-        }
-        return wordsInCategory
-    }
+//    fun getWordsInCategory(categoryName : String) : List<Word>? {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            wordsInCategory = categoryRepository.getWordsInCategory(categoryName)
+//        }
+//        return wordsInCategory
+//    }
 }

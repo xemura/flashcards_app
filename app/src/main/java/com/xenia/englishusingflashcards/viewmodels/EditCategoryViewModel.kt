@@ -1,6 +1,7 @@
 package com.xenia.englishusingflashcards.viewmodels
 
 import android.app.Application
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -11,16 +12,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.xenia.englishusingflashcards.R
 import com.xenia.englishusingflashcards.repositories.CategoryRepository
-import com.xenia.englishusingflashcards.repositories.CreateCategoryRepository
 import com.xenia.englishusingflashcards.repositories.WordRepository
 import com.xenia.englishusingflashcards.room.database.AppDatabase
-import com.xenia.englishusingflashcards.room.entities.Category
 import com.xenia.englishusingflashcards.room.entities.Word
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CreateCategoryViewModel(app: Application) : ViewModel() {
-
+class EditCategoryViewModel(app: Application) : ViewModel() {
     var categoryName by mutableStateOf("")
         private set
 
@@ -31,18 +29,13 @@ class CreateCategoryViewModel(app: Application) : ViewModel() {
     val listWordInCategory: LiveData<List<Word>>
         get() = _listWordInCategory
 
-    private val createCategoryRepository: CreateCategoryRepository
+    private val appDb: AppDatabase = AppDatabase.getInstance(app)
 
     private val categoryRepository: CategoryRepository
-    private val wordRepository: WordRepository
 
     init {
-        val appDb = AppDatabase.getInstance(app)
         val categoryDao = appDb.categoryDao()
-        val wordDao = appDb.wordDao()
         categoryRepository = CategoryRepository(categoryDao)
-        wordRepository = WordRepository(wordDao)
-        createCategoryRepository = CreateCategoryRepository(wordDao)
     }
 
     fun updateCategoryName(input: String) {
@@ -61,23 +54,15 @@ class CreateCategoryViewModel(app: Application) : ViewModel() {
         }
     }
 
-    fun saveCategoryWithWords() {
+    fun saveCategoryWithWords(oldName: String) {
         viewModelScope.launch (Dispatchers.IO) {
-            _listWordInCategory.value?.let { wordRepository.insertListWords(it) }
-            categoryRepository.insertCategory(
-                Category(
-                    categoryName = categoryName,
-                    image = categoryImage,
-                    progress = 0.0f
-                )
-            )
+            // _listWordInCategory.value?.let { wordRepository.insertListWords(it) }
+            categoryRepository.updateCategoryNameAndImage(oldName, categoryName, categoryImage)
         }
     }
 
-//    fun insertAll(list: List<Word>) {
-//        viewModelScope.launch (Dispatchers.IO) {
-//            createCategoryRepository.insertWordsInCategory(list)
-//            _listWordInCategory.value = list
-//        }
-//    }
+    fun getListWordsInCategory(categoryName: String) {
+        _listWordInCategory.value = categoryRepository.getWordsInCategory(categoryName)
+    }
+
 }

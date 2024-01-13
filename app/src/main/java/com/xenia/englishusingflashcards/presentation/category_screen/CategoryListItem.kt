@@ -28,9 +28,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.xenia.englishusingflashcards.navigation.NavigationItem
 
 @Composable
-fun CategoryListItem(image: Int, categoryName: String, percent: Float) {
+fun CategoryListItem(image: Int, categoryName: String, percent: Float, navController : NavController) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -67,7 +69,12 @@ fun CategoryListItem(image: Int, categoryName: String, percent: Float) {
                 SetProgressBar(percent.toInt())
             }
             IconButton(onClick = {
-
+                val route = NavigationItem.EditCategory.route
+                navController.navigate("$route/${categoryName}/${image}") {
+                    popUpTo(NavigationItem.Category.route) {
+                        inclusive = true
+                    }
+                }
             },
                 modifier = Modifier
                     .size(50.dp)
@@ -76,8 +83,7 @@ fun CategoryListItem(image: Int, categoryName: String, percent: Float) {
                     .clip(RoundedCornerShape(25.dp))
                     .weight(0.3f)
             ) {
-                Icon(imageVector = Icons.Filled.Edit, contentDescription = "Edit"
-                )
+                Icon(imageVector = Icons.Filled.Edit, contentDescription = "Edit")
             }
         }
         Spacer(modifier = Modifier.height(10.dp))
