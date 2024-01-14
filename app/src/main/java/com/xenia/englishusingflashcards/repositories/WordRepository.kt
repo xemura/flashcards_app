@@ -15,4 +15,10 @@ class WordRepository(private val wordDao: WordDao) {
             wordDao.insertAll(words)
         }
     }
+
+    fun insertWord(word: Word) {
+        coroutineScope.launch(Dispatchers.IO) {
+            wordDao.insertWord(word)
+        }
+    }
 }

@@ -25,25 +25,33 @@ class EditCategoryViewModel(app: Application) : ViewModel() {
     var categoryImage by mutableIntStateOf(R.drawable.image_1)
         private set
 
+
     private val _listWordInCategory = MutableLiveData<List<Word>>(emptyList())
     val listWordInCategory: LiveData<List<Word>>
         get() = _listWordInCategory
 
+
     private val appDb: AppDatabase = AppDatabase.getInstance(app)
 
     private val categoryRepository: CategoryRepository
+    private val wordRepository: WordRepository
 
     init {
         val categoryDao = appDb.categoryDao()
+        val wordDao = appDb.wordDao()
         categoryRepository = CategoryRepository(categoryDao)
+        wordRepository = WordRepository(wordDao)
     }
 
     fun updateCategoryName(input: String) {
+        Log.d("Tag", "change Name")
         categoryName = input
     }
 
     fun updateCategoryImage(input: Int) {
+        Log.d("Tag", "change Image")
         categoryImage = input
+        //categoryImage = input
     }
 
     fun updateListWordsInCategory(word: Word) {
@@ -51,13 +59,27 @@ class EditCategoryViewModel(app: Application) : ViewModel() {
             val list = _listWordInCategory.value?.toMutableList()
             list?.add(word.copy())
             _listWordInCategory.postValue(list)
+
+            wordRepository.insertWord(word)
+
         }
     }
 
-    fun saveCategoryWithWords(oldName: String) {
+    fun updateImageCategory(oldImage: Int, newImage: Int, categoryName: String) {
+        categoryRepository.updateCategoryImage(oldImage, newImage, categoryName)
+    }
+
+    fun updateCategoryName(oldName: String, newName: String) {
+        categoryRepository.updateCategoryName(oldName, newName)
+    }
+
+    fun deleteWordInCategory(categoryName: String, word: String, translate: String, sentence: String) {
         viewModelScope.launch (Dispatchers.IO) {
-            // _listWordInCategory.value?.let { wordRepository.insertListWords(it) }
-            categoryRepository.updateCategoryNameAndImage(oldName, categoryName, categoryImage)
+            categoryRepository.deleteWordInCategory(categoryName, word, translate, sentence)
+            val list = _listWordInCategory.value?.toMutableList()
+            list?.removeIf { ((it.word == word) and (it.translate == translate) and (it.sentence == sentence)) }
+            Log.d("Tag", "list = $list")
+            _listWordInCategory.postValue(list)
         }
     }
 

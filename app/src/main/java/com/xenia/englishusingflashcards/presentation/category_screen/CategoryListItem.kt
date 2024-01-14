@@ -1,5 +1,6 @@
 package com.xenia.englishusingflashcards.presentation.category_screen
 
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -71,6 +72,7 @@ fun CategoryListItem(image: Int, categoryName: String, percent: Float, navContro
             IconButton(onClick = {
                 val route = NavigationItem.EditCategory.route
                 navController.navigate("$route/${categoryName}/${image}") {
+                    Log.d("Tag", "to edit")
                     popUpTo(NavigationItem.Category.route) {
                         inclusive = true
                     }

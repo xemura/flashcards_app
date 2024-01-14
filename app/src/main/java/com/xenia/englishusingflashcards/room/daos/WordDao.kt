@@ -10,8 +10,11 @@ import com.xenia.englishusingflashcards.room.entities.Word
 @Dao
 interface WordDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertAll(list: List<Word>)
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertWord(word: Word)
 
     @Delete
     fun delete(word: Word)

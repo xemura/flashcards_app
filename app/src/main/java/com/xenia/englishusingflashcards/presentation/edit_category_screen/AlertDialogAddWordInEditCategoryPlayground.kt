@@ -43,7 +43,7 @@ import com.xenia.englishusingflashcards.ui.theme.default
 import com.xenia.englishusingflashcards.viewmodels.CreateCategoryViewModel
 import com.xenia.englishusingflashcards.viewmodels.CreateCategoryViewModelFactory
 import com.xenia.englishusingflashcards.viewmodels.EditCategoryViewModel
-
+import com.xenia.englishusingflashcards.viewmodels.EditCategoryViewModelFactory
 
 private val textFieldColors = listOf(
     Color(0xFF184E77),
@@ -60,7 +60,8 @@ private val textFieldColors = listOf(
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun AlertDialogEditCategory(onDismiss: () -> Unit, onConfirm: () -> Unit) {
+fun AlertDialogAddWordInEditCategory(editCategoryViewModel: EditCategoryViewModel,
+                                     onDismiss: () -> Unit, onConfirm: () -> Unit) {
     var word by remember { mutableStateOf(TextFieldValue()) }
     var errorStateWord by remember { mutableStateOf(false) }
     var errorMessageWord by remember { mutableStateOf("") }
@@ -75,15 +76,6 @@ fun AlertDialogEditCategory(onDismiss: () -> Unit, onConfirm: () -> Unit) {
 
     val maxChar = 50
 
-    val editCategoryViewModel: EditCategoryViewModel = viewModel(
-        LocalViewModelStoreOwner.current!!,
-        "EditCategoryViewModel",
-        CreateCategoryViewModelFactory(
-            LocalContext.current.applicationContext
-                    as Application
-        )
-    )
-
     androidx.compose.material3.AlertDialog(
         onDismissRequest = onDismiss,
         confirmButton = {
@@ -91,7 +83,7 @@ fun AlertDialogEditCategory(onDismiss: () -> Unit, onConfirm: () -> Unit) {
                 onClick = {
                     if (!(word.text.isEmpty() or translate.text.isEmpty() or sentence.text.isEmpty())) {
                         val createdWord = Word(
-                            categoryName = editCategoryViewModel.categoryName,
+                            categoryName = editCategoryViewModel.categoryName, // !!!!!!!!!!!!11
                             word = word.text,
                             translate = translate.text,
                             sentence = sentence.text,
@@ -102,7 +94,7 @@ fun AlertDialogEditCategory(onDismiss: () -> Unit, onConfirm: () -> Unit) {
                             theRepetitionIntervalAfterTheNRepetition = 0.0
                         )
 
-                        editCategoryViewModel.updateListWordsInCategory(createdWord)
+                        editCategoryViewModel.updateListWordsInCategory(createdWord) /////////////////
                         onConfirm.invoke()
                     } else {
                         if (word.text.isEmpty()) {
@@ -171,13 +163,6 @@ fun AlertDialogEditCategory(onDismiss: () -> Unit, onConfirm: () -> Unit) {
                         colors = textFieldColors
                     )
                 }
-
-//                OutlineTextFieldAddWordInCategory(
-//                    maxChar = maxChar,
-//                    keyboardController = keyboardController,
-//                    brush = brush,
-//                    labelText = "Введите слово",
-//                    placeholderText = "Слово")
 
                 OutlinedTextField(
                     value = word,
@@ -384,17 +369,8 @@ fun AlertDialogEditCategory(onDismiss: () -> Unit, onConfirm: () -> Unit) {
 }
 
 @Composable
-fun AlertDialogEditCategoryPlayground() {
+fun AlertDialogAddWordInEditCategoryPlayground(editCategoryViewModel: EditCategoryViewModel) {
     val showAlertDialog = remember { mutableStateOf(false) }
-
-    val editCategoryViewModel: EditCategoryViewModel = viewModel(
-        LocalViewModelStoreOwner.current!!,
-        "EditCategoryViewModel",
-        CreateCategoryViewModelFactory(
-            LocalContext.current.applicationContext
-                    as Application
-        )
-    )
 
     Button(
         onClick = {
@@ -423,7 +399,8 @@ fun AlertDialogEditCategoryPlayground() {
     }
 
     if (showAlertDialog.value) {
-        AlertDialogEditCategory(
+        AlertDialogAddWordInEditCategory(
+            editCategoryViewModel,
             onDismiss = {
                 showAlertDialog.value = false },
             onConfirm = {

@@ -1,6 +1,7 @@
 package com.xenia.englishusingflashcards.viewmodels
 
 import android.app.Application
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -57,6 +58,15 @@ class CreateCategoryViewModel(app: Application) : ViewModel() {
         viewModelScope.launch (Dispatchers.IO) {
             val list = _listWordInCategory.value?.toMutableList()
             list?.add(word.copy())
+            _listWordInCategory.postValue(list)
+        }
+    }
+
+    fun deleteWordInCategory(word: String, translate: String, sentence: String) {
+        viewModelScope.launch (Dispatchers.IO) {
+            val list = _listWordInCategory.value?.toMutableList()
+            list?.removeIf { ((it.word == word) and (it.translate == translate) and (it.sentence == sentence)) }
+            Log.d("Tag", "list = $list")
             _listWordInCategory.postValue(list)
         }
     }

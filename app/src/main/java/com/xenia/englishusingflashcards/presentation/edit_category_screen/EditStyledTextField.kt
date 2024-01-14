@@ -9,6 +9,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -23,6 +24,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.xenia.englishusingflashcards.room.entities.Category
 import com.xenia.englishusingflashcards.ui.theme.default
 import com.xenia.englishusingflashcards.viewmodels.EditCategoryViewModel
 
@@ -54,14 +56,21 @@ fun EditStyledTextField(editCategoryViewModel: EditCategoryViewModel) {
         )
     }
 
-    Log.d("Tag", "- ${editCategoryViewModel.categoryName}")
+    //Log.d("Tag", "- ${editCategoryViewModel.categoryName}")
+
+    //var oldName = editCategoryViewModel.categoryName
 
     OutlinedTextField(
         value = editCategoryViewModel.categoryName,
         onValueChange =
         { value ->
+            if (value.length <= 12) {
+                //Log.d("Tag", "oldName and newName: $oldName and $value")
+                editCategoryViewModel.updateCategoryName(editCategoryViewModel.categoryName, value)
+                //oldName = value
+                editCategoryViewModel.updateCategoryName(value)
+            }
             Log.d("Tag", "EditStyledTextField ${editCategoryViewModel.categoryName}")
-            if (value.length <= 12) editCategoryViewModel.updateCategoryName(value)
             when {
                 editCategoryViewModel.categoryName.isEmpty() -> {
                     errorStateCategoryName = true

@@ -1,6 +1,7 @@
 package com.xenia.englishusingflashcards.presentation.create_category_screen
 
 import android.app.Application
+import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
@@ -102,6 +103,7 @@ fun AlertDialogAddWordInCategory(onDismiss: () -> Unit, onConfirm: () -> Unit) {
                         )
 
                         createCategoryViewModel.updateListWordsInCategory(createdWord)
+
                         onConfirm.invoke()
                     } else {
                         if (word.text.isEmpty()) {

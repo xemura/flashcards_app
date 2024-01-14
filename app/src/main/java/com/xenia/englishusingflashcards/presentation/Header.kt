@@ -67,5 +67,12 @@ fun action(action: String, navController: NavController, activity: Activity?) {
                 }
             }
         }
+        "to_category_screen_from_edit" -> {
+            navController.navigate(NavigationItem.Category.route) {
+                popUpTo(NavigationItem.EditCategory.route) {
+                    inclusive = true
+                }
+            }
+        }
     }
 }

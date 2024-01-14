@@ -13,7 +13,6 @@ class CategoryRepository(private val categoryDao: CategoryDao) {
 
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
     private var wordsInCategory : List<Word>? = null
-    private var categoryByName : Category? = null
 
     fun insertCategory(category: Category) {
         coroutineScope.launch(Dispatchers.IO) {
@@ -35,16 +34,21 @@ class CategoryRepository(private val categoryDao: CategoryDao) {
         return wordsInCategory
     }
 
-//    suspend fun getCategoryByName(categoryName: String) : Category {
-//        return withContext(Dispatchers.IO) {
-//            Log.d("Tag", "repository")
-//            categoryDao.getCategoryByName(categoryName)
-//        }
-//    }
-
-    fun updateCategoryNameAndImage(oldName: String, newName: String, newImage: Int) {
+    fun deleteWordInCategory(categoryName: String, word: String, translate: String, sentence: String) {
         coroutineScope.launch(Dispatchers.IO) {
-            categoryDao.updateCategoryNameAndImage(oldName, newName, newImage)
+            categoryDao.deleteWordInCategory(categoryName, word, translate, sentence)
+        }
+    }
+
+    fun updateCategoryName(oldName: String, newName: String) {
+        coroutineScope.launch(Dispatchers.IO) {
+            categoryDao.updateCategoryName(oldName, newName)
+        }
+    }
+
+    fun updateCategoryImage(oldImage: Int, newImage: Int, categoryName: String) {
+        coroutineScope.launch(Dispatchers.IO) {
+            categoryDao.updateCategoryImage(oldImage, newImage, categoryName)
         }
     }
 

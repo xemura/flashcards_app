@@ -47,14 +47,14 @@ fun EditCategoryScreen(navController : NavController, categoryName: String, cate
         )
     )
 
-    editCategoryViewModel.updateCategoryName(categoryName)
-    editCategoryViewModel.updateCategoryImage(categoryImage)
+    //editCategoryViewModel.updateCategoryImage(categoryImage)
 
-//    Log.d("Tag", "in fun ${editCategoryViewModel.categoryName}")
-//    Log.d("Tag", "in fun ${editCategoryViewModel.categoryImage}")
+    // Log.d("Tag", "EditCategoryScreen ${editCategoryViewModel.categoryName} and ${editCategoryViewModel.categoryImage}")
 
-    val oldName = editCategoryViewModel.categoryName
-    Log.d("Tag", "in fun $oldName")
+//    val oldName = editCategoryViewModel.categoryName
+//    val oldImage = editCategoryViewModel.categoryImage
+//    Log.d("Tag", "EditCategoryScreen $oldName $oldImage")
+
     Scaffold { contentPadding ->
         Column(
             modifier = Modifier
@@ -63,7 +63,7 @@ fun EditCategoryScreen(navController : NavController, categoryName: String, cate
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
-            Header(contentPadding, "Редактировать", "to_category_screen", navController, activity)
+            Header(contentPadding, "Редактировать", "to_category_screen_from_edit", navController, activity)
 
             Column(modifier = Modifier
                 .fillMaxWidth()
@@ -81,7 +81,12 @@ fun EditCategoryScreen(navController : NavController, categoryName: String, cate
                     .border(BorderStroke(1.dp, Color.Black), RoundedCornerShape(25.dp)),
                     contentAlignment = Alignment.Center
                 ) {
+                    Log.d("Tag", "EditCategoryScreen $categoryName")
+                    editCategoryViewModel.updateCategoryName(categoryName)
+                    editCategoryViewModel.updateCategoryImage(categoryImage)
+                    Log.d("Tag", "EditCategoryScreen ${editCategoryViewModel.categoryName}")
                     EditScreenCardEditCategory(editCategoryViewModel)
+                    Log.d("Tag", "EditCategoryScreen")
                 }
                 Box(modifier = Modifier
                     .fillMaxWidth()
@@ -98,39 +103,6 @@ fun EditCategoryScreen(navController : NavController, categoryName: String, cate
                 ) {
                     editCategoryViewModel.getListWordsInCategory(categoryName)
                     EditScreenCardAddWordInCategory(editCategoryViewModel)
-                }
-                Button(
-                    onClick = {
-
-                          // сохранить изменения в категории.
-                          // возможно изменить картинку в категории, название категории
-                          // а также слова в категории (удалить или добавить)
-                        if (editCategoryViewModel.categoryName.isNotEmpty()) {
-                            editCategoryViewModel.saveCategoryWithWords(oldName)
-                            navController.navigate(NavigationItem.Category.route) {
-                                popUpTo(NavigationItem.CreateCategory.route) {
-                                    inclusive = true
-                                }
-                            }
-                        }
-                    },
-                    Modifier
-                        .fillMaxWidth()
-                        .weight(0.16f)
-                        .padding(start = 20.dp, end = 20.dp, bottom = 20.dp),
-                    shape = RoundedCornerShape(25.dp),
-                    border = BorderStroke(1.dp, Color.Black),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(202, 240, 248, 255),
-                        contentColor = Color.Black
-                    )
-                ) {
-                    Text(
-                        "Сохранить",
-                        fontSize = 16.sp,
-                        modifier = Modifier.padding(10.dp),
-                        style = MaterialTheme.typography.bodyLarge,
-                    )
                 }
             }
         }
