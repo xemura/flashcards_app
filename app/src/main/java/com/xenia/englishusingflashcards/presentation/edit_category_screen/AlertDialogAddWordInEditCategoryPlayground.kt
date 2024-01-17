@@ -1,6 +1,5 @@
 package com.xenia.englishusingflashcards.presentation.edit_category_screen
 
-import android.app.Application
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
@@ -27,7 +26,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
@@ -36,14 +34,9 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.xenia.englishusingflashcards.room.entities.Word
 import com.xenia.englishusingflashcards.ui.theme.default
-import com.xenia.englishusingflashcards.viewmodels.CreateCategoryViewModel
-import com.xenia.englishusingflashcards.viewmodels.CreateCategoryViewModelFactory
 import com.xenia.englishusingflashcards.viewmodels.EditCategoryViewModel
-import com.xenia.englishusingflashcards.viewmodels.EditCategoryViewModelFactory
 
 private val textFieldColors = listOf(
     Color(0xFF184E77),
@@ -83,7 +76,7 @@ fun AlertDialogAddWordInEditCategory(editCategoryViewModel: EditCategoryViewMode
                 onClick = {
                     if (!(word.text.isEmpty() or translate.text.isEmpty() or sentence.text.isEmpty())) {
                         val createdWord = Word(
-                            categoryName = editCategoryViewModel.categoryName, // !!!!!!!!!!!!11
+                            categoryName = editCategoryViewModel.categoryName.value!!, // !!!!!!!!!!!!11
                             word = word.text,
                             translate = translate.text,
                             sentence = sentence.text,
@@ -374,8 +367,8 @@ fun AlertDialogAddWordInEditCategoryPlayground(editCategoryViewModel: EditCatego
 
     Button(
         onClick = {
-            if (editCategoryViewModel.categoryName.isNotEmpty()
-                and (editCategoryViewModel.categoryName != ""))
+            if ((editCategoryViewModel.categoryName.value?.isNotEmpty() == true)
+                and (editCategoryViewModel.categoryName.value != ""))
             {
                 showAlertDialog.value = true
             }

@@ -31,8 +31,6 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.xenia.englishusingflashcards.presentation.category_screen.CategoryListItem
-import com.xenia.englishusingflashcards.presentation.create_category_screen.AlertDialogAddWordInCategoryPlayground
 import com.xenia.englishusingflashcards.ui.theme.LightGrayCustom
 import com.xenia.englishusingflashcards.viewmodels.EditCategoryViewModel
 
@@ -61,8 +59,7 @@ fun EditScreenCardAddWordInCategory(editCategoryViewModel: EditCategoryViewModel
                     val dismissState = rememberDismissState()
 
                     if (dismissState.isDismissed(direction = DismissDirection.EndToStart)) {
-                        Log.d("Tag", id.toString())
-                        editCategoryViewModel.deleteWordInCategory(editCategoryViewModel.categoryName, word, translate, sentence)
+                        editCategoryViewModel.deleteWordInCategory(editCategoryViewModel.categoryName.value!!, word, translate, sentence)
                     }
 
                     SwipeToDismiss(
@@ -129,11 +126,6 @@ fun EditScreenCardAddWordInCategory(editCategoryViewModel: EditCategoryViewModel
                                     Text(text = sentence, textAlign = TextAlign.Center)
                                 }
                             }
-//                            CategoryListItem(
-//                                image = category.image,
-//                                categoryName = category.categoryName,
-//                                percent = category.progress,
-//                                navController)
                         }
                     )
 

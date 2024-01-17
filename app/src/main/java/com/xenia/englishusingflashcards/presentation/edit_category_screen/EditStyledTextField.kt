@@ -9,8 +9,8 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -24,7 +24,6 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.xenia.englishusingflashcards.room.entities.Category
 import com.xenia.englishusingflashcards.ui.theme.default
 import com.xenia.englishusingflashcards.viewmodels.EditCategoryViewModel
 
@@ -56,27 +55,23 @@ fun EditStyledTextField(editCategoryViewModel: EditCategoryViewModel) {
         )
     }
 
-    //Log.d("Tag", "- ${editCategoryViewModel.categoryName}")
-
-    //var oldName = editCategoryViewModel.categoryName
+    val categoryName = editCategoryViewModel.categoryName.observeAsState("")
 
     OutlinedTextField(
-        value = editCategoryViewModel.categoryName,
+        value = categoryName.value,
         onValueChange =
         { value ->
             if (value.length <= 12) {
-                //Log.d("Tag", "oldName and newName: $oldName and $value")
-                editCategoryViewModel.updateCategoryName(editCategoryViewModel.categoryName, value)
-                //oldName = value
+                editCategoryViewModel.updateCategoryName(categoryName.value, value)
                 editCategoryViewModel.updateCategoryName(value)
             }
             Log.d("Tag", "EditStyledTextField ${editCategoryViewModel.categoryName}")
             when {
-                editCategoryViewModel.categoryName.isEmpty() -> {
+                categoryName.value.isEmpty() -> {
                     errorStateCategoryName = true
                     errorMessageCategoryName = "Заполните поле"
                 }
-                editCategoryViewModel.categoryName == "" -> {
+                categoryName.value == "" -> {
                     errorStateCategoryName = true
                     errorMessageCategoryName = "Пустое поле"
                 }
