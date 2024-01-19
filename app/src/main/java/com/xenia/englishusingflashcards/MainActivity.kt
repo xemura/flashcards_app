@@ -10,7 +10,13 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
 import androidx.navigation.compose.rememberNavController
-import com.xenia.englishusingflashcards.navigation.AppNavHost
+import com.xenia.englishusingflashcards.navigation.AppNavGraph
+import com.xenia.englishusingflashcards.presentation.SplashScreen
+import com.xenia.englishusingflashcards.presentation.category_screen.category_list_screen.CategoryScreen
+import com.xenia.englishusingflashcards.presentation.category_screen.create_category_screen.CreateCategoryScreen
+import com.xenia.englishusingflashcards.presentation.category_screen.edit_category_screen.main_edit_category_screen.EditCategoryScreen
+import com.xenia.englishusingflashcards.presentation.learning_screen.LearningScreen
+import com.xenia.englishusingflashcards.presentation.main_screen.MainScreen
 import com.xenia.englishusingflashcards.ui.theme.EnglishUsingFlashcardsTheme
 
 class MainActivity : ComponentActivity() {
@@ -30,7 +36,34 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    AppNavHost(navController = rememberNavController())
+                    
+                    AppNavGraph(
+                        navHostController = rememberNavController(),
+                        splashScreenContent = { navController ->
+                            SplashScreen(navController = navController)
+                        },
+                        mainScreenContent = { navController ->
+                            MainScreen(navController = navController)
+                        },
+                        learningScreenContent = { navController ->
+                            LearningScreen(navController = navController)
+                        },
+                        categoryScreenContent = { navController ->
+                            CategoryScreen(navController = navController)
+                        },
+                        editCategoryScreenContent = { navController, category ->
+                            EditCategoryScreen(
+                                navController = navController,
+                                category = category
+                            )
+                        },
+                        createCategoryScreenContent = { navController ->
+                            CreateCategoryScreen(navController = navController)
+                        },
+                        wordsCollectionCategoryScreenContent = { navController, category ->
+
+                        }
+                    )
                 }
             }
         }

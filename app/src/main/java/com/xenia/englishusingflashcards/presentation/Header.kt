@@ -65,20 +65,20 @@ fun action(
         "close_app" -> activity?.finish()
         "to_main_screen" -> {
             navController.navigate(NavigationItem.Main.route) {
-                popUpTo(NavigationItem.Category.route) {
+                popUpTo(NavigationItem.CategoryMain.route) {
                     inclusive = true
                 }
             }
         }
         "to_category_screen" -> {
-            navController.navigate(NavigationItem.Category.route) {
+            navController.navigate(NavigationItem.CategoryMain.route) {
                 popUpTo(NavigationItem.CreateCategory.route) {
                     inclusive = true
                 }
             }
         }
         "to_category_screen_from_edit" -> {
-            navController.navigate(NavigationItem.Category.route) {
+            navController.navigate(NavigationItem.CategoryMain.route) {
                 popUpTo(NavigationItem.EditCategory.route) {
                     inclusive = true
                 }

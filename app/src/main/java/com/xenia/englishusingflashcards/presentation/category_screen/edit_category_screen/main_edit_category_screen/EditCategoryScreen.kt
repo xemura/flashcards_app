@@ -18,9 +18,10 @@ import androidx.navigation.NavController
 import com.xenia.englishusingflashcards.presentation.Header
 import com.xenia.englishusingflashcards.presentation.viewmodels.EditCategoryViewModel
 import com.xenia.englishusingflashcards.presentation.viewmodels.EditCategoryViewModelFactory
+import com.xenia.englishusingflashcards.room.entities.Category
 
 @Composable
-fun EditCategoryScreen(navController : NavController, categoryName: String, categoryImage: Int) {
+fun EditCategoryScreen(navController : NavController, category: Category) {
 
     val activity = (LocalContext.current as? Activity)
     val editCategoryViewModel: EditCategoryViewModel = viewModel(
@@ -42,7 +43,7 @@ fun EditCategoryScreen(navController : NavController, categoryName: String, cate
         ) {
             Header(contentPadding, "Редактировать", "to_category_screen_from_edit", navController, activity)
 
-            ContentEditCategoryScreen(editCategoryViewModel, categoryName, categoryImage)
+            ContentEditCategoryScreen(editCategoryViewModel, category.categoryName, category.image)
         }
     }
 }

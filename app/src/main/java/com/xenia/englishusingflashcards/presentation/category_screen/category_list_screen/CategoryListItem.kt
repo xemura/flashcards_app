@@ -31,9 +31,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.xenia.englishusingflashcards.navigation.NavigationItem
+import com.xenia.englishusingflashcards.room.entities.Category
 
 @Composable
-fun CategoryListItem(image: Int, categoryName: String, percent: Float, navController : NavController) {
+fun CategoryListItem(category: Category, navController : NavController) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -51,7 +52,7 @@ fun CategoryListItem(image: Int, categoryName: String, percent: Float, navContro
             .fillMaxWidth()
             .padding(start = 20.dp, end = 20.dp),
             horizontalArrangement = Arrangement.Start) {
-            Image(painter = painterResource(id = image), contentDescription = "",
+            Image(painter = painterResource(id = category.image), contentDescription = "",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(80.dp)
@@ -63,15 +64,15 @@ fun CategoryListItem(image: Int, categoryName: String, percent: Float, navContro
                 .weight(1.4f)) {
                 Text(
                     modifier = Modifier.padding(bottom = 2.dp),
-                    text = categoryName,
+                    text = category.categoryName,
                     fontSize = 20.sp
                 )
 
-                SetProgressBar(percent.toInt())
+                SetProgressBar(category.progress.toInt())
             }
             IconButton(onClick = {
                 val route = NavigationItem.EditCategory.route
-                navController.navigate("$route/${categoryName}/${image}") {
+                navController.navigate(NavigationItem.EditCategory.getRouteWithArgs(category)) {
                     Log.d("Tag", "to edit")
                     popUpTo(NavigationItem.Category.route) {
                         inclusive = true

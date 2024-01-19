@@ -28,8 +28,8 @@ class EditCategoryViewModel(app: Application) : ViewModel() {
         _categoryImage.value = input
     }
 
-    private val _listWordInCategory = MutableLiveData<List<Word>>(emptyList())
-    val listWordInCategory: LiveData<List<Word>>
+    private val _listWordInCategory = MutableLiveData<List<Word>?>(emptyList())
+    val listWordInCategory: LiveData<List<Word>?>
         get() = _listWordInCategory
 
 
@@ -62,6 +62,7 @@ class EditCategoryViewModel(app: Application) : ViewModel() {
 
     fun updateCategoryName(oldName: String, newName: String) {
         categoryRepository.updateCategoryName(oldName, newName)
+        wordRepository.updateWordsInCategory(newName, oldName)
     }
 
     fun deleteWordInCategory(categoryName: String, word: String, translate: String, sentence: String) {

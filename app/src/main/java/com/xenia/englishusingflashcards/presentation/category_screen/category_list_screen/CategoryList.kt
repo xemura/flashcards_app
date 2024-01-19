@@ -112,10 +112,9 @@ fun CategoryList(navController : NavController) {
                     },
                     dismissContent = {
                         CategoryListItem(
-                            image = category.image,
-                            categoryName = category.categoryName,
-                            percent = category.progress,
-                            navController)
+                            category = category,
+                            navController
+                        )
                     }
                 )
             }

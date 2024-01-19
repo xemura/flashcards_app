@@ -77,7 +77,7 @@ fun MainScreen(navController : NavController) {
             Spacer(modifier = Modifier.height(136.dp))
 
             AlertDialogPlayground()
-            ButtonMain(navController, NavigationItem.Category.route, "Категории")
+            ButtonMain(navController, NavigationItem.CategoryMain.route, "Категории")
             ButtonMain(navController, NavigationItem.LearningCard.route, "Обучение")
 
             Spacer(modifier = Modifier.weight(1f))

@@ -97,7 +97,7 @@ fun CreateCategoryScreen(navController : NavController) {
                     onClick = {
                         if (createCategoryViewModel.categoryName.isNotEmpty()) {
                             createCategoryViewModel.saveCategoryWithWords()
-                            navController.navigate(NavigationItem.Category.route) {
+                            navController.navigate(NavigationItem.CategoryMain.route) {
                                 popUpTo(NavigationItem.CreateCategory.route) {
                                     inclusive = true
                                 }

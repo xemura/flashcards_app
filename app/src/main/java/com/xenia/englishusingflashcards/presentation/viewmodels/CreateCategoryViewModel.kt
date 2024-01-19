@@ -28,8 +28,8 @@ class CreateCategoryViewModel(app: Application) : ViewModel() {
     var categoryImage by mutableIntStateOf(R.drawable.image_1)
         private set
 
-    private val _listWordInCategory = MutableLiveData<List<Word>>(emptyList())
-    val listWordInCategory: LiveData<List<Word>>
+    private val _listWordInCategory = MutableLiveData<List<Word>?>(emptyList())
+    val listWordInCategory: LiveData<List<Word>?>
         get() = _listWordInCategory
 
     private val createCategoryRepository: CreateCategoryRepository

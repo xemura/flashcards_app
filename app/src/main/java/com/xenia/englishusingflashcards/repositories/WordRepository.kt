@@ -21,4 +21,10 @@ class WordRepository(private val wordDao: WordDao) {
             wordDao.insertWord(word)
         }
     }
+
+    fun updateWordsInCategory(categoryNameNew: String, categoryNameOld: String) {
+        coroutineScope.launch(Dispatchers.IO) {
+            wordDao.updateCategoryInWords(categoryNameNew, categoryNameOld)
+        }
+    }
 }

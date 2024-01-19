@@ -18,4 +18,7 @@ interface WordDao {
 
     @Delete
     fun delete(word: Word)
+
+    @Query("UPDATE word SET category_name =:categoryNameNew WHERE category_name =:categoryNameOld")
+    suspend fun updateCategoryInWords(categoryNameNew: String, categoryNameOld: String)
 }
