@@ -1,4 +1,4 @@
-package com.xenia.englishusingflashcards.presentation.edit_category_screen
+package com.xenia.englishusingflashcards.presentation.category_screen.edit_category_screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -16,7 +16,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.xenia.englishusingflashcards.R
-import com.xenia.englishusingflashcards.viewmodels.EditCategoryViewModel
+import com.xenia.englishusingflashcards.presentation.viewmodels.EditCategoryViewModel
 
 var imagesList = listOf(
     R.drawable.image_1,

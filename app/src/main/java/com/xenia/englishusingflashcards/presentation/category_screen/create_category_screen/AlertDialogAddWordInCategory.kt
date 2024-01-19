@@ -1,7 +1,6 @@
-package com.xenia.englishusingflashcards.presentation.create_category_screen
+package com.xenia.englishusingflashcards.presentation.category_screen.create_category_screen
 
 import android.app.Application
-import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
@@ -41,8 +40,8 @@ import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.xenia.englishusingflashcards.room.entities.Word
 import com.xenia.englishusingflashcards.ui.theme.default
-import com.xenia.englishusingflashcards.viewmodels.CreateCategoryViewModel
-import com.xenia.englishusingflashcards.viewmodels.CreateCategoryViewModelFactory
+import com.xenia.englishusingflashcards.presentation.viewmodels.CreateCategoryViewModel
+import com.xenia.englishusingflashcards.presentation.viewmodels.CreateCategoryViewModelFactory
 
 
 private val textFieldColors = listOf(

@@ -1,4 +1,4 @@
-package com.xenia.englishusingflashcards.presentation.create_category_screen
+package com.xenia.englishusingflashcards.presentation.category_screen.create_category_screen
 
 import android.app.Activity
 import android.app.Application
@@ -32,8 +32,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.xenia.englishusingflashcards.navigation.NavigationItem
 import com.xenia.englishusingflashcards.presentation.Header
-import com.xenia.englishusingflashcards.viewmodels.CreateCategoryViewModel
-import com.xenia.englishusingflashcards.viewmodels.CreateCategoryViewModelFactory
+import com.xenia.englishusingflashcards.presentation.viewmodels.CreateCategoryViewModel
+import com.xenia.englishusingflashcards.presentation.viewmodels.CreateCategoryViewModelFactory
 
 
 @Composable

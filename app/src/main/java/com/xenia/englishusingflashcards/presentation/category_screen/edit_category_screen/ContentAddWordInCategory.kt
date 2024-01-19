@@ -1,6 +1,5 @@
-package com.xenia.englishusingflashcards.presentation.edit_category_screen
+package com.xenia.englishusingflashcards.presentation.category_screen.edit_category_screen
 
-import android.util.Log
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
@@ -32,7 +31,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.xenia.englishusingflashcards.ui.theme.LightGrayCustom
-import com.xenia.englishusingflashcards.viewmodels.EditCategoryViewModel
+import com.xenia.englishusingflashcards.presentation.viewmodels.EditCategoryViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -54,7 +53,12 @@ fun EditScreenCardAddWordInCategory(editCategoryViewModel: EditCategoryViewModel
                     .fillMaxWidth()
                     .weight(0.8f)
             ) {
-                items(wordsInCreatedCategory.value!!) { (id, _, word, translate, sentence) ->
+                items(
+                    items = wordsInCreatedCategory.value!!,
+                    key = { word ->
+                        word.sentence
+                    }
+                ) { (id, _, word, translate, sentence) ->
 
                     val dismissState = rememberDismissState()
 

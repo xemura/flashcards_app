@@ -1,4 +1,4 @@
-package com.xenia.englishusingflashcards.presentation.create_category_screen
+package com.xenia.englishusingflashcards.presentation.category_screen.create_category_screen
 
 import android.util.Log
 import androidx.compose.foundation.Image
@@ -16,7 +16,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.xenia.englishusingflashcards.R
-import com.xenia.englishusingflashcards.viewmodels.CreateCategoryViewModel
+import com.xenia.englishusingflashcards.presentation.viewmodels.CreateCategoryViewModel
 
 
 var imagesList = listOf(

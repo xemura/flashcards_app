@@ -26,9 +26,6 @@ interface CategoryDao {
     @Query("DELETE FROM word WHERE category_name =:categoryName")
     suspend fun deleteWordsFromCategory(categoryName: String)
 
-//    @Query("SELECT * FROM category WHERE category_name = :categoryName LIMIT 1")
-//    suspend fun getCategoryByName(categoryName: String) : Category
-
     @Query("UPDATE category SET category_name =:newName WHERE category_name =:oldName")
     suspend fun updateCategoryName(oldName: String, newName: String)
 

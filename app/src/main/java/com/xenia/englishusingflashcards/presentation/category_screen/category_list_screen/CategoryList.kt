@@ -1,4 +1,4 @@
-package com.xenia.englishusingflashcards.presentation.category_screen
+package com.xenia.englishusingflashcards.presentation.category_screen.category_list_screen
 
 import android.app.Application
 import androidx.compose.animation.animateColorAsState
@@ -31,8 +31,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.xenia.englishusingflashcards.viewmodels.CategoryViewModel
-import com.xenia.englishusingflashcards.viewmodels.CategoryViewModelFactory
+import com.xenia.englishusingflashcards.presentation.viewmodels.CategoryViewModel
+import com.xenia.englishusingflashcards.presentation.viewmodels.CategoryViewModelFactory
 
 
 @OptIn(ExperimentalMaterial3Api::class)

@@ -21,7 +21,13 @@ import androidx.navigation.NavController
 import com.xenia.englishusingflashcards.navigation.NavigationItem
 
 @Composable
-fun Header(contentPadding: PaddingValues, text: String, action: String, navController: NavController, activity: Activity?) {
+fun Header(
+    contentPadding: PaddingValues,
+    text: String,
+    action: String,
+    navController: NavController,
+    activity: Activity?
+) {
     Box(
         modifier = Modifier
             .fillMaxWidth().padding(top = 15.dp)
@@ -50,7 +56,11 @@ fun Header(contentPadding: PaddingValues, text: String, action: String, navContr
     }
 }
 
-fun action(action: String, navController: NavController, activity: Activity?) {
+fun action(
+    action: String,
+    navController: NavController,
+    activity: Activity?
+) {
     when (action) {
         "close_app" -> activity?.finish()
         "to_main_screen" -> {

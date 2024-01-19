@@ -1,4 +1,4 @@
-package com.xenia.englishusingflashcards.presentation.category_screen
+package com.xenia.englishusingflashcards.presentation.category_screen.category_list_screen
 
 import android.app.Activity
 import androidx.compose.foundation.background

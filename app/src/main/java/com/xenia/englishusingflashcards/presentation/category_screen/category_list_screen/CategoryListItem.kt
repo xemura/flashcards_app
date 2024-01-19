@@ -1,4 +1,4 @@
-package com.xenia.englishusingflashcards.presentation.category_screen
+package com.xenia.englishusingflashcards.presentation.category_screen.category_list_screen
 
 import android.util.Log
 import androidx.compose.foundation.BorderStroke

@@ -1,4 +1,4 @@
-package com.xenia.englishusingflashcards.presentation.edit_category_screen
+package com.xenia.englishusingflashcards.presentation.category_screen.edit_category_screen
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
@@ -36,7 +36,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.xenia.englishusingflashcards.room.entities.Word
 import com.xenia.englishusingflashcards.ui.theme.default
-import com.xenia.englishusingflashcards.viewmodels.EditCategoryViewModel
+import com.xenia.englishusingflashcards.presentation.viewmodels.EditCategoryViewModel
 
 private val textFieldColors = listOf(
     Color(0xFF184E77),

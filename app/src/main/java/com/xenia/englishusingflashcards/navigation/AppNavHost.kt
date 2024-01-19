@@ -10,9 +10,9 @@ import androidx.navigation.navArgument
 import com.xenia.englishusingflashcards.presentation.learning_screen.LearningScreen
 import com.xenia.englishusingflashcards.presentation.main_screen.MainScreen
 import com.xenia.englishusingflashcards.presentation.SplashScreen
-import com.xenia.englishusingflashcards.presentation.category_screen.CategoryScreen
-import com.xenia.englishusingflashcards.presentation.create_category_screen.CreateCategoryScreen
-import com.xenia.englishusingflashcards.presentation.edit_category_screen.EditCategoryScreen
+import com.xenia.englishusingflashcards.presentation.category_screen.category_list_screen.CategoryScreen
+import com.xenia.englishusingflashcards.presentation.category_screen.create_category_screen.CreateCategoryScreen
+import com.xenia.englishusingflashcards.presentation.category_screen.edit_category_screen.main_edit_category_screen.EditCategoryScreen
 
 @Composable
 fun AppNavHost(

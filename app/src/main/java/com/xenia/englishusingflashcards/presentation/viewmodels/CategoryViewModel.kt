@@ -1,4 +1,4 @@
-package com.xenia.englishusingflashcards.viewmodels
+package com.xenia.englishusingflashcards.presentation.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.ViewModel

@@ -1,4 +1,4 @@
-package com.xenia.englishusingflashcards.presentation.create_category_screen
+package com.xenia.englishusingflashcards.presentation.category_screen.create_category_screen
 
 import android.util.Log
 import androidx.compose.animation.animateColorAsState
@@ -31,9 +31,8 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.xenia.englishusingflashcards.presentation.category_screen.CategoryListItem
 import com.xenia.englishusingflashcards.ui.theme.LightGrayCustom
-import com.xenia.englishusingflashcards.viewmodels.CreateCategoryViewModel
+import com.xenia.englishusingflashcards.presentation.viewmodels.CreateCategoryViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -57,11 +56,9 @@ fun ContentCardAddWordInCreateCategory(createCategoryViewModel: CreateCategoryVi
             ) {
                 items(
                     items = wordsInCreatedCategory.value!!,
-//                    key = { word ->
-//                        word.word
-//                        word.translate
-//                        word.sentence
-//                    }
+                    key = { word ->
+                        word.sentence
+                    }
                 ) { word ->
                     val dismissState = rememberDismissState()
 
