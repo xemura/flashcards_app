@@ -40,10 +40,12 @@ fun ContentEditCategoryScreen (
             .border(BorderStroke(1.dp, Color.Black), RoundedCornerShape(25.dp)),
             contentAlignment = Alignment.Center
         ) {
-            editCategoryViewModel.updateCategoryName(categoryName)
-            editCategoryViewModel.updateCategoryImage(categoryImage)
+            editCategoryViewModel.also {
+                it.updateCategoryName(categoryName)
+                it.updateCategoryImage(categoryImage)
 
-            EditScreenCardEditCategory(editCategoryViewModel)
+                EditScreenCardEditCategory(it)
+            }
         }
         Box(modifier = Modifier
             .fillMaxWidth()

@@ -3,6 +3,7 @@ package com.xenia.englishusingflashcards.presentation.main_screen
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -28,6 +29,7 @@ fun ButtonMain(navController: NavController, navigationItemRoute: String, text: 
         },
         Modifier
             .fillMaxWidth()
+            //.wrapContentHeight()
             .padding(start = 20.dp, end = 20.dp, bottom = 10.dp),
         shape = RoundedCornerShape(25.dp),
         border = BorderStroke(1.dp, Color.Black),

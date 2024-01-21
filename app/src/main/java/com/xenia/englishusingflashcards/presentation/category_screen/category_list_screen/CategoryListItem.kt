@@ -71,7 +71,6 @@ fun CategoryListItem(category: Category, navController : NavController) {
                 SetProgressBar(category.progress.toInt())
             }
             IconButton(onClick = {
-                val route = NavigationItem.EditCategory.route
                 navController.navigate(NavigationItem.EditCategory.getRouteWithArgs(category)) {
                     Log.d("Tag", "to edit")
                     popUpTo(NavigationItem.Category.route) {
