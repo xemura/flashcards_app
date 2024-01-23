@@ -18,7 +18,6 @@ fun AppNavGraph(
     categoryScreenContent: @Composable (NavHostController) -> Unit,
     createCategoryScreenContent: @Composable (NavHostController) -> Unit,
     editCategoryScreenContent: @Composable (NavHostController, Category) -> Unit,
-    wordsCollectionCategoryScreenContent: @Composable (NavHostController, Category) -> Unit,
 ) {
     NavHost(
         modifier = modifier,
@@ -31,16 +30,16 @@ fun AppNavGraph(
         composable(NavigationItem.Main.route) {
             mainScreenContent(navHostController)
         }
-        composable(NavigationItem.LearningCard.route) { //
-            learningScreenContent(navHostController)
-        }
 
         categoryScreenNavGraph(
             navController = navHostController,
             categoryScreenContent = categoryScreenContent,
             createCategoryScreenContent = createCategoryScreenContent,
-            editCategoryScreenContent = editCategoryScreenContent,
-            wordsCollectionCategoryScreenContent = wordsCollectionCategoryScreenContent
+            editCategoryScreenContent = editCategoryScreenContent
         )
+
+        composable(NavigationItem.LearningCard.route) { //
+            learningScreenContent(navHostController)
+        }
     }
 }

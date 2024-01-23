@@ -78,16 +78,8 @@ class CreateCategoryViewModel(app: Application) : ViewModel() {
                 Category(
                     categoryName = categoryName,
                     image = categoryImage,
-                    progress = 0.0f
                 )
             )
         }
     }
-
-//    fun insertAll(list: List<Word>) {
-//        viewModelScope.launch (Dispatchers.IO) {
-//            createCategoryRepository.insertWordsInCategory(list)
-//            _listWordInCategory.value = list
-//        }
-//    }
 }

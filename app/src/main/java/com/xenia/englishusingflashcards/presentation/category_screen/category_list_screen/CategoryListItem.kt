@@ -5,11 +5,13 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -47,37 +49,43 @@ fun CategoryListItem(category: Category, navController : NavController) {
             .background(Color.White),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Spacer(modifier = Modifier.height(10.dp))
         Row(modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 20.dp, end = 20.dp),
-            horizontalArrangement = Arrangement.Start) {
+            .fillMaxSize()
+            .padding(vertical = 10.dp, horizontal = 20.dp),
+            //.padding(start = 20.dp, end = 20.dp, ),
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically)
+        {
             Image(painter = painterResource(id = category.image), contentDescription = "",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .size(80.dp)
+                    .fillMaxHeight()
+                    .size(70.dp)
                     .clip(RoundedCornerShape(25.dp))
                     .weight(0.5f)
             )
-            Column (modifier = Modifier
-                .padding(start = 20.dp, top = 15.dp, end = 10.dp)
-                .weight(1.4f)) {
-                Text(
-                    modifier = Modifier.padding(bottom = 2.dp),
-                    text = category.categoryName,
-                    fontSize = 20.sp
-                )
 
-                SetProgressBar(category.progress.toInt())
-            }
-            IconButton(onClick = {
-                navController.navigate(NavigationItem.EditCategory.getRouteWithArgs(category)) {
-                    Log.d("Tag", "to edit")
-                    popUpTo(NavigationItem.Category.route) {
-                        inclusive = true
+
+            Text(
+                modifier = Modifier
+                    .padding(start = 20.dp, end = 10.dp)
+                    .weight(1.4f),
+                text = category.categoryName,
+                fontSize = 20.sp
+            )
+
+            //SetProgressBar(category.progress.toInt())
+
+
+            IconButton(
+                onClick = {
+                    navController.navigate(NavigationItem.EditCategory.getRouteWithArgs(category)) {
+                        Log.d("Tag", "to edit")
+                        popUpTo(NavigationItem.Category.route) {
+                            inclusive = true
+                        }
                     }
-                }
-            },
+                },
                 modifier = Modifier
                     .size(50.dp)
                     .fillMaxHeight()
@@ -88,6 +96,5 @@ fun CategoryListItem(category: Category, navController : NavController) {
                 Icon(imageVector = Icons.Filled.Edit, contentDescription = "Edit")
             }
         }
-        Spacer(modifier = Modifier.height(10.dp))
     }
 }

@@ -36,7 +36,6 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    
                     AppNavGraph(
                         navHostController = rememberNavController(),
                         splashScreenContent = { navController ->
@@ -59,9 +58,6 @@ class MainActivity : ComponentActivity() {
                         },
                         createCategoryScreenContent = { navController ->
                             CreateCategoryScreen(navController = navController)
-                        },
-                        wordsCollectionCategoryScreenContent = { navController, category ->
-
                         }
                     )
                 }

@@ -78,5 +78,4 @@ class EditCategoryViewModel(app: Application) : ViewModel() {
     fun getListWordsInCategory(categoryName: String) {
         _listWordInCategory.value = categoryRepository.getWordsInCategory(categoryName)
     }
-
 }

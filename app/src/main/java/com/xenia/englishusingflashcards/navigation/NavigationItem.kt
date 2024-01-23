@@ -13,7 +13,7 @@ enum class Screen {
     CATEGORY_NAME,
     CREATE_CATEGORY,
     EDIT_CATEGORY,
-    WORDS_CATEGORY,
+    SORT_WORDS_IN_CATEGORY,
 }
 sealed class NavigationItem(val route: String) {
     data object Splash : NavigationItem(Screen.SPLASH.name)
@@ -33,7 +33,12 @@ sealed class NavigationItem(val route: String) {
             return "${Screen.EDIT_CATEGORY.name}/${categoryJson.encode()}"
         }
     }
-    data object WordsCategory : NavigationItem(Screen.WORDS_CATEGORY.name)
+    data object SortWordsInCategory : NavigationItem("${Screen.SORT_WORDS_IN_CATEGORY.name}/{sort_words_in_category}") {
+        fun getRouteWithArgs(category: com.xenia.englishusingflashcards.room.entities.Category) : String {
+            val categoryJson = Gson().toJson(category)
+            return "${Screen.SORT_WORDS_IN_CATEGORY.name}/${categoryJson.encode()}"
+        }
+    }
 }
 
 fun String.encode() : String {
