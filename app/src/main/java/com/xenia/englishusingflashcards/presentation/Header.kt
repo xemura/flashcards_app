@@ -84,5 +84,12 @@ fun action(
                 }
             }
         }
+        "to_main_screen_from_learn" -> {
+            navController.navigate(NavigationItem.Main.route) {
+                popUpTo(NavigationItem.LearningCard.route) {
+                    inclusive = true
+                }
+            }
+        }
     }
 }

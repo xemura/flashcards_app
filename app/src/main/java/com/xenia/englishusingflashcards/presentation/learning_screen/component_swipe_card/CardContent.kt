@@ -1,4 +1,4 @@
-package com.xenia.englishusingflashcards.presentation.category_screen.category_sort_words_screen.component_swipe_card
+package com.xenia.englishusingflashcards.presentation.learning_screen.component_swipe_card
 
 import android.util.Log
 import androidx.compose.foundation.BorderStroke
@@ -21,8 +21,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.xenia.englishusingflashcards.presentation.category_screen.category_sort_words_screen.component_swipe_card.Constants.cornerRadiusBig
-import com.xenia.englishusingflashcards.presentation.category_screen.category_sort_words_screen.component_swipe_card.Constants.normalElevation
+import com.xenia.englishusingflashcards.presentation.learning_screen.component_swipe_card.Constants.cornerRadiusBig
+import com.xenia.englishusingflashcards.presentation.learning_screen.component_swipe_card.Constants.normalElevation
 import com.xenia.englishusingflashcards.room.entities.Word
 import com.xenia.englishusingflashcards.ui.theme.default
 

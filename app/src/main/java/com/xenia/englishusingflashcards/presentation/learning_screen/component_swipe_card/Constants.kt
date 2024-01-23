@@ -1,4 +1,4 @@
-package com.xenia.englishusingflashcards.presentation.category_screen.category_sort_words_screen.component_swipe_card
+package com.xenia.englishusingflashcards.presentation.learning_screen.component_swipe_card
 
 import androidx.compose.ui.unit.dp
 

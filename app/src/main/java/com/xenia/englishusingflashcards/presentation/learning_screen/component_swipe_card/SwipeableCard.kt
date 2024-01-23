@@ -1,4 +1,4 @@
-package com.xenia.englishusingflashcards.presentation.category_screen.category_sort_words_screen.component_swipe_card
+package com.xenia.englishusingflashcards.presentation.learning_screen.component_swipe_card
 
 import android.annotation.SuppressLint
 import android.graphics.drawable.Animatable
@@ -30,8 +30,8 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.input.pointer.positionChange
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.zIndex
-import com.xenia.englishusingflashcards.presentation.category_screen.category_sort_words_screen.component_swipe_card.Constants.cardHeight
-import com.xenia.englishusingflashcards.presentation.category_screen.category_sort_words_screen.component_swipe_card.Constants.paddingOffset
+import com.xenia.englishusingflashcards.presentation.learning_screen.component_swipe_card.Constants.cardHeight
+import com.xenia.englishusingflashcards.presentation.learning_screen.component_swipe_card.Constants.paddingOffset
 import com.xenia.englishusingflashcards.room.entities.Word
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -190,11 +190,6 @@ fun makeCardModifier(
                         )
                     }
                 }
-            }
-        }
-        .pointerInput(Unit) {
-            detectVerticalDragGestures { change, dragAmount ->
-
             }
         }
 }
