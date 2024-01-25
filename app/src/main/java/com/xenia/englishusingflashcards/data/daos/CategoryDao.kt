@@ -1,13 +1,12 @@
-package com.xenia.englishusingflashcards.room.daos
+package com.xenia.englishusingflashcards.data.daos
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Update
-import com.xenia.englishusingflashcards.room.entities.Category
-import com.xenia.englishusingflashcards.room.entities.Word
+import com.xenia.englishusingflashcards.data.entities.Category
+import com.xenia.englishusingflashcards.data.entities.Word
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -19,7 +18,7 @@ interface CategoryDao {
     fun getCategories(): Flow<List<Category>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCategory(category: Category)
+    suspend fun createCategory(category: Category)
 
     @Delete
     suspend fun deleteCategory(categories: Category)

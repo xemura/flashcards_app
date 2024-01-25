@@ -1,4 +1,4 @@
-package com.xenia.englishusingflashcards
+package com.xenia.englishusingflashcards.presentation
 
 import android.os.Bundle
 import android.view.WindowManager

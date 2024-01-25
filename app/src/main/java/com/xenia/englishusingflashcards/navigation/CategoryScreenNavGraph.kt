@@ -8,7 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.google.gson.Gson
-import com.xenia.englishusingflashcards.room.entities.Category
+import com.xenia.englishusingflashcards.data.entities.Category
 
 
 fun NavGraphBuilder.categoryScreenNavGraph(

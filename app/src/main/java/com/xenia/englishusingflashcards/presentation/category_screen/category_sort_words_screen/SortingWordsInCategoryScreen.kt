@@ -26,8 +26,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.xenia.englishusingflashcards.presentation.Header
 import com.xenia.englishusingflashcards.presentation.category_screen.category_sort_words_screen.component_swipe_card.SwipeableCard
-import com.xenia.englishusingflashcards.room.entities.Category
-import com.xenia.englishusingflashcards.room.entities.Word
+import com.xenia.englishusingflashcards.data.entities.Category
+import com.xenia.englishusingflashcards.data.entities.Word
 
 @Composable
 fun SortingWordsInCategoryScreen(navController : NavController, category: Category) {

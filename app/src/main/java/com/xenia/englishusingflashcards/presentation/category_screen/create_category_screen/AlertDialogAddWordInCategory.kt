@@ -38,7 +38,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.xenia.englishusingflashcards.room.entities.Word
+import com.xenia.englishusingflashcards.data.entities.Word
+import com.xenia.englishusingflashcards.domain.models.WordModel
 import com.xenia.englishusingflashcards.ui.theme.default
 import com.xenia.englishusingflashcards.presentation.viewmodels.CreateCategoryViewModel
 import com.xenia.englishusingflashcards.presentation.viewmodels.CreateCategoryViewModelFactory
@@ -89,7 +90,7 @@ fun AlertDialogAddWordInCategory(onDismiss: () -> Unit, onConfirm: () -> Unit) {
             Button(
                 onClick = {
                     if (!(word.text.isEmpty() or translate.text.isEmpty() or sentence.text.isEmpty())) {
-                        val createdWord = Word(
+                        val createdWord = WordModel(
                             categoryName = createCategoryViewModel.categoryName,
                             word = word.text,
                             translate = translate.text,

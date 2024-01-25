@@ -11,12 +11,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.xenia.englishusingflashcards.R
-import com.xenia.englishusingflashcards.repositories.CategoryRepository
-import com.xenia.englishusingflashcards.repositories.CreateCategoryRepository
-import com.xenia.englishusingflashcards.repositories.WordRepository
-import com.xenia.englishusingflashcards.room.database.AppDatabase
-import com.xenia.englishusingflashcards.room.entities.Category
-import com.xenia.englishusingflashcards.room.entities.Word
+import com.xenia.englishusingflashcards.data.repository.CategoryRepositoryImpl
+import com.xenia.englishusingflashcards.data.repository.WordRepositoryImpl
+import com.xenia.englishusingflashcards.data.database.AppDatabase
+import com.xenia.englishusingflashcards.data.entities.Category
+import com.xenia.englishusingflashcards.data.entities.Word
+import com.xenia.englishusingflashcards.domain.models.CategoryModel
+import com.xenia.englishusingflashcards.domain.models.WordModel
+import com.xenia.englishusingflashcards.domain.usecases.CreateCategoryUseCase
+import com.xenia.englishusingflashcards.domain.usecases.DeleteCategoryUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -28,23 +31,13 @@ class CreateCategoryViewModel(app: Application) : ViewModel() {
     var categoryImage by mutableIntStateOf(R.drawable.image_1)
         private set
 
-    private val _listWordInCategory = MutableLiveData<List<Word>?>(emptyList())
-    val listWordInCategory: LiveData<List<Word>?>
+    private val _listWordInCategory = MutableLiveData<List<WordModel>?>(emptyList())
+    val listWordInCategory: LiveData<List<WordModel>?>
         get() = _listWordInCategory
 
-    private val createCategoryRepository: CreateCategoryRepository
 
-    private val categoryRepository: CategoryRepository
-    private val wordRepository: WordRepository
-
-    init {
-        val appDb = AppDatabase.getInstance(app)
-        val categoryDao = appDb.categoryDao()
-        val wordDao = appDb.wordDao()
-        categoryRepository = CategoryRepository(categoryDao)
-        wordRepository = WordRepository(wordDao)
-        createCategoryRepository = CreateCategoryRepository(wordDao)
-    }
+    private val repository = CategoryRepositoryImpl(app)
+    private val createCategoryUseCase = CreateCategoryUseCase(repository)
 
     fun updateCategoryName(input: String) {
         categoryName = input
@@ -54,7 +47,7 @@ class CreateCategoryViewModel(app: Application) : ViewModel() {
         categoryImage = input
     }
 
-    fun updateListWordsInCategory(word: Word) {
+    fun updateListWordsInCategory(word: WordModel) {
         viewModelScope.launch (Dispatchers.IO) {
             val list = _listWordInCategory.value?.toMutableList()
             list?.add(word.copy())
@@ -73,12 +66,12 @@ class CreateCategoryViewModel(app: Application) : ViewModel() {
 
     fun saveCategoryWithWords() {
         viewModelScope.launch (Dispatchers.IO) {
-            _listWordInCategory.value?.let { wordRepository.insertListWords(it) }
-            categoryRepository.insertCategory(
-                Category(
+            createCategoryUseCase.createCategory(
+                CategoryModel(
                     categoryName = categoryName,
                     image = categoryImage,
-                )
+                ),
+                _listWordInCategory.value
             )
         }
     }
