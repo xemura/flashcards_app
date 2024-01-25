@@ -1,7 +1,7 @@
-package com.xenia.englishusingflashcards.repositories
+package com.xenia.englishusingflashcards.domain.repository
 
-import com.xenia.englishusingflashcards.room.daos.WordDao
-import com.xenia.englishusingflashcards.room.entities.Word
+import com.xenia.englishusingflashcards.data.daos.WordDao
+import com.xenia.englishusingflashcards.data.entities.Word
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

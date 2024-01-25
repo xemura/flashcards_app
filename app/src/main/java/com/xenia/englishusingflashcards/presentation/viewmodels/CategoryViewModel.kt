@@ -2,9 +2,9 @@ package com.xenia.englishusingflashcards.presentation.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
-import com.xenia.englishusingflashcards.repositories.CategoryRepository
-import com.xenia.englishusingflashcards.room.database.AppDatabase
-import com.xenia.englishusingflashcards.room.entities.Category
+import com.xenia.englishusingflashcards.domain.repository.CategoryRepository
+import com.xenia.englishusingflashcards.data.database.AppDatabase
+import com.xenia.englishusingflashcards.data.entities.Category
 import kotlinx.coroutines.flow.Flow
 
 class CategoryViewModel(app: Application) : ViewModel() {

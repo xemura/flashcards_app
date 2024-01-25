@@ -6,10 +6,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.xenia.englishusingflashcards.repositories.CategoryRepository
-import com.xenia.englishusingflashcards.repositories.WordRepository
-import com.xenia.englishusingflashcards.room.database.AppDatabase
-import com.xenia.englishusingflashcards.room.entities.Word
+import com.xenia.englishusingflashcards.domain.repository.CategoryRepository
+import com.xenia.englishusingflashcards.domain.repository.WordRepository
+import com.xenia.englishusingflashcards.data.database.AppDatabase
+import com.xenia.englishusingflashcards.data.entities.Word
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

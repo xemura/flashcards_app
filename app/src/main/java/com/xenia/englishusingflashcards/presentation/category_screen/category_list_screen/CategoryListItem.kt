@@ -33,7 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.xenia.englishusingflashcards.navigation.NavigationItem
-import com.xenia.englishusingflashcards.room.entities.Category
+import com.xenia.englishusingflashcards.data.entities.Category
 
 @Composable
 fun CategoryListItem(category: Category, navController : NavController) {

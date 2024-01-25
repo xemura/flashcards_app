@@ -34,7 +34,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.xenia.englishusingflashcards.room.entities.Word
+import com.xenia.englishusingflashcards.data.entities.Word
 import com.xenia.englishusingflashcards.ui.theme.default
 import com.xenia.englishusingflashcards.presentation.viewmodels.EditCategoryViewModel
 

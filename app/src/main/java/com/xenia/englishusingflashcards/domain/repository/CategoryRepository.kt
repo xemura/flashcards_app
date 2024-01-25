@@ -1,9 +1,9 @@
-package com.xenia.englishusingflashcards.repositories
+package com.xenia.englishusingflashcards.domain.repository
 
 import android.util.Log
-import com.xenia.englishusingflashcards.room.daos.CategoryDao
-import com.xenia.englishusingflashcards.room.entities.Category
-import com.xenia.englishusingflashcards.room.entities.Word
+import com.xenia.englishusingflashcards.data.daos.CategoryDao
+import com.xenia.englishusingflashcards.data.entities.Category
+import com.xenia.englishusingflashcards.data.entities.Word
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

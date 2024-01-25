@@ -2,6 +2,7 @@ package com.xenia.englishusingflashcards.navigation
 
 import android.net.Uri
 import com.google.gson.Gson
+import com.xenia.englishusingflashcards.data.entities.Category
 
 enum class Screen {
     SPLASH,
@@ -28,13 +29,13 @@ sealed class NavigationItem(val route: String) {
     data object CreateCategory : NavigationItem(Screen.CREATE_CATEGORY.name)
     data object EditCategory : NavigationItem("${Screen.EDIT_CATEGORY.name}/{edit_category}")
     {
-        fun getRouteWithArgs(category: com.xenia.englishusingflashcards.room.entities.Category) : String {
+        fun getRouteWithArgs(category: com.xenia.englishusingflashcards.data.entities.Category) : String {
             val categoryJson = Gson().toJson(category)
             return "${Screen.EDIT_CATEGORY.name}/${categoryJson.encode()}"
         }
     }
     data object SortWordsInCategory : NavigationItem("${Screen.SORT_WORDS_IN_CATEGORY.name}/{sort_words_in_category}") {
-        fun getRouteWithArgs(category: com.xenia.englishusingflashcards.room.entities.Category) : String {
+        fun getRouteWithArgs(category: com.xenia.englishusingflashcards.data.entities.Category) : String {
             val categoryJson = Gson().toJson(category)
             return "${Screen.SORT_WORDS_IN_CATEGORY.name}/${categoryJson.encode()}"
         }

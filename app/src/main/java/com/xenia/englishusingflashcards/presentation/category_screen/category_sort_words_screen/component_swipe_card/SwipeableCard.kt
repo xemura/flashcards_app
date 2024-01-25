@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.zIndex
 import com.xenia.englishusingflashcards.presentation.category_screen.category_sort_words_screen.component_swipe_card.Constants.cardHeight
 import com.xenia.englishusingflashcards.presentation.category_screen.category_sort_words_screen.component_swipe_card.Constants.paddingOffset
-import com.xenia.englishusingflashcards.room.entities.Word
+import com.xenia.englishusingflashcards.data.entities.Word
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlin.math.abs

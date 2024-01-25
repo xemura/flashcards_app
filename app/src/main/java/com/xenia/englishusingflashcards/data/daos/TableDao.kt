@@ -1,9 +1,9 @@
-package com.xenia.englishusingflashcards.room.daos
+package com.xenia.englishusingflashcards.data.daos
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.xenia.englishusingflashcards.room.entities.Word
+import com.xenia.englishusingflashcards.data.entities.Word
 
 //@Dao
 //interface TableDao {
