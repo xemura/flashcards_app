@@ -16,6 +16,8 @@ import com.xenia.englishusingflashcards.data.repository.WordRepositoryImpl
 import com.xenia.englishusingflashcards.data.database.AppDatabase
 import com.xenia.englishusingflashcards.data.entities.Category
 import com.xenia.englishusingflashcards.data.entities.Word
+import com.xenia.englishusingflashcards.domain.models.CategoryModel
+import com.xenia.englishusingflashcards.domain.models.WordModel
 import com.xenia.englishusingflashcards.domain.usecases.CreateCategoryUseCase
 import com.xenia.englishusingflashcards.domain.usecases.DeleteCategoryUseCase
 import kotlinx.coroutines.Dispatchers
@@ -29,8 +31,8 @@ class CreateCategoryViewModel(app: Application) : ViewModel() {
     var categoryImage by mutableIntStateOf(R.drawable.image_1)
         private set
 
-    private val _listWordInCategory = MutableLiveData<List<Word>?>(emptyList())
-    val listWordInCategory: LiveData<List<Word>?>
+    private val _listWordInCategory = MutableLiveData<List<WordModel>?>(emptyList())
+    val listWordInCategory: LiveData<List<WordModel>?>
         get() = _listWordInCategory
 
 
@@ -45,7 +47,7 @@ class CreateCategoryViewModel(app: Application) : ViewModel() {
         categoryImage = input
     }
 
-    fun updateListWordsInCategory(word: Word) {
+    fun updateListWordsInCategory(word: WordModel) {
         viewModelScope.launch (Dispatchers.IO) {
             val list = _listWordInCategory.value?.toMutableList()
             list?.add(word.copy())
@@ -65,7 +67,7 @@ class CreateCategoryViewModel(app: Application) : ViewModel() {
     fun saveCategoryWithWords() {
         viewModelScope.launch (Dispatchers.IO) {
             createCategoryUseCase.createCategory(
-                Category(
+                CategoryModel(
                     categoryName = categoryName,
                     image = categoryImage,
                 ),

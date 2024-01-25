@@ -10,6 +10,7 @@ import com.xenia.englishusingflashcards.data.repository.CategoryRepositoryImpl
 import com.xenia.englishusingflashcards.data.repository.WordRepositoryImpl
 import com.xenia.englishusingflashcards.data.database.AppDatabase
 import com.xenia.englishusingflashcards.data.entities.Word
+import com.xenia.englishusingflashcards.domain.models.WordModel
 import com.xenia.englishusingflashcards.domain.usecases.AddWordInCategoryUseCase
 import com.xenia.englishusingflashcards.domain.usecases.DeleteWordFromCategoryUseCase
 import com.xenia.englishusingflashcards.domain.usecases.GetWordsFromCategoryUseCase
@@ -33,8 +34,8 @@ class EditCategoryViewModel(app: Application) : ViewModel() {
         _categoryImage.value = input
     }
 
-    private val _listWordInCategory = MutableLiveData<List<Word>?>(emptyList())
-    val listWordInCategory: LiveData<List<Word>?>
+    private val _listWordInCategory = MutableLiveData<List<WordModel>?>(emptyList())
+    val listWordInCategory: LiveData<List<WordModel>?>
         get() = _listWordInCategory
 
     ///////////////
@@ -47,7 +48,7 @@ class EditCategoryViewModel(app: Application) : ViewModel() {
     private val updateCategoryNameUseCase = UpdateCategoryNameUseCase(repository)
 
 
-    fun updateListWordsInCategory(word: Word) {
+    fun updateListWordsInCategory(word: WordModel) {
         viewModelScope.launch (Dispatchers.IO) {
             val list = _listWordInCategory.value?.toMutableList()
             list?.add(word.copy())

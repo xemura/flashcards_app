@@ -35,6 +35,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.xenia.englishusingflashcards.data.entities.Word
+import com.xenia.englishusingflashcards.domain.models.WordModel
 import com.xenia.englishusingflashcards.ui.theme.default
 import com.xenia.englishusingflashcards.presentation.viewmodels.EditCategoryViewModel
 
@@ -75,7 +76,7 @@ fun AlertDialogAddWordInEditCategory(editCategoryViewModel: EditCategoryViewMode
             Button(
                 onClick = {
                     if (!(word.text.isEmpty() or translate.text.isEmpty() or sentence.text.isEmpty())) {
-                        val createdWord = Word(
+                        val createdWord = WordModel(
                             categoryName = editCategoryViewModel.categoryName.value!!, // !!!!!!!!!!!!11
                             word = word.text,
                             translate = translate.text,

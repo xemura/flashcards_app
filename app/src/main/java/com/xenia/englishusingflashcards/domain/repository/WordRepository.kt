@@ -1,9 +1,8 @@
 package com.xenia.englishusingflashcards.domain.repository
 
-import com.xenia.englishusingflashcards.data.entities.Word
+import com.xenia.englishusingflashcards.domain.models.WordModel
 
 interface WordRepository {
-    fun insertListWords(words: List<Word>)
-    fun insertWord(word: Word)
-//    fun updateWordsInCategory(categoryNameNew: String, categoryNameOld: String)
+    fun insertListWords(words: List<WordModel>)
+    fun insertWord(word: WordModel)
 }

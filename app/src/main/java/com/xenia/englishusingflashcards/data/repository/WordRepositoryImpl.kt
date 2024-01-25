@@ -3,6 +3,8 @@ package com.xenia.englishusingflashcards.data.repository
 import android.app.Application
 import com.xenia.englishusingflashcards.data.database.AppDatabase
 import com.xenia.englishusingflashcards.data.entities.Word
+import com.xenia.englishusingflashcards.data.mapper.WordMapper
+import com.xenia.englishusingflashcards.domain.models.WordModel
 import com.xenia.englishusingflashcards.domain.repository.WordRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -14,21 +16,17 @@ class WordRepositoryImpl(app: Application): WordRepository {
     private val wordDao = appDb.wordDao()
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
 
-    override fun insertListWords(words: List<Word>) {
+    private val mapperWord = WordMapper()
+
+    override fun insertListWords(words: List<WordModel>) {
         coroutineScope.launch(Dispatchers.IO) {
-            wordDao.insertAll(words)
+            wordDao.insertAll(mapperWord.mapWordToData(words))
         }
     }
 
-    override fun insertWord(word: Word) {
+    override fun insertWord(word: WordModel) {
         coroutineScope.launch(Dispatchers.IO) {
-            wordDao.insertWord(word)
+            wordDao.insertWord(mapperWord.mapWord(word))
         }
     }
-
-//    override fun updateWordsInCategory(categoryNameNew: String, categoryNameOld: String) {
-//        coroutineScope.launch(Dispatchers.IO) {
-//            wordDao.updateCategoryInWords(categoryNameNew, categoryNameOld)
-//        }
-//    }
 }
