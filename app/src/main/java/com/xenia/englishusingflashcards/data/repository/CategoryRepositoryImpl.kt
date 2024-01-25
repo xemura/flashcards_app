@@ -11,23 +11,13 @@ import kotlinx.coroutines.launch
 
 class CategoryRepositoryImpl(app: Application) : CategoryRepository {
 
-    val appDb = AppDatabase.getInstance(app)
-    val categoryDao = appDb.categoryDao()
-    val wordDao = appDb.wordDao()
+    private val appDb = AppDatabase.getInstance(app)
+    private val categoryDao = appDb.categoryDao()
+    private val wordDao = appDb.wordDao()
 
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
     private var wordsInCategory: List<Word>? = null
 
-    fun deleteWordInCategory(
-        categoryName: String,
-        word: String,
-        translate: String,
-        sentence: String
-    ) {
-        coroutineScope.launch(Dispatchers.IO) {
-            categoryDao.deleteWordInCategory(categoryName, word, translate, sentence)
-        }
-    }
 
     override fun updateCategoryName(oldName: String, newName: String) {
         coroutineScope.launch(Dispatchers.IO) {

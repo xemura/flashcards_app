@@ -10,8 +10,8 @@ import kotlinx.coroutines.launch
 
 class WordRepositoryImpl(app: Application): WordRepository {
 
-    val appDb = AppDatabase.getInstance(app)
-    val wordDao = appDb.wordDao()
+    private val appDb = AppDatabase.getInstance(app)
+    private val wordDao = appDb.wordDao()
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
 
     override fun insertListWords(words: List<Word>) {
@@ -26,9 +26,9 @@ class WordRepositoryImpl(app: Application): WordRepository {
         }
     }
 
-    override fun updateWordsInCategory(categoryNameNew: String, categoryNameOld: String) {
-        coroutineScope.launch(Dispatchers.IO) {
-            wordDao.updateCategoryInWords(categoryNameNew, categoryNameOld)
-        }
-    }
+//    override fun updateWordsInCategory(categoryNameNew: String, categoryNameOld: String) {
+//        coroutineScope.launch(Dispatchers.IO) {
+//            wordDao.updateCategoryInWords(categoryNameNew, categoryNameOld)
+//        }
+//    }
 }
