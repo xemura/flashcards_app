@@ -1,4 +1,14 @@
 package com.xenia.englishusingflashcards.domain.usecases
 
-class EditCategoryUseCase {
+import com.xenia.englishusingflashcards.domain.repository.CategoryRepository
+
+class EditCategoryUseCase(private val categoryRepository: CategoryRepository) {
+
+    fun updateImage() {
+
+    }
+
+    fun updateCategoryName() {
+
+    }
 }
