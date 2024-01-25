@@ -1,30 +1,9 @@
 package com.xenia.englishusingflashcards.domain.repository
 
-import com.xenia.englishusingflashcards.data.daos.WordDao
 import com.xenia.englishusingflashcards.data.entities.Word
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
-class WordRepository(private val wordDao: WordDao) {
-
-    private val coroutineScope = CoroutineScope(Dispatchers.Main)
-
-    fun insertListWords(words: List<Word>) {
-        coroutineScope.launch(Dispatchers.IO) {
-            wordDao.insertAll(words)
-        }
-    }
-
-    fun insertWord(word: Word) {
-        coroutineScope.launch(Dispatchers.IO) {
-            wordDao.insertWord(word)
-        }
-    }
-
-    fun updateWordsInCategory(categoryNameNew: String, categoryNameOld: String) {
-        coroutineScope.launch(Dispatchers.IO) {
-            wordDao.updateCategoryInWords(categoryNameNew, categoryNameOld)
-        }
-    }
+interface WordRepository {
+    fun insertListWords(words: List<Word>)
+    fun insertWord(word: Word)
+    fun updateWordsInCategory(categoryNameNew: String, categoryNameOld: String)
 }
