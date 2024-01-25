@@ -10,8 +10,6 @@ import com.xenia.englishusingflashcards.domain.models.WordModel
 import com.xenia.englishusingflashcards.domain.repository.CategoryRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class CategoryRepositoryImpl(app: Application) : CategoryRepository {
@@ -57,19 +55,6 @@ class CategoryRepositoryImpl(app: Application) : CategoryRepository {
             categoryDao.deleteWordInCategory(categoryName, word, translate, sentence)
         }
     }
-
-//    override fun getCategories(): Flow<List<CategoryModel>?> {
-//        val list = coroutineScope.async {
-//            appDb.categoryDao().getCategories()
-//        }
-//        return mapperCategory.mapCategory(list.await())
-////        coroutineScope.launch(Dispatchers.IO) {
-////            appDb.categoryDao().getCategories().collect { it ->
-////                return mapperCategory.mapCategory(it)
-////            }
-////            return mapperCategory.mapCategory(appDb.categoryDao().getCategories().collect())
-////        }
-//    }
 
     override fun createCategory(category: CategoryModel, listWordsInCategory: List<WordModel>?) {
         coroutineScope.launch(Dispatchers.IO) {
