@@ -74,9 +74,6 @@ fun CategoryListItem(category: Category, navController : NavController) {
                 fontSize = 20.sp
             )
 
-            //SetProgressBar(category.progress.toInt())
-
-
             IconButton(
                 onClick = {
                     navController.navigate(NavigationItem.EditCategory.getRouteWithArgs(category)) {
