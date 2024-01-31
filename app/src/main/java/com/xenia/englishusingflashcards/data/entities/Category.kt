@@ -1,4 +1,4 @@
-package com.xenia.englishusingflashcards.room.entities
+package com.xenia.englishusingflashcards.data.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

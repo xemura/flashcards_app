@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.xenia.englishusingflashcards.domain.models.CategoryModel
 import com.xenia.englishusingflashcards.presentation.viewmodels.CategoryViewModel
 import com.xenia.englishusingflashcards.presentation.viewmodels.CategoryViewModelFactory
 
@@ -62,7 +63,12 @@ fun CategoryList(navController : NavController) {
                 val dismissState = rememberDismissState()
 
                 if (dismissState.isDismissed(direction = DismissDirection.EndToStart)) {
-                    categoryViewModel.deleteCategory(category)
+                    val categoryModel = CategoryModel(
+                        id = category.id,
+                        categoryName = category.categoryName,
+                        image = category.image
+                    )
+                    categoryViewModel.deleteCategory(categoryModel)
                 }
 
                 SwipeToDismiss(

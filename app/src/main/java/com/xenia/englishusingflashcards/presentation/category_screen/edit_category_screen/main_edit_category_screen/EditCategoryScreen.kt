@@ -18,7 +18,7 @@ import androidx.navigation.NavController
 import com.xenia.englishusingflashcards.presentation.Header
 import com.xenia.englishusingflashcards.presentation.viewmodels.EditCategoryViewModel
 import com.xenia.englishusingflashcards.presentation.viewmodels.EditCategoryViewModelFactory
-import com.xenia.englishusingflashcards.room.entities.Category
+import com.xenia.englishusingflashcards.data.entities.Category
 
 @Composable
 fun EditCategoryScreen(navController : NavController, category: Category) {
