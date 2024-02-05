@@ -7,6 +7,7 @@ import com.xenia.englishusingflashcards.data.mapper.CategoryMapper
 import com.xenia.englishusingflashcards.data.mapper.WordMapper
 import com.xenia.englishusingflashcards.domain.models.CategoryModel
 import com.xenia.englishusingflashcards.domain.models.WordModel
+import com.xenia.englishusingflashcards.domain.models.WordsStudyModel
 import com.xenia.englishusingflashcards.domain.repository.CategoryRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -15,11 +16,15 @@ import kotlinx.coroutines.launch
 class CategoryRepositoryImpl(app: Application) : CategoryRepository {
 
     private val appDb = AppDatabase.getInstance(app)
+
     private val categoryDao = appDb.categoryDao()
+    private val learnDao = appDb.learnDao()
     private val wordDao = appDb.wordDao()
 
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
+
     private var wordsInCategory: List<Word>? = null
+    private var listLearnWords: List<Word>? = null
 
     private val mapperWord = WordMapper()
     private val mapperCategory = CategoryMapper()
@@ -74,5 +79,12 @@ class CategoryRepositoryImpl(app: Application) : CategoryRepository {
 
     override fun setUpNotification() {
         TODO("Not yet implemented")
+    }
+
+    override fun getWordsToLearn(): WordsStudyModel? {
+        coroutineScope.launch(Dispatchers.IO) {
+            listLearnWords = learnDao.getWordsToLearn()
+        }
+        return mapperWord.mapWordToWordsStudyModel(listLearnWords)
     }
 }

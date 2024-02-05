@@ -2,6 +2,7 @@ package com.xenia.englishusingflashcards.data.mapper
 
 import com.xenia.englishusingflashcards.data.entities.Word
 import com.xenia.englishusingflashcards.domain.models.WordModel
+import com.xenia.englishusingflashcards.domain.models.WordsStudyModel
 
 class WordMapper {
     fun mapWord(words: List<Word>?) : List<WordModel> {
@@ -26,6 +27,35 @@ class WordMapper {
         return list
     }
 
+    fun mapWordToWordsStudyModel(words: List<Word>?) : WordsStudyModel? {
+        val list = mutableListOf<WordModel>()
+        var count = 0
+        if (words != null) {
+            for (word in words) {
+                count++
+                val wordModel = WordModel(
+                    id = word.id,
+                    categoryName = word.categoryName,
+                    word = word.word,
+                    translate = word.translate,
+                    sentence = word.sentence,
+                    inProcess = word.inProcess,
+                    theDateOfTheWordStudy = word.theDateOfTheWordStudy,
+                    theNumberOfRepetitions = word.theNumberOfRepetitions,
+                    theRepetitionInterval = word.theRepetitionInterval,
+                    theRepetitionIntervalAfterTheNRepetition = word.theRepetitionIntervalAfterTheNRepetition
+                )
+                list.add(wordModel)
+            }
+        } else {
+            return null
+        }
+        return WordsStudyModel(list, count)
+    }
+
+//    fun mapWordToData(words: List<WordModel>?) = words?.map {
+//        mapWord(it)
+//    }
     fun mapWordToData(words: List<WordModel>?) : List<Word> {
         val list = mutableListOf<Word>()
         if (words != null) {
@@ -48,9 +78,7 @@ class WordMapper {
         return list
     }
 
-    fun mapWord(word: WordModel): Word {
-
-        return Word(
+    fun mapWord(word: WordModel) = Word(
             id = word.id,
             categoryName = word.categoryName,
             word = word.word,
@@ -61,6 +89,5 @@ class WordMapper {
             theNumberOfRepetitions = word.theNumberOfRepetitions,
             theRepetitionInterval = word.theRepetitionInterval,
             theRepetitionIntervalAfterTheNRepetition = word.theRepetitionIntervalAfterTheNRepetition
-        )
-    }
+    )
 }

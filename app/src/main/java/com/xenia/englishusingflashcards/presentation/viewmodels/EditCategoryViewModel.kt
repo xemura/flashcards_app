@@ -8,8 +8,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.xenia.englishusingflashcards.data.repository.CategoryRepositoryImpl
 import com.xenia.englishusingflashcards.data.repository.WordRepositoryImpl
-import com.xenia.englishusingflashcards.data.database.AppDatabase
-import com.xenia.englishusingflashcards.data.entities.Word
 import com.xenia.englishusingflashcards.domain.models.WordModel
 import com.xenia.englishusingflashcards.domain.usecases.AddWordInCategoryUseCase
 import com.xenia.englishusingflashcards.domain.usecases.DeleteWordFromCategoryUseCase
@@ -77,6 +75,6 @@ class EditCategoryViewModel(app: Application) : ViewModel() {
     }
 
     fun getListWordsInCategory(categoryName: String) {
-        _listWordInCategory.value = getWordsFromCategoryUseCase.getWordsFromCategoryCategory(categoryName)
+        _listWordInCategory.value = getWordsFromCategoryUseCase.getWordsFromCategory(categoryName)
     }
 }

@@ -1,4 +1,4 @@
-package com.xenia.englishusingflashcards.data.repository
+package com.xenia.englishusingflashcards.data
 
 import com.xenia.englishusingflashcards.data.entities.Word
 

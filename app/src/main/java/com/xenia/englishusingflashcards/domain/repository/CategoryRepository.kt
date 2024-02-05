@@ -2,6 +2,7 @@ package com.xenia.englishusingflashcards.domain.repository
 
 import com.xenia.englishusingflashcards.domain.models.CategoryModel
 import com.xenia.englishusingflashcards.domain.models.WordModel
+import com.xenia.englishusingflashcards.domain.models.WordsStudyModel
 
 interface CategoryRepository {
     fun getWordsFromCategory(categoryName: String): List<WordModel>?
@@ -14,4 +15,6 @@ interface CategoryRepository {
     fun updateCategoryName(oldName: String, newName: String)
 
     fun setUpNotification()
+
+    fun getWordsToLearn(): WordsStudyModel?
 }

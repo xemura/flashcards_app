@@ -23,7 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.xenia.englishusingflashcards.data.repository.getBottomSheetInfo
+import com.xenia.englishusingflashcards.data.getBottomSheetInfo
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
