@@ -22,6 +22,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -58,7 +59,10 @@ fun LearningScreen(navController : NavController) {
         )
     )
 
-    val data = learningViewModel.getWordToStudy()
+    learningViewModel.getWordToStudy()
+
+    val listLearnWords = learningViewModel.listLearnWords.observeAsState()
+    //val data = learningViewModel.listLearnWords?.wordsListToStudy
 
     Scaffold(
         floatingActionButton = {
@@ -91,97 +95,99 @@ fun LearningScreen(navController : NavController) {
                     mutableIntStateOf(0)
                 }
 
-                if (indexList == data.size) {
-                    Text(
-                        modifier = Modifier.fillMaxSize(),
-                        textAlign = TextAlign.Center,
-                        text = "Больше карточек для изучения нет"
-                    )
-                } else {
-                    Box(
-                        modifier = Modifier.wrapContentHeight()
-                            .padding(top = 100.dp)
-                            .padding(horizontal = 20.dp),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        FlipCard(
-                            cardFace = cardFace,
-                            onClick = { cardFace = cardFace.next },
+                if (listLearnWords.value != null) {
+                    if (indexList == listLearnWords.value!!.wordsListToStudy.size) {
+                        Text(
+                            modifier = Modifier.fillMaxSize(),
+                            textAlign = TextAlign.Center,
+                            text = "Больше карточек для изучения нет"
+                        )
+                    } else {
+                        Box(
                             modifier = Modifier
-                                .fillMaxWidth()
-                                .aspectRatio(1f),
-                            front = {
-                                Box(
-                                    modifier = Modifier
-                                        .fillMaxSize()
-                                        .background(Color.White),
-                                    contentAlignment = Alignment.Center,
-                                ) {
-                                    Text(
+                                .wrapContentHeight()
+                                .padding(top = 100.dp)
+                                .padding(horizontal = 20.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            FlipCard(
+                                cardFace = cardFace,
+                                onClick = { cardFace = cardFace.next },
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .aspectRatio(1f),
+                                front = {
+                                    Box(
                                         modifier = Modifier
-                                            .fillMaxWidth()
-                                            .padding(20.dp),
-                                        text = data[indexList].word,
-                                        textAlign = TextAlign.Center,
-                                        style = MaterialTheme.typography.bodyLarge,
-                                    )
-                                }
-                            },
-                            back = {
-                                Box(
-                                    modifier = Modifier
-                                        .fillMaxSize()
-                                        .background(Color.White),
-                                    contentAlignment = Alignment.Center,
-                                ) {
-                                    Column {
+                                            .fillMaxSize()
+                                            .background(Color.White),
+                                        contentAlignment = Alignment.Center,
+                                    ) {
                                         Text(
                                             modifier = Modifier
                                                 .fillMaxWidth()
-                                                .padding(horizontal = 20.dp),
-                                            text = data[indexList].translate,
-                                            textAlign = TextAlign.Center,
-                                            style = MaterialTheme.typography.bodyLarge,
-                                        )
-                                        Text(
-                                            modifier = Modifier
-                                                .fillMaxWidth()
-                                                .padding(horizontal = 20.dp),
-                                            text = data[indexList].sentence,
+                                                .padding(20.dp),
+                                            text = listLearnWords.value!!.wordsListToStudy[indexList].word,
                                             textAlign = TextAlign.Center,
                                             style = MaterialTheme.typography.bodyLarge,
                                         )
                                     }
+                                },
+                                back = {
+                                    Box(
+                                        modifier = Modifier
+                                            .fillMaxSize()
+                                            .background(Color.White),
+                                        contentAlignment = Alignment.Center,
+                                    ) {
+                                        Column {
+                                            Text(
+                                                modifier = Modifier
+                                                    .fillMaxWidth()
+                                                    .padding(horizontal = 20.dp),
+                                                text = listLearnWords.value!!.wordsListToStudy[indexList].translate,
+                                                textAlign = TextAlign.Center,
+                                                style = MaterialTheme.typography.bodyLarge,
+                                            )
+                                            Text(
+                                                modifier = Modifier
+                                                    .fillMaxWidth()
+                                                    .padding(horizontal = 20.dp),
+                                                text = listLearnWords.value!!.wordsListToStudy[indexList].sentence,
+                                                textAlign = TextAlign.Center,
+                                                style = MaterialTheme.typography.bodyLarge,
+                                            )
+                                        }
+                                    }
+                                },
+                            )
+                        }
+
+                        Button(
+                            onClick = {
+                                if (CardFace.Back == cardFace) {
+                                    if (indexList != listLearnWords.value!!.wordsListToStudy.size) {
+                                        indexList++
+                                        cardFace = cardFace.next
+                                    }
                                 }
                             },
-                        )
-                    }
-
-                    Button(
-                        onClick = {
-                            if (CardFace.Back == cardFace) {
-                                if (indexList != data.size) {
-                                    indexList++
-                                    cardFace = cardFace.next
-                                }
-                            }
-                        },
-                        Modifier
-                            .fillMaxWidth()
-                            //.wrapContentHeight()
-                            .padding(20.dp),
-                        shape = RoundedCornerShape(25.dp),
-                        border = BorderStroke(1.dp, Color.Black),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(202, 240, 248, 255),
-                            contentColor = Color.Black)
-                    ){
-                        Text(
-                            text = "NEXT",
-                            fontSize = 16.sp,
-                            modifier = Modifier.padding(10.dp),
-                            style = MaterialTheme.typography.bodyLarge,
-                        )
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(20.dp),
+                            shape = RoundedCornerShape(25.dp),
+                            border = BorderStroke(1.dp, Color.Black),
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color(202, 240, 248, 255),
+                                contentColor = Color.Black)
+                        ){
+                            Text(
+                                text = "NEXT",
+                                fontSize = 16.sp,
+                                modifier = Modifier.padding(10.dp),
+                                style = MaterialTheme.typography.bodyLarge,
+                            )
+                        }
                     }
                 }
             }

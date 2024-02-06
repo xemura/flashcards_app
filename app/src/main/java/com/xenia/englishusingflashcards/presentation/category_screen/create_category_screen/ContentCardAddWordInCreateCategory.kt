@@ -63,7 +63,6 @@ fun ContentCardAddWordInCreateCategory(createCategoryViewModel: CreateCategoryVi
                     val dismissState = rememberDismissState()
 
                     if (dismissState.isDismissed(direction = DismissDirection.EndToStart)) {
-                        Log.d("Tag", "delete = ${word.word} ${word.id}")
                         createCategoryViewModel.deleteWordInCategory(word.word, word.translate, word.sentence)
                     }
 

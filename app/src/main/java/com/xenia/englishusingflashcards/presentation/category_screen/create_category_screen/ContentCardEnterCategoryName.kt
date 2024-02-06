@@ -29,17 +29,19 @@ var imagesList = listOf(
 @Composable
 fun CardEnterCategoryName(createCategoryViewModel: CreateCategoryViewModel) {
 
-    Column(modifier = Modifier
-        .fillMaxWidth()
-        .padding(vertical = 10.dp),
-        horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 10.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
 
         IconButton(onClick = {
             createCategoryViewModel.updateCategoryImage(imagesList.random())
-            //imageCategory = imagesList.random()
-            Log.d("CardEnterCategoryName", createCategoryViewModel.categoryImage.toString())
         }, modifier = Modifier.size(80.dp)) {
-            Image(painter = painterResource(id = createCategoryViewModel.categoryImage), contentDescription = "",
+            Image(
+                painter = painterResource(id = createCategoryViewModel.categoryImage),
+                contentDescription = "",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(80.dp)

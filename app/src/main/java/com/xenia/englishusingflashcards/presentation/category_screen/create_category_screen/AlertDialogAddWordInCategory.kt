@@ -95,8 +95,8 @@ fun AlertDialogAddWordInCategory(onDismiss: () -> Unit, onConfirm: () -> Unit) {
                             word = word.text,
                             translate = translate.text,
                             sentence = sentence.text,
-                            inProcess = false,
-                            theDateOfTheWordStudy = "", // вычислять
+                            inProcess = true,
+                            theDateOfTheWordStudy = "",
                             theNumberOfRepetitions = 0,
                             theRepetitionInterval = 0.0,
                             theRepetitionIntervalAfterTheNRepetition = 0.0
@@ -172,13 +172,6 @@ fun AlertDialogAddWordInCategory(onDismiss: () -> Unit, onConfirm: () -> Unit) {
                         colors = textFieldColors
                     )
                 }
-
-//                OutlineTextFieldAddWordInCategory(
-//                    maxChar = maxChar,
-//                    keyboardController = keyboardController,
-//                    brush = brush,
-//                    labelText = "Введите слово",
-//                    placeholderText = "Слово")
 
                 OutlinedTextField(
                     value = word,
