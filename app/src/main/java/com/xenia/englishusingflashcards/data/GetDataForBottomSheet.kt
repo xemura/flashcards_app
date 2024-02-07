@@ -14,7 +14,27 @@ fun getBottomSheetInfo(text: String) : BottomSheetInfo {
         "учить" -> {
             bottomSheetInfo.data = listOf(
                 Word(0, "", "1", "", "", false, "",
-                0, 0.0, 0.0)
+                0, 0.0, 0.0),
+                Word(0, "", "1", "", "", false, "",
+                    0, 0.0, 0.0),
+                Word(0, "", "1", "", "", false, "",
+                    0, 0.0, 0.0),
+                Word(0, "", "1", "", "", false, "",
+                    0, 0.0, 0.0),
+                Word(0, "", "1", "", "", false, "",
+                    0, 0.0, 0.0),
+                Word(0, "", "1", "", "", false, "",
+                    0, 0.0, 0.0),
+                Word(0, "", "1", "", "", false, "",
+                    0, 0.0, 0.0),
+                Word(0, "", "1", "", "", false, "",
+                    0, 0.0, 0.0),
+                Word(0, "", "1", "", "", false, "",
+                    0, 0.0, 0.0),
+                Word(0, "", "1", "", "", false, "",
+                    0, 0.0, 0.0),
+                Word(0, "", "1", "", "", false, "",
+                    0, 0.0, 0.0),
             )
             bottomSheetInfo.header = "Карточки для изучения"
             bottomSheetInfo.description = "Это число означает, сколько карточек готово к изучению."

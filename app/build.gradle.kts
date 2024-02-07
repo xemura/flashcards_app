@@ -86,4 +86,8 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
 
     implementation ("com.google.code.gson:gson:2.10")
+
+    implementation("androidx.compose.foundation:foundation:1.6.0")
+
+    implementation("io.github.aghajari:LazySwipeCards:1.0.0")
 }

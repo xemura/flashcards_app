@@ -25,6 +25,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.xenia.englishusingflashcards.data.getBottomSheetInfo
 
+// возможно изменить на это
+// https://proandroiddev.com/how-to-master-swipeable-and-nestedscroll-modifiers-in-compose-bb0635d6a760
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BottomSheet(text : String, onDismiss: () -> Unit) {
