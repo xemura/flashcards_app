@@ -30,8 +30,13 @@ fun Header(
 ) {
     Box(
         modifier = Modifier
-            .fillMaxWidth().padding(top = 15.dp)
-            .padding(contentPadding.calculateBottomPadding().minus(10.dp))
+            .fillMaxWidth()
+            .padding(top = 15.dp)
+            .padding(
+                contentPadding
+                    .calculateBottomPadding()
+                    .minus(10.dp)
+            )
     ) {
         IconButton(
             onClick = {
@@ -48,7 +53,7 @@ fun Header(
         Text(
             modifier = Modifier
                 .align(Alignment.TopCenter)
-                .padding(top = 7.dp),
+                .padding(top = 14.dp),
             text = text,
             style = MaterialTheme.typography.bodyLarge,
             fontSize = 20.sp
@@ -70,6 +75,7 @@ fun action(
                 }
             }
         }
+
         "to_category_screen" -> {
             navController.navigate(NavigationItem.CategoryMain.route) {
                 popUpTo(NavigationItem.CreateCategory.route) {
@@ -77,6 +83,7 @@ fun action(
                 }
             }
         }
+
         "to_category_screen_from_edit" -> {
             navController.navigate(NavigationItem.CategoryMain.route) {
                 popUpTo(NavigationItem.EditCategory.route) {
@@ -84,6 +91,7 @@ fun action(
                 }
             }
         }
+
         "to_main_screen_from_learn" -> {
             navController.navigate(NavigationItem.Main.route) {
                 popUpTo(NavigationItem.LearningCard.route) {

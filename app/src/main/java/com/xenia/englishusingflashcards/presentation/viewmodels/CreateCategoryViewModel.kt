@@ -12,14 +12,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.xenia.englishusingflashcards.R
 import com.xenia.englishusingflashcards.data.repository.CategoryRepositoryImpl
-import com.xenia.englishusingflashcards.data.repository.WordRepositoryImpl
-import com.xenia.englishusingflashcards.data.database.AppDatabase
-import com.xenia.englishusingflashcards.data.entities.Category
-import com.xenia.englishusingflashcards.data.entities.Word
 import com.xenia.englishusingflashcards.domain.models.CategoryModel
 import com.xenia.englishusingflashcards.domain.models.WordModel
 import com.xenia.englishusingflashcards.domain.usecases.CreateCategoryUseCase
-import com.xenia.englishusingflashcards.domain.usecases.DeleteCategoryUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

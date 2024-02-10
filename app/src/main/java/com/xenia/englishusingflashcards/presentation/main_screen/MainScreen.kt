@@ -93,9 +93,3 @@ fun MainScreen(navController : NavController) {
         }
     }
 }
-
-@Preview
-@Composable
-fun PreviewMainScreen() {
-    MainScreen(navController = rememberNavController())
-}

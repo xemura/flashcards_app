@@ -15,3 +15,6 @@ val mainButtonColor = Color(0xFFCDEBE9)
 // app
 
 val LightGrayCustom = Color(0xFFECECEC)
+val LightRed = Color(0xFFFF8A80)
+val LightGreen = Color(0xFFB9F6CA)
+val LightYellow = Color(0xFFF4FF81)
