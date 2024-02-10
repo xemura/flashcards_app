@@ -63,7 +63,7 @@ fun ContentScreen(listLearnWords: State<WordsStudyModel?>) {
                 val mLocalContext = LocalContext.current
 
                 val actionLearnedWord = SwipeAction(
-                    icon = painterResource(id = R.drawable.ic_launcher_foreground),
+                    icon = painterResource(id = R.drawable.ic_done),
                     background = LightGreen,
                     isUndo = true,
                     onSwipe = {
@@ -80,7 +80,7 @@ fun ContentScreen(listLearnWords: State<WordsStudyModel?>) {
                 )
 
                 val actionDeleteWord = SwipeAction(
-                    icon = painterResource(id = R.drawable.ic_launcher_foreground),
+                    icon = painterResource(id = R.drawable.ic_delete),
                     background = LightRed,
                     isUndo = true,
                     onSwipe = {
@@ -97,7 +97,7 @@ fun ContentScreen(listLearnWords: State<WordsStudyModel?>) {
                 )
 
                 val actionRepeatWord = SwipeAction(
-                    icon = painterResource(R.drawable.ic_launcher_foreground),
+                    icon = painterResource(R.drawable.ic_repeat),
                     background = LightYellow,
                     isUndo = true,
                     onSwipe = {
