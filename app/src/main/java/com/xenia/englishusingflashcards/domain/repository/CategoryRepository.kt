@@ -15,6 +15,4 @@ interface CategoryRepository {
     fun updateCategoryName(oldName: String, newName: String)
 
     fun setUpNotification()
-
-    fun getWordsToLearn(): WordsStudyModel?
 }

@@ -58,7 +58,7 @@ fun EditScreenCardAddWordInCategory(editCategoryViewModel: EditCategoryViewModel
                     key = { word ->
                         word.sentence
                     }
-                ) { (id, _, word, translate, sentence) ->
+                ) { (_, _, word, translate, sentence) ->
 
                     val dismissState = rememberDismissState()
 

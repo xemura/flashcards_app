@@ -4,17 +4,17 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.xenia.englishusingflashcards.data.repository.CategoryRepositoryImpl
+import com.xenia.englishusingflashcards.data.repository.LearnRepositoryImpl
 import com.xenia.englishusingflashcards.domain.models.WordsStudyModel
-import com.xenia.englishusingflashcards.domain.usecases.GetWordsToLearnUseCase
+import com.xenia.englishusingflashcards.domain.usecases.GetWordsFromStudyTableUseCase
 
 class LearningViewModel(app: Application) : ViewModel() {
 
-    private val repository = CategoryRepositoryImpl(app)
-    private val getWordsToLearnUseCase = GetWordsToLearnUseCase(repository)
+    private val repository = LearnRepositoryImpl(app)
+    private val getWordsToLearnUseCase = GetWordsFromStudyTableUseCase(repository)
 
-    private val _listLearnWords = MutableLiveData<WordsStudyModel?>()
-    val listLearnWords: LiveData<WordsStudyModel?>
+    private val _listLearnWords = MutableLiveData<List<WordsStudyModel>?>()
+    val listLearnWords: LiveData<List<WordsStudyModel>?>
         get() = _listLearnWords
 
 
@@ -23,6 +23,6 @@ class LearningViewModel(app: Application) : ViewModel() {
     }
 
     fun getWordToStudy() {
-        _listLearnWords.value = getWordsToLearnUseCase.getWordsToLearn()
+        _listLearnWords.value = getWordsToLearnUseCase.getWordsFromStudyTable()
     }
 }

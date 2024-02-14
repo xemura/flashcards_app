@@ -22,7 +22,7 @@ class CategoryRepositoryImpl(app: Application) : CategoryRepository {
     private val learnDao = appDb.learnDao()
     private val wordDao = appDb.wordDao()
 
-    private val coroutineScope = CoroutineScope(Dispatchers.Main)
+    private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
     private var wordsInCategory: List<Word>? = null
     private var listLearnWords: List<Word>? = null
@@ -80,12 +80,5 @@ class CategoryRepositoryImpl(app: Application) : CategoryRepository {
 
     override fun setUpNotification() {
         TODO("Not yet implemented")
-    }
-
-    override fun getWordsToLearn(): WordsStudyModel? {
-        coroutineScope.launch(Dispatchers.IO) {
-            listLearnWords = learnDao.getWordsToLearn()
-        }
-        return mapperWord.mapWordToWordsStudyModel(listLearnWords)
     }
 }

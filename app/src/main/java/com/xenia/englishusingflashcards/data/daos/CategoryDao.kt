@@ -21,7 +21,7 @@ interface CategoryDao {
     suspend fun createCategory(category: Category)
 
     @Delete
-    suspend fun deleteCategory(categories: Category)
+    suspend fun deleteCategory(category: Category)
 
     @Query("DELETE FROM word WHERE category_name =:categoryName")
     suspend fun deleteWordsFromCategory(categoryName: String)

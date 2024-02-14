@@ -12,8 +12,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.xenia.englishusingflashcards.R
 import com.xenia.englishusingflashcards.data.repository.CategoryRepositoryImpl
+import com.xenia.englishusingflashcards.data.repository.LearnRepositoryImpl
 import com.xenia.englishusingflashcards.domain.models.CategoryModel
 import com.xenia.englishusingflashcards.domain.models.WordModel
+import com.xenia.englishusingflashcards.domain.usecases.AddWordsInStudyTableUseCase
 import com.xenia.englishusingflashcards.domain.usecases.CreateCategoryUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,7 +34,9 @@ class CreateCategoryViewModel(app: Application) : ViewModel() {
 
 
     private val repository = CategoryRepositoryImpl(app)
+    private val repositoryLearn = LearnRepositoryImpl(app)
     private val createCategoryUseCase = CreateCategoryUseCase(repository)
+    private val addWordsInStudyTableUseCase = AddWordsInStudyTableUseCase(repositoryLearn)
 
     fun updateCategoryName(input: String) {
         categoryName = input
@@ -68,6 +72,7 @@ class CreateCategoryViewModel(app: Application) : ViewModel() {
                 ),
                 _listWordInCategory.value
             )
+            addWordsInStudyTableUseCase.addWordsInStudyTable(_listWordInCategory.value)
         }
     }
 }

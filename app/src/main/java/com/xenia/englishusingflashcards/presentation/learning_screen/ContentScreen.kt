@@ -46,7 +46,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalSwipeableCardApi::class)
 @Composable
-fun ContentScreen(listLearnWords: State<WordsStudyModel?>) {
+fun ContentScreen(listLearnWords: State<List<WordsStudyModel>?>) {
     Column(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.Center
@@ -56,7 +56,7 @@ fun ContentScreen(listLearnWords: State<WordsStudyModel?>) {
             mutableStateOf(CardFace.Front)
         }
 
-        val data = listLearnWords.value?.wordsListToStudy
+        val data = listLearnWords.value
 
         val states = data?.reversed()
             ?.map { it to rememberSwipeableCardState() }

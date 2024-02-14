@@ -19,7 +19,7 @@ import com.xenia.englishusingflashcards.domain.models.WordModel
 import com.xenia.englishusingflashcards.domain.models.WordsStudyModel
 
 @Composable
-fun BackFaceCard(item: WordModel) {
+fun BackFaceCard(item: WordsStudyModel) {
     Box(
         modifier = Modifier
             .fillMaxSize()

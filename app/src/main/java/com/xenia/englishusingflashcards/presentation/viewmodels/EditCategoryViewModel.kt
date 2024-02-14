@@ -7,10 +7,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.xenia.englishusingflashcards.data.repository.CategoryRepositoryImpl
+import com.xenia.englishusingflashcards.data.repository.LearnRepositoryImpl
 import com.xenia.englishusingflashcards.data.repository.WordRepositoryImpl
 import com.xenia.englishusingflashcards.domain.models.WordModel
 import com.xenia.englishusingflashcards.domain.usecases.AddWordInCategoryUseCase
+import com.xenia.englishusingflashcards.domain.usecases.AddWordInStudyTableUseCase
+import com.xenia.englishusingflashcards.domain.usecases.AddWordsInStudyTableUseCase
+import com.xenia.englishusingflashcards.domain.usecases.CreateCategoryUseCase
 import com.xenia.englishusingflashcards.domain.usecases.DeleteWordFromCategoryUseCase
+import com.xenia.englishusingflashcards.domain.usecases.DeleteWordFromStudyTableUseCase
 import com.xenia.englishusingflashcards.domain.usecases.GetWordsFromCategoryUseCase
 import com.xenia.englishusingflashcards.domain.usecases.UpdateCategoryImageUseCase
 import com.xenia.englishusingflashcards.domain.usecases.UpdateCategoryNameUseCase
@@ -45,6 +50,10 @@ class EditCategoryViewModel(app: Application) : ViewModel() {
     private val updateCategoryImageUseCase = UpdateCategoryImageUseCase(repository)
     private val updateCategoryNameUseCase = UpdateCategoryNameUseCase(repository)
 
+    private val repositoryLearn = LearnRepositoryImpl(app)
+    private val addWordInStudyTableUseCase = AddWordInStudyTableUseCase(repositoryLearn)
+    private val deleteWordInStudyTableUSeCase = DeleteWordFromStudyTableUseCase(repositoryLearn)
+
 
     fun updateListWordsInCategory(word: WordModel) {
         viewModelScope.launch (Dispatchers.IO) {
@@ -53,6 +62,7 @@ class EditCategoryViewModel(app: Application) : ViewModel() {
             _listWordInCategory.postValue(list)
 
             addWordInCategoryUseCase.addWordInCategory(word)
+            addWordInStudyTableUseCase.addWordInStudyTable(word)
         }
     }
 
@@ -67,6 +77,7 @@ class EditCategoryViewModel(app: Application) : ViewModel() {
     fun deleteWordInCategory(categoryName: String, word: String, translate: String, sentence: String) {
         viewModelScope.launch (Dispatchers.IO) {
             deleteWordFromCategoryUseCase.deleteWordFromCategory(categoryName, word, translate, sentence)
+            deleteWordInStudyTableUSeCase.deleteWordInStudyTable(word, translate, sentence)
             val list = _listWordInCategory.value?.toMutableList()
             list?.removeIf { ((it.word == word) and (it.translate == translate) and (it.sentence == sentence)) }
             Log.d("Tag", "list = $list")

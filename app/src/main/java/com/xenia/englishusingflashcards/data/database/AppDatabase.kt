@@ -6,9 +6,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.xenia.englishusingflashcards.data.daos.CategoryDao
 import com.xenia.englishusingflashcards.data.daos.LearnDao
+import com.xenia.englishusingflashcards.data.daos.StudyWordDao
 import com.xenia.englishusingflashcards.data.daos.WordDao
 import com.xenia.englishusingflashcards.data.entities.Category
 import com.xenia.englishusingflashcards.data.entities.NotificationTable
+import com.xenia.englishusingflashcards.data.entities.TableStudyWord
 import com.xenia.englishusingflashcards.data.entities.Word
 
 @Database(entities =
@@ -16,12 +18,15 @@ import com.xenia.englishusingflashcards.data.entities.Word
     Word::class,
     Category::class,
     NotificationTable::class,
-], version = 2, exportSchema = false)
+    TableStudyWord::class
+], version = 3, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun categoryDao(): CategoryDao
     abstract fun wordDao(): WordDao
 
     abstract fun learnDao(): LearnDao
+
+    abstract fun tableStudyDao(): StudyWordDao
     companion object {
         @Volatile
         private var INSTANCE: AppDatabase? = null
