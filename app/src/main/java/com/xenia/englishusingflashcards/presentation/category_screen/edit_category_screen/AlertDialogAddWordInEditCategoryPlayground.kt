@@ -34,7 +34,6 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.xenia.englishusingflashcards.data.entities.Word
 import com.xenia.englishusingflashcards.domain.models.WordModel
 import com.xenia.englishusingflashcards.ui.theme.default
 import com.xenia.englishusingflashcards.presentation.viewmodels.EditCategoryViewModel
@@ -81,7 +80,7 @@ fun AlertDialogAddWordInEditCategory(editCategoryViewModel: EditCategoryViewMode
                             word = word.text,
                             translate = translate.text,
                             sentence = sentence.text,
-                            inProcess = false,
+                            inProcess = true,
                             theDateOfTheWordStudy = "", // вычислять
                             theNumberOfRepetitions = 0,
                             theRepetitionInterval = 0.0,
