@@ -12,6 +12,7 @@ import com.xenia.englishusingflashcards.domain.repository.CategoryRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CategoryRepositoryImpl(app: Application) : CategoryRepository {
 

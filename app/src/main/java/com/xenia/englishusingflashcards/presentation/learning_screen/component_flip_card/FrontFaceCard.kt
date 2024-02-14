@@ -14,10 +14,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.xenia.englishusingflashcards.domain.models.WordModel
 import com.xenia.englishusingflashcards.domain.models.WordsStudyModel
 
 @Composable
-fun FrontFaceCard(listLearnWords: State<WordsStudyModel?>, indexList: Int) {
+fun FrontFaceCard(item: WordModel) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -28,7 +29,7 @@ fun FrontFaceCard(listLearnWords: State<WordsStudyModel?>, indexList: Int) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(20.dp),
-            text = listLearnWords.value!!.wordsListToStudy[indexList].word,
+            text = item.word,
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.bodyLarge,
         )

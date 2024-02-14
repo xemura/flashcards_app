@@ -90,4 +90,6 @@ dependencies {
     implementation("androidx.compose.foundation:foundation:1.6.0")
 
     implementation("me.saket.swipe:swipe:1.0.0")
+
+    implementation("com.alexstyl.swipeablecard:swipeablecard:0.1.0")
 }
