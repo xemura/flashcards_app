@@ -1,5 +1,6 @@
 package com.xenia.englishusingflashcards.presentation.main_screen.bottom_sheets
 
+import android.app.Application
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
@@ -20,10 +21,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.xenia.englishusingflashcards.data.getBottomSheetInfo
+import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.xenia.englishusingflashcards.presentation.viewmodels.MainViewModel
+import com.xenia.englishusingflashcards.presentation.viewmodels.MainViewModelFactory
 
 // возможно изменить на это
 // https://proandroiddev.com/how-to-master-swipeable-and-nestedscroll-modifiers-in-compose-bb0635d6a760
@@ -32,12 +37,21 @@ import com.xenia.englishusingflashcards.data.getBottomSheetInfo
 fun BottomSheet(text : String, onDismiss: () -> Unit) {
     val modalBottomSheetState = rememberModalBottomSheetState()
 
+    val mainViewModel: MainViewModel = viewModel(
+        LocalViewModelStoreOwner.current!!,
+        "MainViewModel",
+        MainViewModelFactory(
+            LocalContext.current.applicationContext
+                    as Application
+        )
+    )
+
     ModalBottomSheet(
         onDismissRequest = { onDismiss() },
         sheetState = modalBottomSheetState,
         dragHandle = { BottomSheetDefaults.DragHandle() },
     ) {
-        val bottomSheetInfo = getBottomSheetInfo(text)
+        val bottomSheetInfo = getBottomSheetInfo(text, mainViewModel)
 
         Text( modifier = Modifier
             .align(Alignment.CenterHorizontally),
@@ -53,9 +67,11 @@ fun BottomSheet(text : String, onDismiss: () -> Unit) {
             color = Color.Gray
         )
 
-        if (bottomSheetInfo.data != null) {
+        val data = bottomSheetInfo.data
+
+        if (data != null) {
             LazyColumn {
-                items(bottomSheetInfo.data) { (id, categoryName, word, translate, sentence) ->
+                items(data) { (id, word, translate, sentence) ->
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()

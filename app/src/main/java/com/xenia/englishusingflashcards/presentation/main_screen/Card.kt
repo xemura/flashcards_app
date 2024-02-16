@@ -44,7 +44,7 @@ private val TextColors = listOf(
 )
 
 @Composable
-fun Card(countWordsText : String, cardText: String) {
+fun Card(countWordsText : Int, cardText: String) {
     var showSheet by remember { mutableStateOf(false) }
 
     if (showSheet) {
@@ -74,7 +74,7 @@ fun Card(countWordsText : String, cardText: String) {
                 )
             }
             Text(
-                countWordsText,
+                countWordsText.toString(),
                 style = TextStyle(
                     brush = Brush.linearGradient(
                         colors = TextColors,

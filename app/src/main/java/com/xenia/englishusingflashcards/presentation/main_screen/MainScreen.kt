@@ -1,6 +1,7 @@
 package com.xenia.englishusingflashcards.presentation.main_screen
 
 import android.app.Activity
+import android.app.Application
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -25,7 +26,13 @@ import androidx.navigation.compose.rememberNavController
 import com.xenia.englishusingflashcards.navigation.NavigationItem
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.xenia.englishusingflashcards.presentation.Header
+import com.xenia.englishusingflashcards.presentation.viewmodels.LearningViewModel
+import com.xenia.englishusingflashcards.presentation.viewmodels.LearningViewModelFactory
+import com.xenia.englishusingflashcards.presentation.viewmodels.MainViewModel
+import com.xenia.englishusingflashcards.presentation.viewmodels.MainViewModelFactory
 
 private val backgroundColors = listOf(
     Color(0xFF03045E),
@@ -38,6 +45,16 @@ private val backgroundColors = listOf(
 @Composable
 fun MainScreen(navController : NavController) {
     val activity = (LocalContext.current as? Activity)
+
+    val mainViewModel: MainViewModel = viewModel(
+        LocalViewModelStoreOwner.current!!,
+        "MainViewModel",
+        MainViewModelFactory(
+            LocalContext.current.applicationContext
+                    as Application
+        )
+    )
+
     // val boxSize = with(LocalDensity.current) { 200.dp.toPx() }
     Scaffold(
     ) { contentPadding ->
@@ -69,9 +86,9 @@ fun MainScreen(navController : NavController) {
 
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly)
             {
-                Card("0", "учить")
-                Card("0", "знаю")
-                Card("0", "выучено")
+                Card(mainViewModel.getCountWordsToStudy(), "учить")
+                Card(0, "знаю")
+                Card(0, "выучено")
             }
 
             Spacer(modifier = Modifier.height(136.dp))
