@@ -94,8 +94,9 @@ fun BottomSheet(text : String, onDismiss: () -> Unit) {
             }
         }
         else {
-            Spacer(modifier = Modifier.height(10.dp))
             Text(
+                modifier = Modifier.fillMaxWidth().padding(vertical = 20.dp),
+                textAlign = TextAlign.Center,
                 text = "Слов нет",
             )
         }
