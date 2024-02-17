@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.xenia.englishusingflashcards.navigation.NavigationItem
+import kotlin.system.exitProcess
 
 @Composable
 fun Header(
@@ -67,7 +68,9 @@ fun action(
     activity: Activity?
 ) {
     when (action) {
-        "close_app" -> activity?.finish()
+        "close_app" -> {
+            activity?.finish()
+        }
         "to_main_screen" -> {
             navController.navigate(NavigationItem.Main.route) {
                 popUpTo(NavigationItem.CategoryMain.route) {

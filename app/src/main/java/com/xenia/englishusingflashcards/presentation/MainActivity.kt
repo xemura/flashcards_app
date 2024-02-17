@@ -11,7 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
 import androidx.navigation.compose.rememberNavController
 import com.xenia.englishusingflashcards.navigation.AppNavGraph
-import com.xenia.englishusingflashcards.presentation.SplashScreen
 import com.xenia.englishusingflashcards.presentation.category_screen.category_list_screen.CategoryScreen
 import com.xenia.englishusingflashcards.presentation.category_screen.create_category_screen.CreateCategoryScreen
 import com.xenia.englishusingflashcards.presentation.category_screen.edit_category_screen.main_edit_category_screen.EditCategoryScreen
@@ -25,7 +24,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             EnglishUsingFlashcardsTheme {
-                // transparent status bar (invisible)
                 WindowCompat.setDecorFitsSystemWindows(window, false)
                 window.setFlags(
                     WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
