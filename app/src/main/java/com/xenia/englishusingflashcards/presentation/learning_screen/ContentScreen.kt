@@ -76,7 +76,6 @@ fun ContentScreen(listLearnWords: State<List<WordsStudyModel>?>) {
             if (data != null) {
                 states?.forEach { (matchProfile, state) ->
                     if (state.swipedDirection == null) {
-                        println("The card was $matchProfile")
                         Column {
                             FlipCard(
                                 cardFace = cardFace,

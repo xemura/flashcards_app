@@ -25,22 +25,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.xenia.englishusingflashcards.ui.theme.default
 import com.xenia.englishusingflashcards.presentation.viewmodels.EditCategoryViewModel
+import com.xenia.englishusingflashcards.ui.theme.textFieldColors
 
-
-private val textFieldColors = listOf(
-    Color(0xFF184E77),
-    Color(0xFF1E6091),
-    Color(0xFF1A759F),
-    Color(0xFF168AAD),
-    Color(0xFF4DA2C7),
-    Color(0xFF4DBFC7),
-    Color(0xFF7DD8C7),
-    Color(0xFFA2E3C8),
-    Color(0xFFB8E7C8),
-    Color(0xFFD3EBCD),
-)
-
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun EditStyledTextField(editCategoryViewModel: EditCategoryViewModel) {
 

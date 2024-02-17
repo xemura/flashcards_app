@@ -44,7 +44,7 @@ private val TextColors = listOf(
 )
 
 @Composable
-fun Card(countWordsText : Int, cardText: String) {
+fun CardInMainScreen(countWordsText : Int, cardText: String) {
     var showSheet by remember { mutableStateOf(false) }
 
     if (showSheet) {

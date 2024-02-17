@@ -41,9 +41,3 @@ fun CategoryScreen(navController : NavController) {
         }
     }
 }
-
-@Preview
-@Composable
-fun PreviewCategoryScreen() {
-    CategoryScreen(navController = rememberNavController())
-}

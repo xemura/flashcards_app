@@ -124,9 +124,3 @@ fun CreateCategoryScreen(navController : NavController) {
         }
     }
 }
-
-@Preview
-@Composable
-fun PreviewCreateCategoryScreen() {
-    CreateCategoryScreen(navController = rememberNavController())
-}

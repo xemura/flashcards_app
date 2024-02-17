@@ -100,7 +100,6 @@ fun BottomSheet(text : String, onDismiss: () -> Unit) {
                 text = "Слов нет",
             )
         }
-
     }
 }
 

@@ -1,6 +1,5 @@
 package com.xenia.englishusingflashcards.presentation.category_screen.create_category_screen
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -23,7 +22,7 @@ var imagesList = listOf(
     R.drawable.image_1,
     R.drawable.image_2,
     R.drawable.image_3,
-    R.drawable.image_4
+    R.drawable.image_4,
 )
 
 @Composable
@@ -35,7 +34,6 @@ fun CardEnterCategoryName(createCategoryViewModel: CreateCategoryViewModel) {
             .padding(vertical = 10.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
         IconButton(onClick = {
             createCategoryViewModel.updateCategoryImage(imagesList.random())
         }, modifier = Modifier.size(80.dp)) {

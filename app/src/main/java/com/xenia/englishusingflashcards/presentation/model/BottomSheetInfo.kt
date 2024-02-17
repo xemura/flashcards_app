@@ -1,4 +1,4 @@
-package com.xenia.englishusingflashcards.presentation.main_screen.bottom_sheets
+package com.xenia.englishusingflashcards.presentation.model
 
 import com.xenia.englishusingflashcards.domain.models.WordsStudyModel
 

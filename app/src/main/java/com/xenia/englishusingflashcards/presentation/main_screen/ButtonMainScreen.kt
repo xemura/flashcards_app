@@ -17,7 +17,7 @@ import androidx.navigation.NavController
 import com.xenia.englishusingflashcards.navigation.NavigationItem
 
 @Composable
-fun ButtonMain(navController: NavController, navigationItemRoute: String, text: String) {
+fun ButtonMainScreen(navController: NavController, navigationItemRoute: String, text: String) {
     Button(
         onClick = {
             navController.navigate(navigationItemRoute) {
@@ -28,7 +28,6 @@ fun ButtonMain(navController: NavController, navigationItemRoute: String, text: 
         },
         Modifier
             .fillMaxWidth()
-            //.wrapContentHeight()
             .padding(start = 20.dp, end = 20.dp, bottom = 10.dp),
         shape = RoundedCornerShape(25.dp),
         border = BorderStroke(1.dp, Color.Black),

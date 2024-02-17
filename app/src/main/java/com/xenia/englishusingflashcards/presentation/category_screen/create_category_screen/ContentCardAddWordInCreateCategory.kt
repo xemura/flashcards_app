@@ -1,6 +1,5 @@
 package com.xenia.englishusingflashcards.presentation.category_screen.create_category_screen
 
-import android.util.Log
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background

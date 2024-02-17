@@ -1,12 +1,15 @@
 package com.xenia.englishusingflashcards.presentation.viewmodels
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.xenia.englishusingflashcards.data.repository.LearnRepositoryImpl
 import com.xenia.englishusingflashcards.domain.models.WordsStudyModel
 import com.xenia.englishusingflashcards.domain.usecases.GetWordsFromStudyTableUseCase
+import kotlinx.coroutines.launch
 
 class LearningViewModel(app: Application) : ViewModel() {
 
@@ -20,9 +23,12 @@ class LearningViewModel(app: Application) : ViewModel() {
 
     init {
         getWordToStudy()
+        Log.d("LearningViewModel", _listLearnWords.value.toString())
     }
 
     fun getWordToStudy() {
-        _listLearnWords.value = getWordsToLearnUseCase.getWordsFromStudyTable()
+        viewModelScope.launch {
+            _listLearnWords.value = getWordsToLearnUseCase.getWordsFromStudyTable()
+        }
     }
 }

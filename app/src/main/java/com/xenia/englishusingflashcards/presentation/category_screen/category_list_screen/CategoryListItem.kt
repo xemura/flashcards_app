@@ -29,20 +29,7 @@ import androidx.navigation.NavController
 import com.xenia.englishusingflashcards.R
 import com.xenia.englishusingflashcards.navigation.NavigationItem
 import com.xenia.englishusingflashcards.data.entities.Category
-
-
-private val backgroundColors = listOf(
-    Color(0xFFD3EBCD),
-    Color(0xFFB8E7C8),
-    Color(0xFFA2E3C8),
-    Color(0xFF7DD8C7),
-    Color(0xFF4DBFC7),
-    Color(0xFF4DA2C7),
-    Color(0xFF168AAD),
-    Color(0xFF1A759F),
-    Color(0xFF1E6091),
-    Color(0xFF184E77),
-)
+import com.xenia.englishusingflashcards.ui.theme.backgroundColors
 
 @Composable
 fun CategoryListItem(category: Category, navController : NavController) {

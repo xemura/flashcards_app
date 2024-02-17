@@ -19,13 +19,11 @@ class CategoryRepositoryImpl(app: Application) : CategoryRepository {
     private val appDb = AppDatabase.getInstance(app)
 
     private val categoryDao = appDb.categoryDao()
-    private val learnDao = appDb.learnDao()
     private val wordDao = appDb.wordDao()
 
     private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
     private var wordsInCategory: List<Word>? = null
-    private var listLearnWords: List<Word>? = null
 
     private val mapperWord = WordMapper()
     private val mapperCategory = CategoryMapper()

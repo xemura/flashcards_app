@@ -18,19 +18,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.xenia.englishusingflashcards.navigation.NavigationItem
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.xenia.englishusingflashcards.presentation.Header
-import com.xenia.englishusingflashcards.presentation.viewmodels.LearningViewModel
-import com.xenia.englishusingflashcards.presentation.viewmodels.LearningViewModelFactory
 import com.xenia.englishusingflashcards.presentation.viewmodels.MainViewModel
 import com.xenia.englishusingflashcards.presentation.viewmodels.MainViewModelFactory
 
@@ -86,16 +82,16 @@ fun MainScreen(navController : NavController) {
 
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly)
             {
-                Card(mainViewModel.getCountWordsToStudy(), "учить")
-                Card(0, "знаю")
-                Card(0, "выучено")
+                CardInMainScreen(mainViewModel.getCountWordsToStudy(), "учить")
+                CardInMainScreen(0, "знаю")
+                CardInMainScreen(0, "выучено")
             }
 
             Spacer(modifier = Modifier.height(136.dp))
 
             AlertDialogPlayground()
-            ButtonMain(navController, NavigationItem.CategoryMain.route, "Категории")
-            ButtonMain(navController, NavigationItem.LearningCard.route, "Обучение")
+            ButtonMainScreen(navController, NavigationItem.CategoryMain.route, "Категории")
+            ButtonMainScreen(navController, NavigationItem.LearningCard.route, "Обучение")
 
             Spacer(modifier = Modifier.weight(1f))
 

@@ -1,5 +1,6 @@
 package com.xenia.englishusingflashcards.presentation.main_screen.bottom_sheets
 
+import com.xenia.englishusingflashcards.presentation.model.BottomSheetInfo
 import com.xenia.englishusingflashcards.presentation.viewmodels.MainViewModel
 
 fun getBottomSheetInfo(text: String, mainViewModel: MainViewModel) : BottomSheetInfo {

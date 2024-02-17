@@ -80,7 +80,6 @@ class EditCategoryViewModel(app: Application) : ViewModel() {
             deleteWordInStudyTableUSeCase.deleteWordInStudyTable(word, translate, sentence)
             val list = _listWordInCategory.value?.toMutableList()
             list?.removeIf { ((it.word == word) and (it.translate == translate) and (it.sentence == sentence)) }
-            Log.d("Tag", "list = $list")
             _listWordInCategory.postValue(list)
         }
     }
