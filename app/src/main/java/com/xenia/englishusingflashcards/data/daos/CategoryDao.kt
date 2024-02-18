@@ -26,9 +26,6 @@ interface CategoryDao {
     @Query("DELETE FROM word WHERE category_name =:categoryName")
     suspend fun deleteWordsFromCategory(categoryName: String)
 
-    @Query("UPDATE category SET category_name =:newName WHERE category_name =:oldName")
-    suspend fun updateCategoryName(oldName: String, newName: String)
-
     @Query("UPDATE category SET image =:newImage WHERE image =:oldImage AND category_name =:categoryName")
     suspend fun updateCategoryImage(oldImage: Int, newImage: Int, categoryName: String)
 
@@ -38,9 +35,4 @@ interface CategoryDao {
             "translate=:translate AND " +
             "sentence=:sentence")
     suspend fun deleteWordInCategory(categoryName: String, word: String, translate: String, sentence: String)
-
-
-    @Query("SELECT * FROM category WHERE category_name = :categoryName LIMIT 1")
-    fun getCategoryByName(categoryName: String): Flow<Category?>
-
 }

@@ -27,20 +27,9 @@ class CategoryRepositoryImpl(app: Application) : CategoryRepository {
 
     private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
-    private var wordsInCategory: List<Word>? = null
-
-    private var categories: Flow<List<Category>>? = null
-
     private val mapperWord = WordMapper()
     private val mapperCategory = CategoryMapper()
 
-
-    override fun updateCategoryName(oldName: String, newName: String) {
-        coroutineScope.launch(Dispatchers.IO) {
-            categoryDao.updateCategoryName(oldName, newName)
-            wordDao.updateCategoryInWords(newName, oldName)
-        }
-    }
 
     override fun updateCategoryImage(oldImage: Int, newImage: Int, categoryName: String) {
         coroutineScope.launch(Dispatchers.IO) {

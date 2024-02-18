@@ -14,7 +14,6 @@ interface CategoryRepository {
     fun deleteCategory(category: CategoryModel)
 
     fun updateCategoryImage(oldImage: Int, newImage: Int, categoryName: String)
-    fun updateCategoryName(oldName: String, newName: String)
 
     fun setUpNotification()
 }

@@ -1,7 +1,6 @@
 package com.xenia.englishusingflashcards.presentation.viewmodels
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,17 +8,13 @@ import androidx.lifecycle.viewModelScope
 import com.xenia.englishusingflashcards.data.repository.CategoryRepositoryImpl
 import com.xenia.englishusingflashcards.data.repository.LearnRepositoryImpl
 import com.xenia.englishusingflashcards.data.repository.WordRepositoryImpl
-import com.xenia.englishusingflashcards.domain.models.CategoryModel
 import com.xenia.englishusingflashcards.domain.models.WordModel
 import com.xenia.englishusingflashcards.domain.usecases.AddWordInCategoryUseCase
 import com.xenia.englishusingflashcards.domain.usecases.AddWordInStudyTableUseCase
-import com.xenia.englishusingflashcards.domain.usecases.AddWordsInStudyTableUseCase
-import com.xenia.englishusingflashcards.domain.usecases.CreateCategoryUseCase
 import com.xenia.englishusingflashcards.domain.usecases.DeleteWordFromCategoryUseCase
 import com.xenia.englishusingflashcards.domain.usecases.DeleteWordFromStudyTableUseCase
 import com.xenia.englishusingflashcards.domain.usecases.GetWordsFromCategoryUseCase
 import com.xenia.englishusingflashcards.domain.usecases.UpdateCategoryImageUseCase
-import com.xenia.englishusingflashcards.domain.usecases.UpdateCategoryNameUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -42,14 +37,11 @@ class EditCategoryViewModel(app: Application, name: String) : ViewModel() {
     private val _listWordInCategory: MutableStateFlow<List<WordModel>?> = MutableStateFlow(emptyList())
     val listWordInCategory: StateFlow<List<WordModel>?> = _listWordInCategory.asStateFlow()
 
-    ///////////////
-
     private val repository = CategoryRepositoryImpl(app)
     private val addWordInCategoryUseCase = AddWordInCategoryUseCase(WordRepositoryImpl(app))
     private val deleteWordFromCategoryUseCase = DeleteWordFromCategoryUseCase(repository)
     private val getWordsFromCategoryUseCase = GetWordsFromCategoryUseCase(repository)
     private val updateCategoryImageUseCase = UpdateCategoryImageUseCase(repository)
-    private val updateCategoryNameUseCase = UpdateCategoryNameUseCase(repository)
 
     private val repositoryLearn = LearnRepositoryImpl(app)
     private val addWordInStudyTableUseCase = AddWordInStudyTableUseCase(repositoryLearn)
@@ -71,10 +63,6 @@ class EditCategoryViewModel(app: Application, name: String) : ViewModel() {
         updateCategoryImageUseCase.updateCategoryImage(oldImage, newImage, categoryName)
     }
 
-    fun updateCategoryName(oldName: String, newName: String) {
-        updateCategoryNameUseCase.updateCategoryName(oldName, newName)
-    }
-
     fun deleteWordInCategory(categoryName: String, word: String, translate: String, sentence: String) {
         viewModelScope.launch (Dispatchers.IO) {
             deleteWordFromCategoryUseCase.deleteWordFromCategory(categoryName, word, translate, sentence)
@@ -82,7 +70,7 @@ class EditCategoryViewModel(app: Application, name: String) : ViewModel() {
         }
     }
 
-    fun getListWordsInCategory(categoryName: String) {
+    private fun getListWordsInCategory(categoryName: String) {
         viewModelScope.launch {
             getWordsFromCategoryUseCase.getWordsFromCategory(categoryName)
                 .flowOn(Dispatchers.IO)

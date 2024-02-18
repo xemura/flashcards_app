@@ -1,7 +1,6 @@
 package com.xenia.englishusingflashcards.data.mapper
 
 import com.xenia.englishusingflashcards.data.entities.TableStudyWord
-import com.xenia.englishusingflashcards.data.entities.Word
 import com.xenia.englishusingflashcards.domain.models.WordModel
 import com.xenia.englishusingflashcards.domain.models.WordsStudyModel
 

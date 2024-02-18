@@ -27,35 +27,6 @@ class WordMapper {
         return list
     }
 
-//    fun mapWordToWordsStudyModel(words: List<Word>?) : WordModel? {
-//        val list = mutableListOf<WordModel>()
-//        var count = 0
-//        if (words != null) {
-//            for (word in words) {
-//                count++
-//                val wordModel = WordModel(
-//                    id = word.id,
-//                    categoryName = word.categoryName,
-//                    word = word.word,
-//                    translate = word.translate,
-//                    sentence = word.sentence,
-//                    inProcess = word.inProcess,
-//                    theDateOfTheWordStudy = word.theDateOfTheWordStudy,
-//                    theNumberOfRepetitions = word.theNumberOfRepetitions,
-//                    theRepetitionInterval = word.theRepetitionInterval,
-//                    theRepetitionIntervalAfterTheNRepetition = word.theRepetitionIntervalAfterTheNRepetition
-//                )
-//                list.add(wordModel)
-//            }
-//        } else {
-//            return null
-//        }
-//        return WordModel(list, count)
-//    }
-
-//    fun mapWordToData(words: List<WordModel>?) = words?.map {
-//        mapWord(it)
-//    }
     fun mapWordToData(words: List<WordModel>?) : List<Word> {
         val list = mutableListOf<Word>()
         if (words != null) {
