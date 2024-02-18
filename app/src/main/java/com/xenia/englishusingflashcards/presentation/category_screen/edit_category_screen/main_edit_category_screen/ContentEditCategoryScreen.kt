@@ -29,7 +29,7 @@ fun ContentEditCategoryScreen (
     ) {
         Box(modifier = Modifier
             .fillMaxWidth()
-            .weight(0.4f)
+            .weight(0.3f)
             .padding(
                 start = 20.dp,
                 end = 20.dp,
@@ -41,7 +41,6 @@ fun ContentEditCategoryScreen (
             contentAlignment = Alignment.Center
         ) {
             editCategoryViewModel.also {
-                it.updateCategoryName(categoryName)
                 it.updateCategoryImage(categoryImage)
 
                 EditScreenCardEditCategory(it)
@@ -60,7 +59,6 @@ fun ContentEditCategoryScreen (
             .border(BorderStroke(1.dp, Color.Black), RoundedCornerShape(25.dp)),
             contentAlignment = Alignment.Center
         ) {
-            editCategoryViewModel.getListWordsInCategory(categoryName)
             EditScreenCardAddWordInCategory(editCategoryViewModel)
         }
     }

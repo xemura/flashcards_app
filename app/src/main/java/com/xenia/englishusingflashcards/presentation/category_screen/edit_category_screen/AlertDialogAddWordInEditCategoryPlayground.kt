@@ -40,8 +40,10 @@ import com.xenia.englishusingflashcards.presentation.viewmodels.EditCategoryView
 import com.xenia.englishusingflashcards.ui.theme.textFieldColors
 
 @Composable
-fun AlertDialogAddWordInEditCategory(editCategoryViewModel: EditCategoryViewModel,
-                                     onDismiss: () -> Unit, onConfirm: () -> Unit) {
+fun AlertDialogAddWordInEditCategory(
+    editCategoryViewModel: EditCategoryViewModel,
+    onDismiss: () -> Unit, onConfirm: () -> Unit
+) {
     var word by remember { mutableStateOf(TextFieldValue()) }
     var errorStateWord by remember { mutableStateOf(false) }
     var errorMessageWord by remember { mutableStateOf("") }
@@ -63,7 +65,7 @@ fun AlertDialogAddWordInEditCategory(editCategoryViewModel: EditCategoryViewMode
                 onClick = {
                     if (!(word.text.isEmpty() or translate.text.isEmpty() or sentence.text.isEmpty())) {
                         val createdWord = WordModel(
-                            categoryName = editCategoryViewModel.categoryName.value!!, // !!!!!!!!!!!!11
+                            categoryName = editCategoryViewModel.categoryName,
                             word = word.text,
                             translate = translate.text,
                             sentence = sentence.text,
@@ -354,11 +356,7 @@ fun AlertDialogAddWordInEditCategoryPlayground(editCategoryViewModel: EditCatego
 
     Button(
         onClick = {
-            if ((editCategoryViewModel.categoryName.value?.isNotEmpty() == true)
-                and (editCategoryViewModel.categoryName.value != ""))
-            {
-                showAlertDialog.value = true
-            }
+            showAlertDialog.value = true
         },
         Modifier
             .fillMaxWidth()

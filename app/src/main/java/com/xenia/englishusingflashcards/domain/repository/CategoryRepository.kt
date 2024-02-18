@@ -6,7 +6,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface CategoryRepository {
     fun getCategories(): Flow<List<CategoryModel>?>
-    fun getWordsFromCategory(categoryName: String): List<WordModel>?
+    fun getWordsFromCategory(categoryName: String): Flow<List<WordModel>?>
+
     fun deleteWordFromCategory(categoryName: String, word: String, translate: String, sentence: String)
 
     fun createCategory(category: CategoryModel, listWordsInCategory: List<WordModel>?)

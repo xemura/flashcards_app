@@ -53,12 +53,10 @@ class CategoryRepositoryImpl(app: Application) : CategoryRepository {
             mapperCategory.mapCategory(category)
         }
 
-    override fun getWordsFromCategory(categoryName: String): List<WordModel> {
-        coroutineScope.launch(Dispatchers.IO) {
-            wordsInCategory = categoryDao.getWordsInCategory(categoryName)
+    override fun getWordsFromCategory(categoryName: String): Flow<List<WordModel>?> =
+        categoryDao.getWordsInCategory(categoryName).map {
+            mapperWord.mapWord(it)
         }
-        return mapperWord.mapWord(wordsInCategory)
-    }
 
     override fun deleteWordFromCategory(
         categoryName: String,

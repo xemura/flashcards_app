@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
@@ -15,6 +16,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.xenia.englishusingflashcards.R
 import com.xenia.englishusingflashcards.presentation.viewmodels.EditCategoryViewModel
 
@@ -40,7 +42,7 @@ fun EditScreenCardEditCategory(editCategoryViewModel: EditCategoryViewModel) {
             editCategoryViewModel.updateImageCategory(
                 categoryImage.value,
                 newImage,
-                editCategoryViewModel.categoryName.value!!
+                editCategoryViewModel.categoryName
             )
             editCategoryViewModel.updateCategoryImage(newImage)
         }, modifier = Modifier.size(80.dp)) {
@@ -56,6 +58,9 @@ fun EditScreenCardEditCategory(editCategoryViewModel: EditCategoryViewModel) {
             )
         }
 
-        EditStyledTextField(editCategoryViewModel)
+        Text(text = editCategoryViewModel.categoryName,
+            fontSize = 30.sp)
+
+        //EditStyledTextField(editCategoryViewModel)
     }
 }

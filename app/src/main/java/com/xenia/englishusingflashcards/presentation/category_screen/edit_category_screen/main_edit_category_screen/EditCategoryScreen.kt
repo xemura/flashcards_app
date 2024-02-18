@@ -29,7 +29,8 @@ fun EditCategoryScreen(navController : NavController, category: Category) {
         "EditCategoryViewModel",
         EditCategoryViewModelFactory(
             LocalContext.current.applicationContext
-                    as Application
+                    as Application,
+            category.categoryName
         )
     )
 

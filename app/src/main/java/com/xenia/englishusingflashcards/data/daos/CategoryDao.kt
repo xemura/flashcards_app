@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CategoryDao {
     @Query("SELECT * FROM word WHERE category_name = :categoryName")
-    suspend fun getWordsInCategory(categoryName: String): List<Word>?
+    fun getWordsInCategory(categoryName: String): Flow<List<Word>?>
 
     @Query("SELECT * FROM category")
     fun getCategories(): Flow<List<Category>?>
