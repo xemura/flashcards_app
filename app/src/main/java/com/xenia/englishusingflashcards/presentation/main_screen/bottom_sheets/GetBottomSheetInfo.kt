@@ -8,7 +8,7 @@ fun getBottomSheetInfo(text: String, mainViewModel: MainViewModel) : BottomSheet
 
     when (text) {
         "учить" -> {
-            bottomSheetInfo.data = mainViewModel.getWordsToStudy()
+            bottomSheetInfo.data = mainViewModel.wordsToStudy.value
             bottomSheetInfo.header = "Карточки для изучения"
             bottomSheetInfo.description = "Это число означает, сколько карточек готово к изучению."
         }

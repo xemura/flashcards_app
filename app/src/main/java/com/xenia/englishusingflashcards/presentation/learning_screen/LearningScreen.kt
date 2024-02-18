@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,9 +35,7 @@ fun LearningScreen(navController: NavController) {
         )
     )
 
-    learningViewModel.getWordToStudy()
-
-    val listLearnWords = learningViewModel.listLearnWords.observeAsState()
+    val listLearnWords = learningViewModel.wordsToStudy.collectAsState()
 
     Scaffold(
         floatingActionButton = {

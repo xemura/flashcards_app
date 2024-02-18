@@ -11,6 +11,8 @@ import com.xenia.englishusingflashcards.domain.models.WordsStudyModel
 import com.xenia.englishusingflashcards.domain.repository.LearnRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class LearnRepositoryImpl(app: Application): LearnRepository {
@@ -46,10 +48,8 @@ class LearnRepositoryImpl(app: Application): LearnRepository {
         }
     }
 
-    override fun getWordsFromStudyTable(): List<WordsStudyModel>? {
-        coroutineScope.launch {
-            wordsToLearn = tableStudyDao.getWordsInCategory()
+    override fun getWordsFromStudyTable(): Flow<List<WordsStudyModel>?> =
+        tableStudyDao.getWordsInCategory().map {
+            mapperWord.mapWordsToDomain(it)
         }
-        return mapperWord.mapWordsToDomain(wordsToLearn)
-    }
 }

@@ -9,6 +9,12 @@ import androidx.lifecycle.viewModelScope
 import com.xenia.englishusingflashcards.data.repository.LearnRepositoryImpl
 import com.xenia.englishusingflashcards.domain.models.WordsStudyModel
 import com.xenia.englishusingflashcards.domain.usecases.GetWordsFromStudyTableUseCase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 
 class LearningViewModel(app: Application) : ViewModel() {
@@ -16,19 +22,26 @@ class LearningViewModel(app: Application) : ViewModel() {
     private val repository = LearnRepositoryImpl(app)
     private val getWordsToLearnUseCase = GetWordsFromStudyTableUseCase(repository)
 
-    private val _listLearnWords = MutableLiveData<List<WordsStudyModel>?>()
-    val listLearnWords: LiveData<List<WordsStudyModel>?>
-        get() = _listLearnWords
+    private val _wordsToStudy: MutableStateFlow<List<WordsStudyModel>?> = MutableStateFlow(emptyList())
+    val wordsToStudy: StateFlow<List<WordsStudyModel>?> = _wordsToStudy.asStateFlow()
 
 
     init {
-        getWordToStudy()
-        Log.d("LearningViewModel", _listLearnWords.value.toString())
+        getWordsToStudy()
+        Log.d("LearningViewModel", _wordsToStudy.value.toString())
     }
 
-    fun getWordToStudy() {
+    private fun getWordsToStudy() {
         viewModelScope.launch {
-            _listLearnWords.value = getWordsToLearnUseCase.getWordsFromStudyTable()
+            getWordsToLearnUseCase.getWordsFromStudyTable()
+                .flowOn(Dispatchers.IO)
+                .catch {
+
+                }
+                .collect { listWords ->
+                    Log.d("MainViewModel", "collect")
+                    _wordsToStudy.value = listWords
+                }
         }
     }
 }

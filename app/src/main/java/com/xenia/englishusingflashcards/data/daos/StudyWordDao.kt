@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.xenia.englishusingflashcards.data.entities.TableStudyWord
 import com.xenia.englishusingflashcards.data.entities.Word
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface StudyWordDao {
@@ -24,5 +25,5 @@ interface StudyWordDao {
     suspend fun addAll(list: List<TableStudyWord>)
 
     @Query("SELECT * FROM table_study")
-    suspend fun getWordsInCategory(): List<TableStudyWord>?
+    fun getWordsInCategory(): Flow<List<TableStudyWord>?>
 }
