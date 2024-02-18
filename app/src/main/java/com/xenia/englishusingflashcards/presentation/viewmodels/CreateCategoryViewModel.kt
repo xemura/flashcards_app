@@ -18,6 +18,9 @@ import com.xenia.englishusingflashcards.domain.models.WordModel
 import com.xenia.englishusingflashcards.domain.usecases.AddWordsInStudyTableUseCase
 import com.xenia.englishusingflashcards.domain.usecases.CreateCategoryUseCase
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class CreateCategoryViewModel(app: Application) : ViewModel() {
@@ -28,9 +31,8 @@ class CreateCategoryViewModel(app: Application) : ViewModel() {
     var categoryImage by mutableIntStateOf(R.drawable.image_1)
         private set
 
-    private val _listWordInCategory = MutableLiveData<List<WordModel>?>(emptyList())
-    val listWordInCategory: LiveData<List<WordModel>?>
-        get() = _listWordInCategory
+    private val _listWordsInCategory = MutableStateFlow(emptyList<WordModel>())
+    val listWordsInCategory: StateFlow<List<WordModel>?> = _listWordsInCategory.asStateFlow()
 
 
     private val repository = CategoryRepositoryImpl(app)
@@ -49,18 +51,17 @@ class CreateCategoryViewModel(app: Application) : ViewModel() {
 
     fun updateListWordsInCategory(word: WordModel) {
         viewModelScope.launch (Dispatchers.IO) {
-            val list = _listWordInCategory.value?.toMutableList()
-            list?.add(word.copy())
-            _listWordInCategory.postValue(list)
+            val list = _listWordsInCategory.value.toMutableList()
+            list.add(word.copy())
+            _listWordsInCategory.value = list
         }
     }
 
     fun deleteWordInCategory(word: String, translate: String, sentence: String) {
         viewModelScope.launch (Dispatchers.IO) {
-            val list = _listWordInCategory.value?.toMutableList()
-            list?.removeIf { ((it.word == word) and (it.translate == translate) and (it.sentence == sentence)) }
-            Log.d("Tag", "list = $list")
-            _listWordInCategory.postValue(list)
+            val list = _listWordsInCategory.value.toMutableList()
+            list.removeIf { ((it.word == word) and (it.translate == translate) and (it.sentence == sentence)) }
+            _listWordsInCategory.value = list
         }
     }
 
@@ -71,9 +72,9 @@ class CreateCategoryViewModel(app: Application) : ViewModel() {
                     categoryName = categoryName,
                     image = categoryImage,
                 ),
-                _listWordInCategory.value
+                _listWordsInCategory.value
             )
-            addWordsInStudyTableUseCase.addWordsInStudyTable(_listWordInCategory.value)
+            addWordsInStudyTableUseCase.addWordsInStudyTable(_listWordsInCategory.value)
         }
     }
 }

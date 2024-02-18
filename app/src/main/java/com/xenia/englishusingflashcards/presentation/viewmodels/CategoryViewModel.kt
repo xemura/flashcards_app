@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 class CategoryViewModel(app: Application) : ViewModel() {
 
     private val _categories = MutableStateFlow(emptyList<CategoryModel>())
-    val categories: StateFlow<List<CategoryModel>> = _categories.asStateFlow()
+    val categories: StateFlow<List<CategoryModel>?> = _categories.asStateFlow()
 
     private val repository = CategoryRepositoryImpl(app)
     private val deleteCategoryUseCase = DeleteCategoryUseCase(repository)

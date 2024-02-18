@@ -21,6 +21,7 @@ import androidx.compose.material3.SwipeToDismiss
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDismissState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
@@ -38,7 +39,7 @@ import com.xenia.englishusingflashcards.presentation.viewmodels.CreateCategoryVi
 fun ContentCardAddWordInCreateCategory(createCategoryViewModel: CreateCategoryViewModel) {
 
     val wordsInCreatedCategory =
-        createCategoryViewModel.listWordInCategory.observeAsState()
+        createCategoryViewModel.listWordsInCategory.collectAsState()
 
     Column(modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally) {

@@ -51,11 +51,11 @@ fun CategoryList(navController : NavController) {
 
     val data = categoryViewModel.categories.collectAsState(initial = emptyList())
 
-    if (data.value.isNotEmpty()) {
+    if (!data.value.isNullOrEmpty()) {
         LazyColumn(modifier = Modifier.fillMaxWidth())
         {
             items(
-                items = data.value,
+                items = data.value!!,
                 key = { category ->
                     category.id
                 }
