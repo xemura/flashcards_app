@@ -1,13 +1,10 @@
 package com.xenia.englishusingflashcards.presentation.viewmodels
 
 import android.app.Application
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.xenia.englishusingflashcards.R
@@ -15,7 +12,7 @@ import com.xenia.englishusingflashcards.data.repository.CategoryRepositoryImpl
 import com.xenia.englishusingflashcards.data.repository.LearnRepositoryImpl
 import com.xenia.englishusingflashcards.domain.models.CategoryModel
 import com.xenia.englishusingflashcards.domain.models.WordModel
-import com.xenia.englishusingflashcards.domain.usecases.AddWordsInStudyTableUseCase
+import com.xenia.englishusingflashcards.domain.usecases.learn_screen.AddWordsInStudyTableUseCase
 import com.xenia.englishusingflashcards.domain.usecases.CreateCategoryUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

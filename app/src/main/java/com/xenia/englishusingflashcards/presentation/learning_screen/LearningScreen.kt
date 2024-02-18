@@ -56,7 +56,7 @@ fun LearningScreen(navController: NavController) {
                 navController,
                 activity
             )
-            ContentScreen(listLearnWords = listLearnWords)
+            ContentScreen(listLearnWords = listLearnWords, learningViewModel)
         }
     }
 }

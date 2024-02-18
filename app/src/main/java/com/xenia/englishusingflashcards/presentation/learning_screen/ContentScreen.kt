@@ -41,12 +41,13 @@ import com.xenia.englishusingflashcards.presentation.learning_screen.component_f
 import com.xenia.englishusingflashcards.presentation.learning_screen.component_flip_card.CardFace
 import com.xenia.englishusingflashcards.presentation.learning_screen.component_flip_card.FlipCard
 import com.xenia.englishusingflashcards.presentation.learning_screen.component_flip_card.FrontFaceCard
+import com.xenia.englishusingflashcards.presentation.viewmodels.LearningViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalSwipeableCardApi::class)
 @Composable
-fun ContentScreen(listLearnWords: State<List<WordsStudyModel>?>) {
+fun ContentScreen(listLearnWords: State<List<WordsStudyModel>?>, learningViewModel: LearningViewModel) {
     Column(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.Center
@@ -54,6 +55,10 @@ fun ContentScreen(listLearnWords: State<List<WordsStudyModel>?>) {
 
         var cardFace by remember {
             mutableStateOf(CardFace.Front)
+        }
+
+        var currentCard by remember {
+            mutableStateOf(WordsStudyModel())
         }
 
         val data = listLearnWords.value
@@ -136,9 +141,11 @@ fun ContentScreen(listLearnWords: State<List<WordsStudyModel>?>) {
                                         }
                                     ),
                                 front = {
+                                    currentCard = matchProfile
                                     FrontFaceCard(matchProfile)
                                 },
                                 back = {
+                                    currentCard = matchProfile
                                     BackFaceCard(matchProfile)
                                 },
                             )
@@ -181,7 +188,13 @@ fun ContentScreen(listLearnWords: State<List<WordsStudyModel>?>) {
                                                 cardFace = cardFace.next
                                                 delay(500L)
                                                 state.swipe(Direction.Down)
+                                                learningViewModel.deleteWordFromTableStudy(
+                                                    currentCard.word,
+                                                    currentCard.translate,
+                                                    currentCard.sentence
+                                                )
                                             }
+
                                         } else {
                                             error(mLocalContext)
                                         }

@@ -1,6 +1,7 @@
 package com.xenia.englishusingflashcards.presentation.viewmodels
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,9 +11,9 @@ import com.xenia.englishusingflashcards.data.repository.LearnRepositoryImpl
 import com.xenia.englishusingflashcards.data.repository.WordRepositoryImpl
 import com.xenia.englishusingflashcards.domain.models.WordModel
 import com.xenia.englishusingflashcards.domain.usecases.AddWordInCategoryUseCase
-import com.xenia.englishusingflashcards.domain.usecases.AddWordInStudyTableUseCase
+import com.xenia.englishusingflashcards.domain.usecases.learn_screen.AddWordInStudyTableUseCase
 import com.xenia.englishusingflashcards.domain.usecases.DeleteWordFromCategoryUseCase
-import com.xenia.englishusingflashcards.domain.usecases.DeleteWordFromStudyTableUseCase
+import com.xenia.englishusingflashcards.domain.usecases.learn_screen.DeleteWordFromStudyTableUseCase
 import com.xenia.englishusingflashcards.domain.usecases.GetWordsFromCategoryUseCase
 import com.xenia.englishusingflashcards.domain.usecases.UpdateCategoryImageUseCase
 import kotlinx.coroutines.Dispatchers

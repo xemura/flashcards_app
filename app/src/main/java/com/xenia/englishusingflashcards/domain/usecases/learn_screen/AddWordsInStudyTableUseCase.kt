@@ -1,4 +1,4 @@
-package com.xenia.englishusingflashcards.domain.usecases
+package com.xenia.englishusingflashcards.domain.usecases.learn_screen
 
 import com.xenia.englishusingflashcards.domain.models.WordModel
 import com.xenia.englishusingflashcards.domain.repository.LearnRepository
