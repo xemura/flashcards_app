@@ -15,6 +15,15 @@ class CategoryMapper {
         )
     }
 
+    fun mapDataCategoryToModel(category: Category): CategoryModel {
+
+        return CategoryModel(
+            id = category.id,
+            categoryName = category.categoryName,
+            image = category.image
+        )
+    }
+
     fun mapCategory(categories: List<Category>?): List<CategoryModel> {
 
         val list = mutableListOf<CategoryModel>()

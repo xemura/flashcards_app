@@ -15,7 +15,7 @@ interface CategoryDao {
     suspend fun getWordsInCategory(categoryName: String): List<Word>?
 
     @Query("SELECT * FROM category")
-    fun getCategories(): List<Category>?
+    fun getCategories(): Flow<List<Category>?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun createCategory(category: Category)

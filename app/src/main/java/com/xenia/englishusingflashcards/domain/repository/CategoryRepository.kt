@@ -5,7 +5,7 @@ import com.xenia.englishusingflashcards.domain.models.WordModel
 import kotlinx.coroutines.flow.Flow
 
 interface CategoryRepository {
-    fun getCategories(): Flow<List<CategoryModel>>
+    fun getCategories(): Flow<List<CategoryModel>?>
     fun getWordsFromCategory(categoryName: String): List<WordModel>?
     fun deleteWordFromCategory(categoryName: String, word: String, translate: String, sentence: String)
 

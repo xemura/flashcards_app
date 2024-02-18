@@ -14,6 +14,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -47,9 +48,10 @@ class CategoryRepositoryImpl(app: Application) : CategoryRepository {
         }
     }
 
-    override fun getCategories(): Flow<List<CategoryModel>> = flow {
-        emit(mapperCategory.mapCategory(categoryDao.getCategories()))
-    }
+    override fun getCategories(): Flow<List<CategoryModel>?> =
+        categoryDao.getCategories().map { category ->
+            mapperCategory.mapCategory(category)
+        }
 
     override fun getWordsFromCategory(categoryName: String): List<WordModel> {
         coroutineScope.launch(Dispatchers.IO) {

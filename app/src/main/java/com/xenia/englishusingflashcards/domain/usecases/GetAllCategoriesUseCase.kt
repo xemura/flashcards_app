@@ -5,7 +5,7 @@ import com.xenia.englishusingflashcards.domain.repository.CategoryRepository
 import kotlinx.coroutines.flow.Flow
 
 class GetAllCategoriesUseCase(private val categoryRepository: CategoryRepository) {
-    fun getCategories() : Flow<List<CategoryModel>> {
+    fun getCategories() : Flow<List<CategoryModel>?> {
         return categoryRepository.getCategories()
     }
 }
