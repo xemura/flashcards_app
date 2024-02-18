@@ -2,6 +2,7 @@ package com.xenia.englishusingflashcards.data.repository
 
 import android.app.Application
 import com.xenia.englishusingflashcards.data.database.AppDatabase
+import com.xenia.englishusingflashcards.data.entities.Category
 import com.xenia.englishusingflashcards.data.entities.Word
 import com.xenia.englishusingflashcards.data.mapper.CategoryMapper
 import com.xenia.englishusingflashcards.data.mapper.WordMapper
@@ -11,6 +12,8 @@ import com.xenia.englishusingflashcards.domain.models.WordsStudyModel
 import com.xenia.englishusingflashcards.domain.repository.CategoryRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -24,6 +27,8 @@ class CategoryRepositoryImpl(app: Application) : CategoryRepository {
     private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
     private var wordsInCategory: List<Word>? = null
+
+    private var categories: Flow<List<Category>>? = null
 
     private val mapperWord = WordMapper()
     private val mapperCategory = CategoryMapper()
@@ -40,6 +45,10 @@ class CategoryRepositoryImpl(app: Application) : CategoryRepository {
         coroutineScope.launch(Dispatchers.IO) {
             categoryDao.updateCategoryImage(oldImage, newImage, categoryName)
         }
+    }
+
+    override fun getCategories(): Flow<List<CategoryModel>> = flow {
+        emit(mapperCategory.mapCategory(categoryDao.getCategories()))
     }
 
     override fun getWordsFromCategory(categoryName: String): List<WordModel> {

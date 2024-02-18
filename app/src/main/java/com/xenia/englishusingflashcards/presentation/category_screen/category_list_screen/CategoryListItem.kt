@@ -28,18 +28,17 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.xenia.englishusingflashcards.R
 import com.xenia.englishusingflashcards.navigation.NavigationItem
-import com.xenia.englishusingflashcards.data.entities.Category
+import com.xenia.englishusingflashcards.domain.models.CategoryModel
 import com.xenia.englishusingflashcards.ui.theme.backgroundColors
 
 @Composable
-fun CategoryListItem(category: Category, navController : NavController) {
+fun CategoryListItem(category: CategoryModel, navController : NavController) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(
                 start = 20.dp,
                 end = 20.dp,
-                bottom = 5.dp
             )
             .clip(RoundedCornerShape(25.dp))
             .border(

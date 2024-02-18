@@ -30,4 +30,20 @@ class CategoryMapper {
         }
         return list
     }
+
+    fun mapCategoryToCategoryModel(categories: List<Category>?): List<CategoryModel> {
+
+        val list = mutableListOf<CategoryModel>()
+        if (categories != null) {
+            for (category in categories) {
+                val categoryModel = CategoryModel(
+                    id = category.id,
+                    categoryName = category.categoryName,
+                    image = category.image
+                )
+                list.add(categoryModel)
+            }
+        }
+        return list
+    }
 }

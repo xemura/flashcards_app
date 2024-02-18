@@ -35,6 +35,7 @@ class CreateCategoryViewModel(app: Application) : ViewModel() {
 
     private val repository = CategoryRepositoryImpl(app)
     private val repositoryLearn = LearnRepositoryImpl(app)
+
     private val createCategoryUseCase = CreateCategoryUseCase(repository)
     private val addWordsInStudyTableUseCase = AddWordsInStudyTableUseCase(repositoryLearn)
 
