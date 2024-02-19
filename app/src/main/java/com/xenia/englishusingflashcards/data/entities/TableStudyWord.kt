@@ -11,8 +11,8 @@ data class TableStudyWord(
     @ColumnInfo(name = "word") val word: String,
     @ColumnInfo(name = "translate") val translate: String,
     @ColumnInfo(name = "sentence") val sentence: String,
-    @ColumnInfo(name = "the_date_of_the_word_study") val theDateOfTheWordStudy: String,
+    @ColumnInfo(name = "state") val state: String,
     @ColumnInfo(name = "the_number_of_repetitions") val theNumberOfRepetitions: Int,
-    @ColumnInfo(name = "the_repetition_interval") val theRepetitionInterval: Double,
-    @ColumnInfo(name = "the_repetition_interval_after_the_n_repetition") val theRepetitionIntervalAfterTheNRepetition: Double,
+    @ColumnInfo(name = "the_repetition_interval") val theRepetitionInterval: String,
+    @ColumnInfo(name = "date_of_the_next_repetition") val dateOfTheNextRepetition: String,
 )

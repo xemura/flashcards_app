@@ -22,8 +22,6 @@ class LearnRepositoryImpl(app: Application): LearnRepository {
     private val tableStudyDao = appDb.tableStudyDao()
     private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
-    private var wordsToLearn: List<TableStudyWord>? = null
-
     private val mapperWord = WordStudyMapper()
 
     override fun addWordInStudyTable(word: WordModel) {

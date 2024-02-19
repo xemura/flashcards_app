@@ -34,14 +34,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.xenia.englishusingflashcards.R
 import com.xenia.englishusingflashcards.presentation.main_screen.bottom_sheets.BottomSheet
+import com.xenia.englishusingflashcards.ui.theme.textColorsInCard
 
-private val TextColors = listOf(
-    Color(0xFF03045E),
-    Color(0xFF0077B6),
-    Color(0xFF00B4D8),
-    Color(0xFF90E0EF),
-    Color(0xFFCAF0F8),
-)
 
 @Composable
 fun CardInMainScreen(countWordsText : Int, cardText: String) {
@@ -77,7 +71,7 @@ fun CardInMainScreen(countWordsText : Int, cardText: String) {
                 countWordsText.toString(),
                 style = TextStyle(
                     brush = Brush.linearGradient(
-                        colors = TextColors,
+                        colors = textColorsInCard,
                         tileMode = TileMode.Mirror
                     ),
                     fontSize = 45.sp,

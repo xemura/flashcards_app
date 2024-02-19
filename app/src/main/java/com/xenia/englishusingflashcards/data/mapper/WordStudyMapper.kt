@@ -10,10 +10,10 @@ class WordStudyMapper {
         word = word.word,
         translate = word.translate,
         sentence = word.sentence,
-        theDateOfTheWordStudy = word.theDateOfTheWordStudy,
-        theNumberOfRepetitions = word.theNumberOfRepetitions,
-        theRepetitionInterval = word.theRepetitionInterval,
-        theRepetitionIntervalAfterTheNRepetition = word.theRepetitionIntervalAfterTheNRepetition
+        state = "",
+        theNumberOfRepetitions = 0,
+        theRepetitionInterval = "",
+        dateOfTheNextRepetition = ""
     )
 
     fun mapWordsToStudy(words: List<WordModel>?) : List<TableStudyWord> {
@@ -25,10 +25,10 @@ class WordStudyMapper {
                     word = word.word,
                     translate = word.translate,
                     sentence = word.sentence,
-                    theDateOfTheWordStudy = word.theDateOfTheWordStudy,
+                    state = "",
                     theNumberOfRepetitions = word.theNumberOfRepetitions,
-                    theRepetitionInterval = word.theRepetitionInterval,
-                    theRepetitionIntervalAfterTheNRepetition = word.theRepetitionIntervalAfterTheNRepetition
+                    theRepetitionInterval = "",
+                    dateOfTheNextRepetition = ""
                 )
                 list.add(word)
             }
@@ -45,10 +45,10 @@ class WordStudyMapper {
                     word = word.word,
                     translate = word.translate,
                     sentence = word.sentence,
-                    theDateOfTheWordStudy = word.theDateOfTheWordStudy,
+                    theDateOfTheWordStudy = "",
                     theNumberOfRepetitions = word.theNumberOfRepetitions,
-                    theRepetitionInterval = word.theRepetitionInterval,
-                    theRepetitionIntervalAfterTheNRepetition = word.theRepetitionIntervalAfterTheNRepetition
+                    theRepetitionInterval = 0.0,
+                    theRepetitionIntervalAfterTheNRepetition = 0.0
                 )
                 list.add(word)
             }

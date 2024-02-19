@@ -44,3 +44,19 @@ val backgroundColors = listOf(
     Color(0xFF1E6091),
     Color(0xFF184E77),
 )
+
+val textColorsInCard = listOf(
+    Color(0xFF03045E),
+    Color(0xFF0077B6),
+    Color(0xFF00B4D8),
+    Color(0xFF90E0EF),
+    Color(0xFFCAF0F8),
+)
+
+val borderColors = listOf(
+    Color(0xFFCAF0F8),
+    Color(0xFF90E0EF),
+    Color(0xFF00B4D8),
+    Color(0xFF0077B6),
+    Color(0xFF004691),
+)
