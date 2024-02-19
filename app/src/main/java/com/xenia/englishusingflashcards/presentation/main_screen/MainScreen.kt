@@ -2,6 +2,7 @@ package com.xenia.englishusingflashcards.presentation.main_screen
 
 import android.app.Activity
 import android.app.Application
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -29,6 +30,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.xenia.englishusingflashcards.presentation.Header
 import com.xenia.englishusingflashcards.presentation.viewmodels.MainViewModel
 import com.xenia.englishusingflashcards.presentation.viewmodels.MainViewModelFactory
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 @Composable
 fun MainScreen(navController : NavController) {
@@ -42,6 +48,11 @@ fun MainScreen(navController : NavController) {
                     as Application
         )
     )
+
+    // Log.d("MainScreen", LocalDateTime.now().toString())
+    val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss", Locale.US)
+    val currentDate = sdf.format(Date())
+    Log.d("MainScreen", currentDate)
 
     // val boxSize = with(LocalDensity.current) { 200.dp.toPx() }
     Scaffold(
