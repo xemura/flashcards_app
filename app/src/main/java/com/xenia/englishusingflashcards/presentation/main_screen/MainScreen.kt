@@ -96,7 +96,7 @@ fun MainScreen(navController : NavController) {
             Spacer(modifier = Modifier.weight(1f))
 
             Text(
-                modifier = Modifier.padding(bottom = 20.dp),
+                modifier = Modifier.padding(bottom = 25.dp),
                 text = "created by xemura",
                 textAlign = TextAlign.Center,
                 color = Color.Gray,
