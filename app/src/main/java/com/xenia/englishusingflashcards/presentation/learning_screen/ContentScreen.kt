@@ -35,7 +35,6 @@ import com.alexstyl.swipeablecard.ExperimentalSwipeableCardApi
 import com.alexstyl.swipeablecard.rememberSwipeableCardState
 import com.alexstyl.swipeablecard.swipableCard
 import com.xenia.englishusingflashcards.R
-import com.xenia.englishusingflashcards.domain.models.WordModel
 import com.xenia.englishusingflashcards.domain.models.WordsStudyModel
 import com.xenia.englishusingflashcards.presentation.learning_screen.component_flip_card.BackFaceCard
 import com.xenia.englishusingflashcards.presentation.learning_screen.component_flip_card.CardFace

@@ -32,10 +32,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.xenia.englishusingflashcards.domain.models.CategoryModel
 import com.xenia.englishusingflashcards.presentation.viewmodels.CategoryViewModel
 import com.xenia.englishusingflashcards.presentation.viewmodels.CategoryViewModelFactory
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

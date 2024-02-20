@@ -2,7 +2,6 @@ package com.xenia.englishusingflashcards.data.repository
 
 import android.app.Application
 import com.xenia.englishusingflashcards.data.database.AppDatabase
-import com.xenia.englishusingflashcards.data.entities.Word
 import com.xenia.englishusingflashcards.data.mapper.WordMapper
 import com.xenia.englishusingflashcards.domain.models.WordModel
 import com.xenia.englishusingflashcards.domain.repository.WordRepository

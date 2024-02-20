@@ -21,7 +21,6 @@ import com.xenia.englishusingflashcards.presentation.viewmodels.EditCategoryView
 @Composable
 fun ContentEditCategoryScreen (
     editCategoryViewModel: EditCategoryViewModel,
-    categoryName: String,
     categoryImage: Int
 ) {
     Column(modifier = Modifier

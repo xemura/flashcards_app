@@ -4,14 +4,9 @@ import android.util.Log
 import com.xenia.englishusingflashcards.data.entities.TableStudyWord
 import com.xenia.englishusingflashcards.domain.models.WordModel
 import com.xenia.englishusingflashcards.domain.models.WordsStudyModel
-import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
-import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
-import java.util.Date
-import java.util.Locale
 
 class WordStudyMapper {
     fun mapWordToStudy(word: WordModel): TableStudyWord {

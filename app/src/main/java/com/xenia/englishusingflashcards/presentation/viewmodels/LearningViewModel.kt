@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.xenia.englishusingflashcards.data.repository.LearnRepositoryImpl
 import com.xenia.englishusingflashcards.domain.models.WordsStudyModel
 import com.xenia.englishusingflashcards.domain.usecases.learn_screen.DeleteWordFromStudyTableUseCase
-import com.xenia.englishusingflashcards.domain.usecases.learn_screen.GetWordsFromStudyTableUseCase
 import com.xenia.englishusingflashcards.domain.usecases.learn_screen.MoveToAnotherStateUseCase
 import com.xenia.englishusingflashcards.domain.usecases.main_screen.GetWordsFromTableStudyUseCase
 import kotlinx.coroutines.Dispatchers
@@ -29,12 +28,12 @@ class LearningViewModel(app: Application) : ViewModel() {
     val wordsToStudy: StateFlow<List<WordsStudyModel>?> = _wordsToStudy.asStateFlow()
 
     init {
-        getWordsToStudy("учить")
+        getWordsToStudy()
     }
 
-    private fun getWordsToStudy(study: String) {
+    private fun getWordsToStudy() {
         viewModelScope.launch {
-            getWordsToStudyUseCase.getWordsFromStudyTable(study)
+            getWordsToStudyUseCase.getWordsFromStudyTable("учить")
                 .flowOn(Dispatchers.IO)
                 .catch {
 

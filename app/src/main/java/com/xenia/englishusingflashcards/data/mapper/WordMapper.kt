@@ -2,7 +2,6 @@ package com.xenia.englishusingflashcards.data.mapper
 
 import com.xenia.englishusingflashcards.data.entities.Word
 import com.xenia.englishusingflashcards.domain.models.WordModel
-import com.xenia.englishusingflashcards.domain.models.WordsStudyModel
 
 class WordMapper {
     fun mapWord(words: List<Word>?) : List<WordModel> {

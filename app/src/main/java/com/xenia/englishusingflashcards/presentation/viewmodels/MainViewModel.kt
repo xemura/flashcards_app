@@ -34,9 +34,9 @@ class MainViewModel(app: Application) : ViewModel() {
     val wordsToLearned: StateFlow<List<WordsStudyModel>?> = _wordsToLearned.asStateFlow()
 
     init {
-        getWordsToStudy("учить")
-        getWordsToKnow("знаю")
-        getWordsToLearned("выучено")
+        getWordsToStudy()
+        getWordsToKnow()
+        getWordsToLearned()
     }
 
     fun getCountWordsToStudy(): Int {
@@ -51,9 +51,9 @@ class MainViewModel(app: Application) : ViewModel() {
         return _wordsToLearned.value?.size ?: 0
     }
 
-    private fun getWordsToStudy(study: String) {
+    private fun getWordsToStudy() {
         viewModelScope.launch {
-            getWordsToStudyUseCase.getWordsFromStudyTable(study)
+            getWordsToStudyUseCase.getWordsFromStudyTable("учить")
                 .flowOn(Dispatchers.IO)
                 .catch {
 
@@ -65,9 +65,9 @@ class MainViewModel(app: Application) : ViewModel() {
         }
     }
 
-    private fun getWordsToKnow(know: String) {
+    private fun getWordsToKnow() {
         viewModelScope.launch {
-            getWordsKnowUseCase.getWordsFromKnowTable(know)
+            getWordsKnowUseCase.getWordsFromKnowTable("знаю")
                 .flowOn(Dispatchers.IO)
                 .catch {
 
@@ -79,9 +79,9 @@ class MainViewModel(app: Application) : ViewModel() {
         }
     }
 
-    private fun getWordsToLearned(learned: String) {
+    private fun getWordsToLearned() {
         viewModelScope.launch {
-            getWordsLearnedUseCase.getWordsFromLearnedTable(learned)
+            getWordsLearnedUseCase.getWordsFromLearnedTable("выучено")
                 .flowOn(Dispatchers.IO)
                 .catch {
 

@@ -44,7 +44,7 @@ fun EditCategoryScreen(navController : NavController, category: Category) {
         ) {
             Header(contentPadding, "Редактировать", "to_category_screen_from_edit", navController, activity)
 
-            ContentEditCategoryScreen(editCategoryViewModel, category.categoryName, category.image)
+            ContentEditCategoryScreen(editCategoryViewModel, category.image)
         }
     }
 }
