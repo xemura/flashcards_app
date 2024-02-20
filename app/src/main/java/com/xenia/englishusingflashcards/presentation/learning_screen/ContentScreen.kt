@@ -220,6 +220,12 @@ fun ContentScreen(listLearnWords: State<List<WordsStudyModel>?>, learningViewMod
                                                     )
                                                     .show()
                                             }
+                                            scope.launch {
+                                                Log.d("Know", currentCard.id.toString())
+                                                learningViewModel.guessedCardAndMoveToKnowState(
+                                                    currentCard.id
+                                                )
+                                            }
                                         } else {
                                             error(mLocalContext)
                                         }

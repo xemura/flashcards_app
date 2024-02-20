@@ -18,10 +18,10 @@ class WordStudyMapper {
         val currentDate = LocalDateTime.now()
 
         val beginning = LocalDate.of(currentDate.year, currentDate.month, currentDate.dayOfMonth)
-        val dateTime = LocalDateTime.of(beginning, LocalTime.of(currentDate.hour, currentDate.minute))
+        var dateTime = LocalDateTime.of(beginning, LocalTime.of(currentDate.hour, currentDate.minute))
 
         Log.d("WordStudyMapper", dateTime.toString())
-        //dateTime1 = dateTime1.plusHours(12)
+        //dateTime = dateTime.plusHours(12)
         Log.d("WordStudyMapper", dateTime.toString())
 
         return TableStudyWord(
@@ -30,8 +30,8 @@ class WordStudyMapper {
             translate = word.translate,
             sentence = word.sentence,
             state = "учить",
-            theNumberOfRepetitions = 0,
-            theRepetitionInterval = "0 15",
+            theNumberOfRepetitions = 1,
+            theRepetitionInterval = "1", // интервал в часах?
             dateOfTheNextRepetition = dateTime.toString()
         )
     }
@@ -53,8 +53,8 @@ class WordStudyMapper {
                     translate = word.translate,
                     sentence = word.sentence,
                     state = "учить",
-                    theNumberOfRepetitions = 0,
-                    theRepetitionInterval = "0 15",
+                    theNumberOfRepetitions = 1,
+                    theRepetitionInterval = "1",
                     dateOfTheNextRepetition = dateTime.toString()
                 )
                 list.add(word)
@@ -73,7 +73,7 @@ class WordStudyMapper {
                     translate = word.translate,
                     sentence = word.sentence,
                     theDateOfTheWordStudy = "",
-                    theNumberOfRepetitions = 0,
+                    theNumberOfRepetitions = 1,
                     theRepetitionInterval = 0.0,
                     theRepetitionIntervalAfterTheNRepetition = 0.0
                 )

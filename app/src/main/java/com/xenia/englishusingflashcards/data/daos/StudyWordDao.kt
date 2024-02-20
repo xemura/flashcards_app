@@ -1,12 +1,10 @@
 package com.xenia.englishusingflashcards.data.daos
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.xenia.englishusingflashcards.data.entities.TableStudyWord
-import com.xenia.englishusingflashcards.data.entities.Word
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -25,5 +23,22 @@ interface StudyWordDao {
     suspend fun addAll(list: List<TableStudyWord>)
 
     @Query("SELECT * FROM table_study")
-    fun getWordsInCategory(): Flow<List<TableStudyWord>?>
+    fun getWordsFromStudyTable(): Flow<List<TableStudyWord>?>
+
+    @Query("SELECT * FROM table_study WHERE id=:wordId")
+    suspend fun getWordFromStudyTable(wordId: Int): TableStudyWord
+
+    @Query("UPDATE table_study SET " +
+            "date_of_the_next_repetition=:nextDate, " +
+            "the_number_of_repetitions=:number, " +
+            "state=:state, " +
+            "the_repetition_interval=:interval " +
+            "WHERE id=:wordId")
+    fun guessedCardAndMoveToKnowState(
+        wordId: Int,
+        nextDate: String,
+        number: Int,
+        state: String,
+        interval: String
+        )
 }

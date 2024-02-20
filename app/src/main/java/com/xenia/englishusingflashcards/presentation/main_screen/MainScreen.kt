@@ -49,11 +49,6 @@ fun MainScreen(navController : NavController) {
         )
     )
 
-    // Log.d("MainScreen", LocalDateTime.now().toString())
-    val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss", Locale.US)
-    val currentDate = sdf.format(Date())
-    Log.d("MainScreen", currentDate)
-
     // val boxSize = with(LocalDensity.current) { 200.dp.toPx() }
     Scaffold(
     ) { contentPadding ->
