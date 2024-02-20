@@ -1,4 +1,4 @@
-package com.xenia.englishusingflashcards.domain.usecases
+package com.xenia.englishusingflashcards.domain.usecases.notifications
 
 import com.xenia.englishusingflashcards.domain.repository.CategoryRepository
 

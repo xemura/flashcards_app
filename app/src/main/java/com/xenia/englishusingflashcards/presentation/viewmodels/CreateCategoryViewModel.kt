@@ -13,7 +13,7 @@ import com.xenia.englishusingflashcards.data.repository.LearnRepositoryImpl
 import com.xenia.englishusingflashcards.domain.models.CategoryModel
 import com.xenia.englishusingflashcards.domain.models.WordModel
 import com.xenia.englishusingflashcards.domain.usecases.learn_screen.AddWordsInStudyTableUseCase
-import com.xenia.englishusingflashcards.domain.usecases.CreateCategoryUseCase
+import com.xenia.englishusingflashcards.domain.usecases.category_screen.CreateCategoryUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

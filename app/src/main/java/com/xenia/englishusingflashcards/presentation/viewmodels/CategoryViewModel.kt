@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.xenia.englishusingflashcards.data.repository.CategoryRepositoryImpl
 import com.xenia.englishusingflashcards.domain.models.CategoryModel
-import com.xenia.englishusingflashcards.domain.usecases.DeleteCategoryUseCase
-import com.xenia.englishusingflashcards.domain.usecases.GetAllCategoriesUseCase
+import com.xenia.englishusingflashcards.domain.usecases.category_screen.DeleteCategoryUseCase
+import com.xenia.englishusingflashcards.domain.usecases.category_screen.GetAllCategoriesUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

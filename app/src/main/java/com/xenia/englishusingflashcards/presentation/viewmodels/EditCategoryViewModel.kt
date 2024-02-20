@@ -1,7 +1,6 @@
 package com.xenia.englishusingflashcards.presentation.viewmodels
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,12 +9,12 @@ import com.xenia.englishusingflashcards.data.repository.CategoryRepositoryImpl
 import com.xenia.englishusingflashcards.data.repository.LearnRepositoryImpl
 import com.xenia.englishusingflashcards.data.repository.WordRepositoryImpl
 import com.xenia.englishusingflashcards.domain.models.WordModel
-import com.xenia.englishusingflashcards.domain.usecases.AddWordInCategoryUseCase
+import com.xenia.englishusingflashcards.domain.usecases.category_screen.AddWordInCategoryUseCase
 import com.xenia.englishusingflashcards.domain.usecases.learn_screen.AddWordInStudyTableUseCase
-import com.xenia.englishusingflashcards.domain.usecases.DeleteWordFromCategoryUseCase
+import com.xenia.englishusingflashcards.domain.usecases.category_screen.DeleteWordFromCategoryUseCase
 import com.xenia.englishusingflashcards.domain.usecases.learn_screen.DeleteWordFromStudyTableUseCase
-import com.xenia.englishusingflashcards.domain.usecases.GetWordsFromCategoryUseCase
-import com.xenia.englishusingflashcards.domain.usecases.UpdateCategoryImageUseCase
+import com.xenia.englishusingflashcards.domain.usecases.category_screen.GetWordsFromCategoryUseCase
+import com.xenia.englishusingflashcards.domain.usecases.category_screen.UpdateCategoryImageUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
