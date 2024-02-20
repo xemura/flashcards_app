@@ -117,6 +117,13 @@ fun ContentScreen(listLearnWords: State<List<WordsStudyModel>?>, learningViewMod
                                                             Toast.LENGTH_SHORT
                                                         )
                                                         .show()
+
+                                                    scope.launch {
+                                                        Log.d("Know", currentCard.id.toString())
+                                                        learningViewModel.guessedCardAndMoveToKnowState(
+                                                            currentCard.id
+                                                        )
+                                                    }
                                                 }
 
                                                 Direction.Down -> {

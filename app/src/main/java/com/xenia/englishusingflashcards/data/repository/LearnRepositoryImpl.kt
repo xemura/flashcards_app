@@ -52,6 +52,21 @@ class LearnRepositoryImpl(app: Application): LearnRepository {
             mapperWord.mapWordsToDomain(it)
         }
 
+    override fun getWordsToStudy(study: String): Flow<List<WordsStudyModel>?> =
+        tableStudyDao.getWordsToStudy(study).map {
+            mapperWord.mapWordsToDomain(it)
+        }
+
+    override fun getWordsToKnow(know: String): Flow<List<WordsStudyModel>?> =
+        tableStudyDao.getWordsToKnow(know).map {
+            mapperWord.mapWordsToDomain(it)
+        }
+
+    override fun getWordsToLearned(learned: String): Flow<List<WordsStudyModel>?> =
+        tableStudyDao.getWordsToLearned(learned).map {
+            mapperWord.mapWordsToDomain(it)
+        }
+
     override fun guessedCardAndMoveToKnowState(
         wordId: Int
     ) {

@@ -41,4 +41,13 @@ interface StudyWordDao {
         state: String,
         interval: String
         )
+
+    @Query("SELECT * FROM table_study WHERE state=:study")
+    fun getWordsToStudy(study: String): Flow<List<TableStudyWord>?>
+
+    @Query("SELECT * FROM table_study WHERE state=:know")
+    fun getWordsToKnow(know: String): Flow<List<TableStudyWord>?>
+
+    @Query("SELECT * FROM table_study WHERE state=:learned")
+    fun getWordsToLearned(learned: String): Flow<List<TableStudyWord>?>
 }

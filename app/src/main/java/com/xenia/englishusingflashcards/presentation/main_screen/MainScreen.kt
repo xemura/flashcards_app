@@ -81,8 +81,8 @@ fun MainScreen(navController : NavController) {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly)
             {
                 CardInMainScreen(mainViewModel.getCountWordsToStudy(), "учить")
-                CardInMainScreen(0, "знаю")
-                CardInMainScreen(0, "выучено")
+                CardInMainScreen(mainViewModel.getCountWordsToKnow(), "знаю")
+                CardInMainScreen(mainViewModel.getCountWordsToLearned(), "выучено")
             }
 
             Spacer(modifier = Modifier.height(136.dp))

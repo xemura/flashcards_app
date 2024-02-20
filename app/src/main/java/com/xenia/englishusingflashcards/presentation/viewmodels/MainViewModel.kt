@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.xenia.englishusingflashcards.data.repository.LearnRepositoryImpl
 import com.xenia.englishusingflashcards.domain.models.WordsStudyModel
-import com.xenia.englishusingflashcards.domain.usecases.learn_screen.GetWordsFromStudyTableUseCase
+import com.xenia.englishusingflashcards.domain.usecases.main_screen.GetWordsFromTableKnowUseCase
+import com.xenia.englishusingflashcards.domain.usecases.main_screen.GetWordsFromTableLearnedUseCase
+import com.xenia.englishusingflashcards.domain.usecases.main_screen.GetWordsFromTableStudyUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,22 +20,40 @@ import kotlinx.coroutines.launch
 class MainViewModel(app: Application) : ViewModel() {
 
     private val repository = LearnRepositoryImpl(app)
-    private val getWordsToLearnUseCase = GetWordsFromStudyTableUseCase(repository)
+    private val getWordsToStudyUseCase = GetWordsFromTableStudyUseCase(repository)
+    private val getWordsKnowUseCase = GetWordsFromTableKnowUseCase(repository)
+    private val getWordsLearnedUseCase = GetWordsFromTableLearnedUseCase(repository)
 
     private val _wordsToStudy: MutableStateFlow<List<WordsStudyModel>?> = MutableStateFlow(emptyList())
     val wordsToStudy: StateFlow<List<WordsStudyModel>?> = _wordsToStudy.asStateFlow()
 
+    private val _wordsToKnow: MutableStateFlow<List<WordsStudyModel>?> = MutableStateFlow(emptyList())
+    val wordsToKnow: StateFlow<List<WordsStudyModel>?> = _wordsToKnow.asStateFlow()
+
+    private val _wordsToLearned: MutableStateFlow<List<WordsStudyModel>?> = MutableStateFlow(emptyList())
+    val wordsToLearned: StateFlow<List<WordsStudyModel>?> = _wordsToLearned.asStateFlow()
+
     init {
-        getWordsToStudy()
+        getWordsToStudy("учить")
+        getWordsToKnow("знаю")
+        getWordsToLearned("выучено")
     }
 
     fun getCountWordsToStudy(): Int {
         return _wordsToStudy.value?.size ?: 0
     }
 
-    private fun getWordsToStudy() {
+    fun getCountWordsToKnow(): Int {
+        return _wordsToKnow.value?.size ?: 0
+    }
+
+    fun getCountWordsToLearned(): Int {
+        return _wordsToLearned.value?.size ?: 0
+    }
+
+    private fun getWordsToStudy(study: String) {
         viewModelScope.launch {
-            getWordsToLearnUseCase.getWordsFromStudyTable()
+            getWordsToStudyUseCase.getWordsFromStudyTable(study)
                 .flowOn(Dispatchers.IO)
                 .catch {
 
@@ -41,6 +61,34 @@ class MainViewModel(app: Application) : ViewModel() {
                 .collect { listWords ->
                     Log.d("MainViewModel", "collect")
                     _wordsToStudy.value = listWords
+                }
+        }
+    }
+
+    private fun getWordsToKnow(know: String) {
+        viewModelScope.launch {
+            getWordsKnowUseCase.getWordsFromKnowTable(know)
+                .flowOn(Dispatchers.IO)
+                .catch {
+
+                }
+                .collect { listWords ->
+                    Log.d("MainViewModel", "collect")
+                    _wordsToKnow.value = listWords
+                }
+        }
+    }
+
+    private fun getWordsToLearned(learned: String) {
+        viewModelScope.launch {
+            getWordsLearnedUseCase.getWordsFromLearnedTable(learned)
+                .flowOn(Dispatchers.IO)
+                .catch {
+
+                }
+                .collect { listWords ->
+                    Log.d("MainViewModel", "collect")
+                    _wordsToLearned.value = listWords
                 }
         }
     }

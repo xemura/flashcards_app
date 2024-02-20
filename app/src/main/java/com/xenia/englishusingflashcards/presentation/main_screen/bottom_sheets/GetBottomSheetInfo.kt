@@ -13,12 +13,12 @@ fun getBottomSheetInfo(text: String, mainViewModel: MainViewModel) : BottomSheet
             bottomSheetInfo.description = "Это число означает, сколько карточек готово к изучению."
         }
         "знаю" -> {
-            bottomSheetInfo.data = null
+            bottomSheetInfo.data = mainViewModel.wordsToKnow.value
             bottomSheetInfo.header = "Краткосрочная память"
             bottomSheetInfo.description = "Это число означает, сколько слов и фраз у тебя в кратковременной памяти."
         }
         "выучено" -> {
-            bottomSheetInfo.data = null
+            bottomSheetInfo.data = mainViewModel.wordsToLearned.value
             bottomSheetInfo.header = "Долгосрочная память"
             bottomSheetInfo.description = "Это число означает, сколько слов и фраз у тебя в долговременной памяти."
         }
