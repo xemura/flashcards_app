@@ -9,6 +9,7 @@ import com.xenia.englishusingflashcards.domain.models.WordsStudyModel
 import com.xenia.englishusingflashcards.domain.usecases.main_screen.GetWordsFromTableKnowUseCase
 import com.xenia.englishusingflashcards.domain.usecases.main_screen.GetWordsFromTableLearnedUseCase
 import com.xenia.englishusingflashcards.domain.usecases.main_screen.GetWordsFromTableStudyUseCase
+import com.xenia.englishusingflashcards.domain.usecases.main_screen.UpdateStateWordsUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -23,6 +24,7 @@ class MainViewModel(app: Application) : ViewModel() {
     private val getWordsToStudyUseCase = GetWordsFromTableStudyUseCase(repository)
     private val getWordsKnowUseCase = GetWordsFromTableKnowUseCase(repository)
     private val getWordsLearnedUseCase = GetWordsFromTableLearnedUseCase(repository)
+    private val updateStateWordsUseCase = UpdateStateWordsUseCase(repository)
 
     private val _wordsToStudy: MutableStateFlow<List<WordsStudyModel>?> = MutableStateFlow(emptyList())
     val wordsToStudy: StateFlow<List<WordsStudyModel>?> = _wordsToStudy.asStateFlow()
@@ -34,6 +36,7 @@ class MainViewModel(app: Application) : ViewModel() {
     val wordsToLearned: StateFlow<List<WordsStudyModel>?> = _wordsToLearned.asStateFlow()
 
     init {
+        updateStateWords()
         getWordsToStudy()
         getWordsToKnow()
         getWordsToLearned()
@@ -90,6 +93,13 @@ class MainViewModel(app: Application) : ViewModel() {
                     Log.d("MainViewModel", "collect")
                     _wordsToLearned.value = listWords
                 }
+        }
+    }
+
+    private fun updateStateWords() {
+        viewModelScope.launch {
+            Log.d("updateStateWords", "mainViewModel updateStateWords")
+            updateStateWordsUseCase.updateStateWords()
         }
     }
 }

@@ -26,13 +26,13 @@ class LearnRepositoryImpl(app: Application): LearnRepository {
     private val mapperWord = WordStudyMapper()
 
     override fun addWordInStudyTable(word: WordModel) {
-        coroutineScope.launch {
+        coroutineScope.launch(Dispatchers.IO) {
             tableStudyDao.addWordInStudyTable(mapperWord.mapWordToStudy(word))
         }
     }
 
     override fun addWordsInStudyTable(listWords: List<WordModel>?) {
-        coroutineScope.launch {
+        coroutineScope.launch(Dispatchers.IO) {
             tableStudyDao.addAll(mapperWord.mapWordsToStudy(listWords))
         }
     }
@@ -42,15 +42,10 @@ class LearnRepositoryImpl(app: Application): LearnRepository {
         translate: String,
         sentence: String
     ) {
-        coroutineScope.launch {
+        coroutineScope.launch(Dispatchers.IO) {
             tableStudyDao.deleteWordInStudyTable(word, translate, sentence)
         }
     }
-
-    override fun getWordsFromStudyTable(): Flow<List<WordsStudyModel>?> =
-        tableStudyDao.getWordsFromStudyTable().map {
-            mapperWord.mapWordsToDomain(it)
-        }
 
     override fun getWordsToStudy(study: String): Flow<List<WordsStudyModel>?> =
         tableStudyDao.getWordsToStudy(study).map {
@@ -67,29 +62,49 @@ class LearnRepositoryImpl(app: Application): LearnRepository {
             mapperWord.mapWordsToDomain(it)
         }
 
+    override fun updateStateWords() {
+        coroutineScope.launch(Dispatchers.Default) {
+            val words = tableStudyDao.getWordsFromStudyTable()
+            words?.forEach { word ->
+                if ((word.theNumberOfRepetitions >= 5) and (word.theNumberOfRepetitions < 7)) {
+                    tableStudyDao.updateState(word.id, "выучено")
+                }
+                val date = word.dateOfTheNextRepetition.formatToDate()
+                val nextDate = date.plusHours(word.theRepetitionInterval.toInt().toLong())
+
+                if (nextDate.equals(LocalDateTime.now()) or nextDate.isBefore(LocalDateTime.now())) {
+                    val currentDate = LocalDateTime.now()
+                    val beginning = LocalDate.of(currentDate.year, currentDate.month, currentDate.dayOfMonth)
+                    val dateTime = LocalDateTime.of(beginning, LocalTime.of(currentDate.hour, currentDate.minute))
+
+                    tableStudyDao.updateDateOfTheNextRepetition(word.id, dateTime.toString(), "учить")
+
+                    if (word.theNumberOfRepetitions >= 7) {
+                        tableStudyDao.updateRepetitionIntervalAndNumberOfRepetition(
+                            word.id,
+                            "учить",
+                            1,
+                            "1"
+                        )
+                    }
+                }
+            }
+        }
+    }
+
     override fun guessedCardAndMoveToKnowState(
         wordId: Int
     ) {
-        coroutineScope.launch {
+        coroutineScope.launch(Dispatchers.Default) {
             val word = tableStudyDao.getWordFromStudyTable(wordId)
-
-            Log.d("guessedCardAndMoveToKnowState", word.toString())
-
             val numberOfRepetition = word.theNumberOfRepetitions + 1
             val date = word.dateOfTheNextRepetition
             var dateOfTheNextRepetition = date.formatToDate()
             dateOfTheNextRepetition = dateOfTheNextRepetition.plusHours(
                 word.theRepetitionInterval.toInt().toLong()
             )
-
             val state = "знаю"
             val interval = (numberOfRepetition - 1) * word.theRepetitionInterval.toInt()
-
-            Log.d("guessedCardAndMoveToKnowState", numberOfRepetition.toString())
-            Log.d("guessedCardAndMoveToKnowState", dateOfTheNextRepetition.toString())
-            Log.d("guessedCardAndMoveToKnowState", state)
-            Log.d("guessedCardAndMoveToKnowState", interval.toString())
-            Log.d("guessedCardAndMoveToKnowState", wordId.toString())
 
             tableStudyDao.guessedCardAndMoveToKnowState(
                 wordId,

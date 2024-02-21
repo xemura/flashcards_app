@@ -8,10 +8,9 @@ interface LearnRepository {
     fun addWordInStudyTable(word: WordModel)
     fun addWordsInStudyTable(listWords: List<WordModel>?)
     fun deleteWordFromStudyTable(word: String, translate: String, sentence: String)
-    fun getWordsFromStudyTable(): Flow<List<WordsStudyModel>?>
     fun guessedCardAndMoveToKnowState(wordId: Int)
-
     fun getWordsToStudy(study: String): Flow<List<WordsStudyModel>?>
     fun getWordsToKnow(know: String): Flow<List<WordsStudyModel>?>
     fun getWordsToLearned(learned: String): Flow<List<WordsStudyModel>?>
+    fun updateStateWords()
 }

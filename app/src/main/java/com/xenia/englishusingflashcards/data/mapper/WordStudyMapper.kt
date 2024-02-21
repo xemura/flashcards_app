@@ -11,13 +11,8 @@ import java.time.LocalTime
 class WordStudyMapper {
     fun mapWordToStudy(word: WordModel): TableStudyWord {
         val currentDate = LocalDateTime.now()
-
         val beginning = LocalDate.of(currentDate.year, currentDate.month, currentDate.dayOfMonth)
-        var dateTime = LocalDateTime.of(beginning, LocalTime.of(currentDate.hour, currentDate.minute))
-
-        Log.d("WordStudyMapper", dateTime.toString())
-        //dateTime = dateTime.plusHours(12)
-        Log.d("WordStudyMapper", dateTime.toString())
+        val dateTime = LocalDateTime.of(beginning, LocalTime.of(currentDate.hour, currentDate.minute))
 
         return TableStudyWord(
             id = word.id,
@@ -26,7 +21,7 @@ class WordStudyMapper {
             sentence = word.sentence,
             state = "учить",
             theNumberOfRepetitions = 1,
-            theRepetitionInterval = "1", // интервал в часах?
+            theRepetitionInterval = "1",
             dateOfTheNextRepetition = dateTime.toString()
         )
     }

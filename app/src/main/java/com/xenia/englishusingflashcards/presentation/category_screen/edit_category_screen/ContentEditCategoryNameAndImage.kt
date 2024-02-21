@@ -60,7 +60,5 @@ fun EditScreenCardEditCategory(editCategoryViewModel: EditCategoryViewModel) {
 
         Text(text = editCategoryViewModel.categoryName,
             fontSize = 30.sp)
-
-        //EditStyledTextField(editCategoryViewModel)
     }
 }

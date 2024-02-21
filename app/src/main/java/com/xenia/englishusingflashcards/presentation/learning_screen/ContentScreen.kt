@@ -217,7 +217,6 @@ fun ContentScreen(listLearnWords: State<List<WordsStudyModel>?>, learningViewMod
                                             scope.launch {
                                                 cardFace = cardFace.next
                                                 delay(500L)
-                                                state.swipe(Direction.Right)
                                                 Toast
                                                     .makeText(
                                                         mLocalContext,
@@ -227,7 +226,7 @@ fun ContentScreen(listLearnWords: State<List<WordsStudyModel>?>, learningViewMod
                                                     .show()
                                             }
                                             scope.launch {
-                                                Log.d("Know", currentCard.id.toString())
+                                                state.swipe(Direction.Right)
                                                 learningViewModel.guessedCardAndMoveToKnowState(
                                                     currentCard.id
                                                 )
@@ -246,7 +245,6 @@ fun ContentScreen(listLearnWords: State<List<WordsStudyModel>?>, learningViewMod
                     }
                 }
             } else {
-                println("fffffffff")
                 Text(
                     modifier = Modifier.fillMaxSize(),
                     textAlign = TextAlign.Center,
