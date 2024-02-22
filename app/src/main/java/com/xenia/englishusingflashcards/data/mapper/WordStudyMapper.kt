@@ -61,11 +61,7 @@ class WordStudyMapper {
                     id = word.id,
                     word = word.word,
                     translate = word.translate,
-                    sentence = word.sentence,
-                    theDateOfTheWordStudy = "",
-                    theNumberOfRepetitions = 1,
-                    theRepetitionInterval = 0.0,
-                    theRepetitionIntervalAfterTheNRepetition = 0.0
+                    sentence = word.sentence
                 )
                 list.add(word)
             }

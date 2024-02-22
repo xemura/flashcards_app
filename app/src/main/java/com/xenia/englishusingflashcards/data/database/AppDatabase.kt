@@ -16,7 +16,7 @@ import com.xenia.englishusingflashcards.data.entities.Word
     Word::class,
     Category::class,
     TableStudyWord::class
-], version = 1, exportSchema = false)
+], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun categoryDao(): CategoryDao
     abstract fun wordDao(): WordDao

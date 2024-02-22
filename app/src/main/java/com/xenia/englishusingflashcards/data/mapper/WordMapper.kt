@@ -13,12 +13,7 @@ class WordMapper {
                     categoryName = word.categoryName,
                     word = word.word,
                     translate = word.translate,
-                    sentence = word.sentence,
-                    inProcess = word.inProcess,
-                    theDateOfTheWordStudy = word.theDateOfTheWordStudy,
-                    theNumberOfRepetitions = word.theNumberOfRepetitions,
-                    theRepetitionInterval = word.theRepetitionInterval,
-                    theRepetitionIntervalAfterTheNRepetition = word.theRepetitionIntervalAfterTheNRepetition
+                    sentence = word.sentence
                 )
                 list.add(wordModel)
             }
@@ -35,12 +30,7 @@ class WordMapper {
                     categoryName = word.categoryName,
                     word = word.word,
                     translate = word.translate,
-                    sentence = word.sentence,
-                    inProcess = word.inProcess,
-                    theDateOfTheWordStudy = word.theDateOfTheWordStudy,
-                    theNumberOfRepetitions = word.theNumberOfRepetitions,
-                    theRepetitionInterval = word.theRepetitionInterval,
-                    theRepetitionIntervalAfterTheNRepetition = word.theRepetitionIntervalAfterTheNRepetition
+                    sentence = word.sentence
                 )
                 list.add(word)
             }
@@ -53,11 +43,6 @@ class WordMapper {
             categoryName = word.categoryName,
             word = word.word,
             translate = word.translate,
-            sentence = word.sentence,
-            inProcess = word.inProcess,
-            theDateOfTheWordStudy = word.theDateOfTheWordStudy,
-            theNumberOfRepetitions = word.theNumberOfRepetitions,
-            theRepetitionInterval = word.theRepetitionInterval,
-            theRepetitionIntervalAfterTheNRepetition = word.theRepetitionIntervalAfterTheNRepetition
+            sentence = word.sentence
     )
 }

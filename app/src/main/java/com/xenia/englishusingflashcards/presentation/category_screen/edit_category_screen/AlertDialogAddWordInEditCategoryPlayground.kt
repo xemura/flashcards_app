@@ -67,12 +67,7 @@ fun AlertDialogAddWordInEditCategory(
                             categoryName = editCategoryViewModel.categoryName,
                             word = word.text,
                             translate = translate.text,
-                            sentence = sentence.text,
-                            inProcess = true,
-                            theDateOfTheWordStudy = "", // вычислять
-                            theNumberOfRepetitions = 0,
-                            theRepetitionInterval = 0.0,
-                            theRepetitionIntervalAfterTheNRepetition = 0.0
+                            sentence = sentence.text
                         )
 
                         editCategoryViewModel.updateListWordsInCategory(createdWord) /////////////////

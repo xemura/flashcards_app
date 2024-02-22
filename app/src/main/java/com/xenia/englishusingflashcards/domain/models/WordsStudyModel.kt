@@ -6,8 +6,4 @@ data class WordsStudyModel (
     val word : String = "",
     val translate : String = "",
     val sentence : String = "",
-    val theDateOfTheWordStudy: String = "",
-    val theNumberOfRepetitions: Int = 0,
-    val theRepetitionInterval: Double = 0.0,
-    val theRepetitionIntervalAfterTheNRepetition: Double = 0.0,
 )
