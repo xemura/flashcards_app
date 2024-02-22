@@ -39,7 +39,6 @@ class LearningViewModel(app: Application) : ViewModel() {
 
                 }
                 .collect { listWords ->
-                    Log.d("MainViewModel", "collect")
                     _wordsToStudy.value = listWords
                 }
         }

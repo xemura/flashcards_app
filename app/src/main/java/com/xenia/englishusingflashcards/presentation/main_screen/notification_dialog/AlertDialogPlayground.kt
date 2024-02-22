@@ -1,6 +1,5 @@
 package com.xenia.englishusingflashcards.presentation.main_screen.notification_dialog
 
-import android.app.Application
 import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -38,12 +37,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.xenia.englishusingflashcards.prefsstore.NotificationRepository
 import com.xenia.englishusingflashcards.presentation.viewmodels.NotificationViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -110,7 +106,8 @@ fun AlertDialogContent(
 
             val timePickerState = rememberTimePickerState(
                 initialHour = selectedHour,
-                initialMinute = selectedMinute
+                initialMinute = selectedMinute,
+                is24Hour = true
             )
 
             Column(modifier = Modifier.padding(10.dp)) {
@@ -212,8 +209,14 @@ fun AlertDialogContent(
                                                             "$selectedHour:$selectedMinute"
                                                         )
 
-                                                        val getTime =
-                                                            "$selectedHour:$selectedMinute"
+                                                        val getTime = if ((selectedHour/10 == 0) and (selectedMinute/10 == 0)) {
+                                                            "0$selectedHour:0$selectedMinute"
+                                                        } else if (selectedHour/10 == 0) {
+                                                            "0$selectedHour:$selectedMinute"
+                                                        } else if (selectedMinute/10 == 0) {
+                                                            "$selectedHour:0$selectedMinute"
+                                                        } else "$selectedHour:$selectedMinute"
+
                                                         notificationViewModel.saveTimeNotification(getTime)
                                                     }
                                                 }

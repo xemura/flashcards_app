@@ -37,7 +37,6 @@ class CategoryViewModel(app: Application) : ViewModel() {
 
                 }
                 .collect { categories ->
-                    Log.d("CategoryViewModel", "collect")
                     _categories.value = categories
                 }
         }

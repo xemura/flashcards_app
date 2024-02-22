@@ -98,7 +98,6 @@ class MainViewModel(app: Application) : ViewModel() {
 
     private fun updateStateWords() {
         viewModelScope.launch {
-            Log.d("updateStateWords", "mainViewModel updateStateWords")
             updateStateWordsUseCase.updateStateWords()
         }
     }
