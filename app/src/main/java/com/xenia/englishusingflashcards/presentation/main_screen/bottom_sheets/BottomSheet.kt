@@ -1,6 +1,7 @@
 package com.xenia.englishusingflashcards.presentation.main_screen.bottom_sheets
 
 import android.app.Application
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -47,8 +48,6 @@ fun BottomSheet(text : String, onDismiss: () -> Unit) {
         )
     )
 
-    val boxSize = with(LocalDensity.current) { 200.dp.toPx() }
-
     ModalBottomSheet(
         onDismissRequest = { onDismiss() },
         sheetState = modalBottomSheetState,
@@ -75,7 +74,9 @@ fun BottomSheet(text : String, onDismiss: () -> Unit) {
 
         val data = bottomSheetInfo.data
 
-        if (data != null) {
+        Log.d("BottomSheet", data.toString())
+
+        if (!data.isNullOrEmpty()) {
             LazyColumn {
                 items(data) { (id, word, translate, sentence) ->
                     Box(

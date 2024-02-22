@@ -8,7 +8,6 @@ import com.xenia.englishusingflashcards.data.daos.CategoryDao
 import com.xenia.englishusingflashcards.data.daos.StudyWordDao
 import com.xenia.englishusingflashcards.data.daos.WordDao
 import com.xenia.englishusingflashcards.data.entities.Category
-import com.xenia.englishusingflashcards.data.entities.NotificationTable
 import com.xenia.englishusingflashcards.data.entities.TableStudyWord
 import com.xenia.englishusingflashcards.data.entities.Word
 
@@ -16,13 +15,11 @@ import com.xenia.englishusingflashcards.data.entities.Word
 [
     Word::class,
     Category::class,
-    NotificationTable::class,
     TableStudyWord::class
-], version = 4, exportSchema = false)
+], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun categoryDao(): CategoryDao
     abstract fun wordDao(): WordDao
-
     abstract fun tableStudyDao(): StudyWordDao
     companion object {
         @Volatile
