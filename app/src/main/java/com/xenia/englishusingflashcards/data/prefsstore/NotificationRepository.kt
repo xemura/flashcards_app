@@ -1,4 +1,4 @@
-package com.xenia.englishusingflashcards.prefsstore
+package com.xenia.englishusingflashcards.data.prefsstore
 
 
 import android.content.Context

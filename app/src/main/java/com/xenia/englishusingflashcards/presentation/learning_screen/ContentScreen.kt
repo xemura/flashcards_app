@@ -1,7 +1,6 @@
 package com.xenia.englishusingflashcards.presentation.learning_screen
 
 import android.content.Context
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -96,29 +95,14 @@ fun ContentScreen(listLearnWords: State<List<WordsStudyModel>?>, learningViewMod
                                                     if (CardFace.Back == cardFace) {
                                                         cardFace = cardFace.next
                                                     }
-                                                    Toast
-                                                        .makeText(
-                                                            mLocalContext,
-                                                            "Не Понял",
-                                                            Toast.LENGTH_SHORT
-                                                        )
-                                                        .show()
                                                 }
 
                                                 Direction.Right -> {
                                                     if (CardFace.Back == cardFace) {
                                                         cardFace = cardFace.next
                                                     }
-                                                    Toast
-                                                        .makeText(
-                                                            mLocalContext,
-                                                            "Понял",
-                                                            Toast.LENGTH_SHORT
-                                                        )
-                                                        .show()
 
                                                     scope.launch {
-                                                        Log.d("Know", currentCard.id.toString())
                                                         learningViewModel.guessedCardAndMoveToKnowState(
                                                             currentCard.id
                                                         )
@@ -129,15 +113,7 @@ fun ContentScreen(listLearnWords: State<List<WordsStudyModel>?>, learningViewMod
                                                     if (CardFace.Back == cardFace) {
                                                         cardFace = cardFace.next
                                                     }
-                                                    Toast
-                                                        .makeText(
-                                                            mLocalContext,
-                                                            "Delete",
-                                                            Toast.LENGTH_SHORT
-                                                        )
-                                                        .show()
                                                 }
-
                                                 else -> {}
                                             }
                                             println("The card was swiped to $direction")
@@ -169,11 +145,6 @@ fun ContentScreen(listLearnWords: State<List<WordsStudyModel>?>, learningViewMod
                                                 cardFace = cardFace.next
                                                 delay(500L)
                                                 state.swipe(Direction.Left)
-                                                Toast.makeText(
-                                                    mLocalContext,
-                                                    "Не понял",
-                                                    Toast.LENGTH_SHORT
-                                                ).show()
                                             }
 
                                         } else {
@@ -217,15 +188,6 @@ fun ContentScreen(listLearnWords: State<List<WordsStudyModel>?>, learningViewMod
                                             scope.launch {
                                                 cardFace = cardFace.next
                                                 delay(500L)
-                                                Toast
-                                                    .makeText(
-                                                        mLocalContext,
-                                                        "Понял",
-                                                        Toast.LENGTH_SHORT
-                                                    )
-                                                    .show()
-                                            }
-                                            scope.launch {
                                                 state.swipe(Direction.Right)
                                                 learningViewModel.guessedCardAndMoveToKnowState(
                                                     currentCard.id

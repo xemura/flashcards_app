@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.AP
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.xenia.englishusingflashcards.prefsstore.NotificationRepository
+import com.xenia.englishusingflashcards.data.prefsstore.NotificationRepository
 import com.xenia.englishusingflashcards.presentation.main_screen.notification_dialog.NotificationClass
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow

@@ -5,7 +5,7 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
-import com.xenia.englishusingflashcards.prefsstore.NotificationRepository
+import com.xenia.englishusingflashcards.data.prefsstore.NotificationRepository
 
 private const val FILE_PREFERENCE_NAME = "layout_preferences"
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
