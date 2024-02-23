@@ -37,6 +37,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -45,6 +46,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -204,10 +208,21 @@ fun AlertDialogContent(
                                                         selectedHour = timePickerState.hour
                                                         selectedMinute = timePickerState.minute
 
-                                                        Log.d(
-                                                            "setTime",
-                                                            "$selectedHour:$selectedMinute"
-                                                        )
+//                                                        val currentDate = LocalDateTime.now()
+//
+//                                                        val beginning = LocalDate.of(currentDate.year, currentDate.month, currentDate.dayOfMonth)
+//                                                        val dateTime = LocalDateTime.of(beginning, LocalTime.of(selectedHour, selectedMinute))
+//
+//                                                        alarmItem = AlarmItem(
+//                                                            time = LocalDateTime.now().plusSeconds(secondsText.toLong()),
+//                                                            message = messageText
+//                                                        )
+//
+//                                                        alarmItem?.let(scheduler::schedule)
+//                                                        Log.d(
+//                                                            "setTime",
+//                                                            "$selectedHour:$selectedMinute"
+//                                                        )
 
                                                         val getTime = if ((selectedHour/10 == 0) and (selectedMinute/10 == 0)) {
                                                             "0$selectedHour:0$selectedMinute"

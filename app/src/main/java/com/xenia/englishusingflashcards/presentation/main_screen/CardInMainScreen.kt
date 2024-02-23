@@ -36,7 +36,6 @@ import com.xenia.englishusingflashcards.R
 import com.xenia.englishusingflashcards.presentation.main_screen.bottom_sheets.BottomSheet
 import com.xenia.englishusingflashcards.ui.theme.textColorsInCard
 
-
 @Composable
 fun CardInMainScreen(countWordsText : Int, cardText: String) {
     var showSheet by remember { mutableStateOf(false) }

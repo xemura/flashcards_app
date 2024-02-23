@@ -2,6 +2,10 @@ package com.xenia.englishusingflashcards.presentation.main_screen
 
 import android.app.Activity
 import android.app.Application
+import android.content.pm.PackageManager
+import android.os.Build
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,6 +19,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -24,6 +29,7 @@ import androidx.navigation.NavController
 import com.xenia.englishusingflashcards.navigation.NavigationItem
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.xenia.englishusingflashcards.presentation.Header
@@ -96,6 +102,38 @@ fun MainScreen(navController : NavController) {
                 style = MaterialTheme.typography.bodyLarge,
                 fontSize = 15.sp
             )
+        }
+    }
+}
+
+@Composable
+fun RuntimePermissionsDialog(
+    permission: String,
+    onPermissionGranted: () -> Unit,
+    onPermissionDenied: () -> Unit,
+) {
+
+    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+
+        if (ContextCompat.checkSelfPermission(
+                LocalContext.current,
+                permission) != PackageManager.PERMISSION_GRANTED) {
+
+            val requestLocationPermissionLauncher =
+                rememberLauncherForActivityResult(
+                    ActivityResultContracts.RequestPermission()
+                ) { isGranted: Boolean ->
+
+                    if (isGranted) {
+                        onPermissionGranted()
+                    } else {
+                        onPermissionDenied()
+                    }
+                }
+
+            SideEffect {
+                requestLocationPermissionLauncher.launch(permission)
+            }
         }
     }
 }

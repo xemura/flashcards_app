@@ -68,8 +68,4 @@ class CategoryRepositoryImpl(app: Application) : CategoryRepository {
             categoryDao.deleteWordsFromCategory(category.categoryName)
         }
     }
-
-    override fun setUpNotification() {
-        TODO("Not yet implemented")
-    }
 }

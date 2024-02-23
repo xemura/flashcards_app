@@ -67,32 +67,21 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
-    // Navigation
     val navVersion = "2.7.6"
-    implementation("androidx.navigation:navigation-compose:$navVersion")
-
-    // Room
+    val work_version = "2.9.0"
     val room_version = "2.6.1"
 
+    implementation("androidx.navigation:navigation-compose:$navVersion")
     implementation("androidx.room:room-runtime:$room_version")
     annotationProcessor("androidx.room:room-compiler:$room_version")
-    // To use Kotlin annotation processing tool (kapt)
     kapt("androidx.room:room-compiler:$room_version")
-
     implementation ("androidx.compose.runtime:runtime-livedata:$1.5.1")
-    // optional - Kotlin Extensions and Coroutines support for Room
     implementation("androidx.room:room-ktx:$room_version")
-
     implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
-
     implementation ("com.google.code.gson:gson:2.10")
-
     implementation("androidx.compose.foundation:foundation:1.6.0")
-
-    implementation("me.saket.swipe:swipe:1.0.0")
-
     implementation("com.alexstyl.swipeablecard:swipeablecard:0.1.0")
-
-    // Preferences DataStore
     implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+    implementation("androidx.work:work-runtime-ktx:$work_version")
 }
