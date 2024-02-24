@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -38,6 +39,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -115,35 +117,36 @@ fun AlertDialogContent(
             )
 
             Column(modifier = Modifier.padding(10.dp)) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(
-                        "Включить уведомления",
-                        fontSize = 16.sp, style = MaterialTheme.typography.bodyLarge,
-                        modifier = Modifier.size(150.dp, 50.dp),
-                        color = textColor.value
-                    )
-                    Switch(
-                        checked = stateNotification.value,
-                        modifier = Modifier.padding(start = 50.dp),
-                        onCheckedChange = {
-                            scope.launch {
-                                notificationViewModel.saveStateNotification(it)
-                                if (stateNotification.value) textColor.value = Color(0xff00695C)
-                                else textColor.value = Color.Unspecified
-                            }
-                        }
-                    )
-                }
+//                Row(verticalAlignment = Alignment.CenterVertically) {
+//                    Text(
+//                        "Включить уведомления",
+//                        fontSize = 16.sp, style = MaterialTheme.typography.bodyLarge,
+//                        modifier = Modifier.size(150.dp, 50.dp),
+//                        color = textColor.value
+//                    )
+//                    Switch(
+//                        checked = stateNotification.value,
+//                        modifier = Modifier.padding(start = 50.dp),
+//                        onCheckedChange = {
+//                            scope.launch {
+//                                notificationViewModel.saveStateNotification(it)
+//                                if (stateNotification.value) textColor.value = Color(0xff00695C)
+//                                else textColor.value = Color.Unspecified
+//                            }
+//                        }
+//                    )
+//                }
 
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
                         "Настройка напоминаний",
                         fontSize = 16.sp, style = MaterialTheme.typography.bodyLarge,
-                        modifier = Modifier.size(150.dp, 50.dp),
+                        modifier = Modifier.size(170.dp, 40.dp),
                         color = textColor.value
                     )
                     Box(
                         modifier = Modifier.padding(start = 30.dp),
+                        contentAlignment = Alignment.Center
                     ) {
                         Row(modifier = Modifier
                             .clickable {
@@ -151,14 +154,8 @@ fun AlertDialogContent(
                             })
                         {
                             Text(
-                                modifier = Modifier.padding(top = 7.dp),
                                 text = timeNotification.value,
                                 fontSize = 20.sp
-                            )
-                            Icon(
-                                modifier = Modifier.padding(top = 13.dp),
-                                imageVector = Icons.Filled.ArrowDropDown,
-                                contentDescription = null
                             )
 
                             if (showDialog) {
