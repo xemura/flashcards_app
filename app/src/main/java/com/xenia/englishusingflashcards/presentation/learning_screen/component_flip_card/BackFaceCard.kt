@@ -28,7 +28,7 @@ fun BackFaceCard(item: WordsStudyModel) {
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 20.dp),
+                    .padding(horizontal = 20.dp, vertical = 10.dp),
                 text = item.translate,
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.bodyLarge,

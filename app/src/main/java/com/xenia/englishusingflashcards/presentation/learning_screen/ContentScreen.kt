@@ -113,6 +113,14 @@ fun ContentScreen(listLearnWords: State<List<WordsStudyModel>?>, learningViewMod
                                                     if (CardFace.Back == cardFace) {
                                                         cardFace = cardFace.next
                                                     }
+
+                                                    scope.launch {
+                                                        learningViewModel.deleteWordFromTableStudy(
+                                                            currentCard.word,
+                                                            currentCard.translate,
+                                                            currentCard.sentence
+                                                        )
+                                                    }
                                                 }
                                                 else -> {}
                                             }

@@ -56,7 +56,7 @@ fun StyledTextField() {
         value = createCategoryViewModel.categoryName,
         onValueChange =
         { value ->
-            if (value.length <= 12) createCategoryViewModel.updateCategoryName(value)
+            if (value.length <= 24) createCategoryViewModel.updateCategoryName(value)
             when {
                 createCategoryViewModel.categoryName.isEmpty() -> {
                     errorStateCategoryName = true

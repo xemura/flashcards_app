@@ -56,6 +56,7 @@ fun AlertDialogAddWordInEditCategory(
     var errorMessageSentence by remember { mutableStateOf("") }
 
     val maxChar = 50
+    val maxCharForSentence = 100
 
     androidx.compose.material3.AlertDialog(
         onDismissRequest = onDismiss,
@@ -277,7 +278,7 @@ fun AlertDialogAddWordInEditCategory(
                 OutlinedTextField(
                     value = sentence,
                     { value ->
-                        if (value.text.length <= maxChar) sentence = value
+                        if (value.text.length <= maxCharForSentence) sentence = value
                         when {
                             sentence.text.isEmpty() -> {
                                 errorStateSentence = true
@@ -294,9 +295,9 @@ fun AlertDialogAddWordInEditCategory(
                         }
                     },
                     supportingText = {
-                        if (sentence.text.length >= maxChar) {
+                        if (sentence.text.length >= maxCharForSentence) {
                             Text(
-                                text = "${sentence.text.length} / $maxChar",
+                                text = "${sentence.text.length} / $maxCharForSentence",
                                 modifier = Modifier.fillMaxWidth(),
                                 textAlign = TextAlign.End,
                             )
@@ -317,7 +318,6 @@ fun AlertDialogAddWordInEditCategory(
                             else "Перевод", style = MaterialTheme.typography.bodyLarge
                         )
                     },
-                    maxLines = 2,
                     textStyle = TextStyle(brush = brush, fontFamily = default, fontSize = 16.sp),
                     isError = errorStateSentence,
                     keyboardOptions = KeyboardOptions(
