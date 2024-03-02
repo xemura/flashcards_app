@@ -1,7 +1,6 @@
 package com.xenia.englishusingflashcards.data.repository
 
 import android.app.Application
-import android.util.Log
 import com.xenia.englishusingflashcards.data.database.AppDatabase
 import com.xenia.englishusingflashcards.data.mapper.WordStudyMapper
 import com.xenia.englishusingflashcards.domain.models.WordModel
@@ -117,19 +116,12 @@ class LearnRepositoryImpl(app: Application): LearnRepository {
     }
 }
 
-private fun String.formatToDate() : LocalDateTime {
+private fun String.formatToDate(): LocalDateTime {
     val date = this
-    Log.d("formatToDate", date)
     val localDate = LocalDate.parse(date.substring(0, 10))
-    Log.d("formatToDate", localDate.toString())
 
     val hours = date.substring(date.indexOf("T") + 1, date.indexOf(":")).toInt()
-    Log.d("formatToDate", hours.toString())
     val minutes = date.substring(date.indexOf(":") + 1).toInt()
-    Log.d("formatToDate", minutes.toString())
 
-    val dateTime = LocalDateTime.of(localDate, LocalTime.of(hours, minutes))
-    Log.d("formatToDate", dateTime.toString())
-
-    return dateTime
+    return LocalDateTime.of(localDate, LocalTime.of(hours, minutes))
 }

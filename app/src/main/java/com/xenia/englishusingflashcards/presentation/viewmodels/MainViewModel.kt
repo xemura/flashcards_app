@@ -1,7 +1,6 @@
 package com.xenia.englishusingflashcards.presentation.viewmodels
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.xenia.englishusingflashcards.data.repository.LearnRepositoryImpl
@@ -62,7 +61,6 @@ class MainViewModel(app: Application) : ViewModel() {
 
                 }
                 .collect { listWords ->
-                    Log.d("MainViewModel", "collect")
                     _wordsToStudy.value = listWords
                 }
         }
@@ -76,7 +74,6 @@ class MainViewModel(app: Application) : ViewModel() {
 
                 }
                 .collect { listWords ->
-                    Log.d("MainViewModel", "collect")
                     _wordsToKnow.value = listWords
                 }
         }
@@ -90,7 +87,6 @@ class MainViewModel(app: Application) : ViewModel() {
 
                 }
                 .collect { listWords ->
-                    Log.d("MainViewModel", "collect")
                     _wordsToLearned.value = listWords
                 }
         }

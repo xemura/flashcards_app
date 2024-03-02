@@ -1,7 +1,6 @@
 package com.xenia.englishusingflashcards.presentation.category_screen.category_list_screen
 
 import android.app.Application
-import android.util.Log
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
@@ -60,8 +59,6 @@ fun CategoryList(navController : NavController) {
                 }
             ) { category ->
                 val dismissState = rememberDismissState()
-
-                Log.d("CategoryList", category.id.toString())
 
                 if (dismissState.isDismissed(direction = DismissDirection.EndToStart)) {
                     categoryViewModel.deleteCategory(category)

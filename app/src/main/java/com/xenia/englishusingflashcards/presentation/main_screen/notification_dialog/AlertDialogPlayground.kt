@@ -1,6 +1,5 @@
 package com.xenia.englishusingflashcards.presentation.main_screen.notification_dialog
 
-import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -9,20 +8,15 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TimePicker
@@ -38,8 +32,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -48,9 +40,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.LocalTime
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -61,8 +50,6 @@ fun AlertDialogContent(
 ) {
 
     val scope = CoroutineScope(Dispatchers.IO)
-
-    val stateNotification = notificationViewModel.state.collectAsState()
     val timeNotification = notificationViewModel.time.collectAsState()
 
     AlertDialog(
@@ -117,26 +104,6 @@ fun AlertDialogContent(
             )
 
             Column(modifier = Modifier.padding(10.dp)) {
-//                Row(verticalAlignment = Alignment.CenterVertically) {
-//                    Text(
-//                        "Включить уведомления",
-//                        fontSize = 16.sp, style = MaterialTheme.typography.bodyLarge,
-//                        modifier = Modifier.size(150.dp, 50.dp),
-//                        color = textColor.value
-//                    )
-//                    Switch(
-//                        checked = stateNotification.value,
-//                        modifier = Modifier.padding(start = 50.dp),
-//                        onCheckedChange = {
-//                            scope.launch {
-//                                notificationViewModel.saveStateNotification(it)
-//                                if (stateNotification.value) textColor.value = Color(0xff00695C)
-//                                else textColor.value = Color.Unspecified
-//                            }
-//                        }
-//                    )
-//                }
-
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
                         "Настройка напоминаний",
@@ -204,22 +171,6 @@ fun AlertDialogContent(
                                                         showDialog = false
                                                         selectedHour = timePickerState.hour
                                                         selectedMinute = timePickerState.minute
-
-//                                                        val currentDate = LocalDateTime.now()
-//
-//                                                        val beginning = LocalDate.of(currentDate.year, currentDate.month, currentDate.dayOfMonth)
-//                                                        val dateTime = LocalDateTime.of(beginning, LocalTime.of(selectedHour, selectedMinute))
-//
-//                                                        alarmItem = AlarmItem(
-//                                                            time = LocalDateTime.now().plusSeconds(secondsText.toLong()),
-//                                                            message = messageText
-//                                                        )
-//
-//                                                        alarmItem?.let(scheduler::schedule)
-//                                                        Log.d(
-//                                                            "setTime",
-//                                                            "$selectedHour:$selectedMinute"
-//                                                        )
 
                                                         val getTime = if ((selectedHour/10 == 0) and (selectedMinute/10 == 0)) {
                                                             "0$selectedHour:0$selectedMinute"

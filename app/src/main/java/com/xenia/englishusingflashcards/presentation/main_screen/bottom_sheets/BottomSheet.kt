@@ -30,8 +30,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.xenia.englishusingflashcards.presentation.viewmodels.MainViewModel
 import com.xenia.englishusingflashcards.presentation.viewmodels.MainViewModelFactory
 
-// возможно изменить на это
-// https://proandroiddev.com/how-to-master-swipeable-and-nestedscroll-modifiers-in-compose-bb0635d6a760
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BottomSheet(text : String, onDismiss: () -> Unit) {
@@ -74,7 +72,7 @@ fun BottomSheet(text : String, onDismiss: () -> Unit) {
 
         if (!data.isNullOrEmpty()) {
             LazyColumn {
-                items(data) { (id, word, translate, sentence) ->
+                items(data) { (_, word, translate, sentence) ->
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()

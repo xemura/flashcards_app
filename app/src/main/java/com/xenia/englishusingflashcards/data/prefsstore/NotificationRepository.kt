@@ -1,7 +1,6 @@
 package com.xenia.englishusingflashcards.data.prefsstore
 
 
-import android.content.Context
 import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -9,7 +8,6 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
@@ -61,6 +59,4 @@ class NotificationRepository(private val dataStore: DataStore<Preferences>) {
         .map { preferences ->
             preferences[KEY_NOTIFICATION_TIME] ?: "08:00"
         }
-
-
 }
